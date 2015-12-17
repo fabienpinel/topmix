@@ -8,5 +8,6 @@ angular.module('myApp', [
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
+      $.material.init();
   $routeProvider.otherwise({redirectTo: '/view1'});
 }]);
