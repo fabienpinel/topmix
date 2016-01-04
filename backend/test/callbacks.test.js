@@ -59,7 +59,7 @@ describe('Callbacks Tests', function () {
                 .set('Accept', 'application/json')
                 .end(function(err, res){
                     assert.equal(500, res.status);
-                    assert.equal(res.body.errmsg, 'E11000 duplicate key error index: topmix.users.$username_1 dup key: { : "username" }');
+                    assert(res.body.errmsg.indexOf('E11000 duplicate key error index: topmix.users.$username_1') >= 0);
                     done();
                 });
         });
