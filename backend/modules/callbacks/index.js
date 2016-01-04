@@ -10,6 +10,10 @@ module.exports = {
     deleteSessions: sessionsCB.deleteSessions,
 
     getMixes: mixesCB.getMixes,
-    postMixes: mixesCB.postMixes
-
+    postMixes: mixesCB.postMixes,
+    getOneMixes: mixesCB.getOneMixes,
+    deleteMixes: mixesCB.deleteOneMixes,
+        postTracks: mixesCB.postTracks,
+        putTracks: mixesCB.putTracks,
+        deleteTracks: mixesCB.deleteTracks
 };
