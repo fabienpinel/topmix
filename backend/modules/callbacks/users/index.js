@@ -1,7 +1,7 @@
 var database = require('../../database');
 
 module.exports = {
-    createUser: function (req, res) {
+    postUsers: function (req, res) {
         database
             .connect()
             .then(function (db) {

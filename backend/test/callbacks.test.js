@@ -10,6 +10,12 @@ describe('Callbacks Tests', function () {
         password: 'password'
     };
 
+    var mix = {
+        name: 'mix 1'
+    };
+
+    var sessionId = null;
+
     var server;
     before(function () {
         server = require('../');
@@ -21,7 +27,11 @@ describe('Callbacks Tests', function () {
                 var users = db.collection('users');
                 users.remove({username: user.username}, function (err, response) {
                     assert.equal(1, response.result.n);
-                    server.close(done);
+                    var mixes = db.collection('mixes');
+                    mixes.remove({name: mix.name}, function (err, response) {
+                        //assert.equal(1, response.result.n);
+                        server.close(done);
+                    });
                 });
             })
             .catch(function (err) {
@@ -30,10 +40,10 @@ describe('Callbacks Tests', function () {
 
     });
 
-    describe('Create User', function () {
+    describe('Post /api/users', function () {
         it ('Should Create a user', function (done) {
             request(server)
-                .post('/users')
+                .post('/api/users')
                 .send(user)
                 .set('Accept', 'application/json')
                 .end(function(err, res){
@@ -44,12 +54,92 @@ describe('Callbacks Tests', function () {
 
         it ('Should Fail when Create a user with same username', function (done) {
             request(server)
-                .post('/users')
+                .post('/api/users')
                 .send(user)
                 .set('Accept', 'application/json')
                 .end(function(err, res){
                     assert.equal(500, res.status);
                     assert.equal(res.body.errmsg, 'E11000 duplicate key error index: topmix.users.$username_1 dup key: { : "username" }')
+                    done();
+                });
+        });
+    });
+
+    describe('Post /api/sessions', function () {
+        it ('Should Create a sessionId for the user', function (done) {
+            request(server)
+                .post('/api/sessions')
+                .send(user)
+                .set('Accept', 'application/json')
+                .end(function(err, res){
+                    sessionId = res.body;
+                    assert.equal(201, res.status);
+                    done();
+                });
+        });
+
+        it ('Should Create a sessionId for the user', function (done) {
+            request(server)
+                .post('/api/sessions')
+                .send({
+                    username: 'coucou',
+                    password: 'password'
+                })
+                .set('Accept', 'application/json')
+                .end(function(err, res){
+                    assert.equal(403, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Post /api/mixes', function () {
+        it ('Should Create a user\'s Mix', function (done) {
+            request(server)
+                .post('/api/mixes')
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .send({name: mix.name})
+                .end(function(err, res) {
+                    assert.equal(201, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Get /api/mixes', function () {
+        it ('Should Get the mix previously created', function (done) {
+            request(server)
+                .get('/api/mixes')
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .send({name: mix.name})
+                .end(function(err, res) {
+                    assert.equal(1, res.body.length);
+                    assert.equal(200, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/sessions', function () {
+        it ('Should Delete a sessionId for the user', function (done) {
+            request(server)
+                .del('/api/sessions')
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res){
+                    assert.equal(204, res.status);
+                    done();
+                });
+        });
+        it ('Should not Delete a sessionId for the user because already done', function (done) {
+            request(server)
+                .del('/api/sessions')
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res){
+                    assert.equal(403, res.status);
                     done();
                 });
         });
