@@ -13,7 +13,7 @@ config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-app.run([ '$rootScope', 'LoginFactory','$location', function ($rootScope, LoginFactory, $location){
+app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($rootScope, LoginFactory, SigninFactory, $location){
   $rootScope.logged = false;
   $rootScope.user = null;
 
@@ -32,6 +32,22 @@ app.run([ '$rootScope', 'LoginFactory','$location', function ($rootScope, LoginF
         function(data){
           //success
           console.log("Login success",data);
+          $rootScope.logged = true;
+          $rootScope.user_sessionid = data;
+        },
+        function(message){
+          //error
+          console.log("Error Login: "+message);
+        }
+    )
+  };
+  /************ Global Signin ************/
+  $rootScope.signin = function(){
+    console.log("Trying to signin with: "+$rootScope.username_signinModal+"/"+$rootScope.password_signinModal);
+    SigninFactory.signin($rootScope.username_signinModal, $rootScope.password_signinModal).then(
+        function(data){
+          //success
+          console.log("Signin success",data);
           $rootScope.logged = true;
           $rootScope.user_sessionid = data;
         },
