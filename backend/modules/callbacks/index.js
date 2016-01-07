@@ -1,6 +1,7 @@
 var usersCB = require('./users');
 var sessionsCB = require('./sessions');
 var mixesCB = require('./mixes');
+var samplesCB = require('./samples');
 
 module.exports = {
 
@@ -13,7 +14,10 @@ module.exports = {
     postMixes: mixesCB.postMixes,
     getOneMixes: mixesCB.getOneMixes,
     deleteMixes: mixesCB.deleteOneMixes,
-        postTracks: mixesCB.postTracks,
-        putTracks: mixesCB.putTracks,
-        deleteTracks: mixesCB.deleteTracks
+    postTracks: mixesCB.postTracks,
+    putTracks: mixesCB.putTracks,
+    deleteTracks: mixesCB.deleteTracks,
+
+    getSamples: samplesCB.getSamples,
+    postSamples: samplesCB.postSamples
 };

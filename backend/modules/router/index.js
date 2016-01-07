@@ -17,7 +17,7 @@ module.exports = function (router) {
     router.delete('/api/mixes/:idMixes/tracks/:idTracks', callbacks.deleteTracks);
 
     router.post('/api/mixes/:idMixes/tracks/:idTracks/samples/', callbacks.postSamples);
-    router.delete('/api/mixes/:idMixes/tracks/:idTracks/samples/:idSamples', callbacks.deleteSamples);
+    //router.delete('/api/mixes/:idMixes/tracks/:idTracks/samples/:idSamples', callbacks.d);
 
     router.get('/api/samples/', callbacks.getSamples);
 

@@ -48,11 +48,28 @@ module.exports = {
                                     }
                                     samples.push(req.param._id);
                                 }
+                                mixes.update(
+                                    {
+                                        userId : req.user._id,
+                                        _id : ObjectID(req.params.idMixes),
+                                        tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
+                                    },
+                                    {
+                                        $set : {'tracks.$.samples': samples}
+                                    },
+                                    function (err, result) {
+                                        if (err) { return res.status(500).json(err); }
+                                        else {
+                                            if (result.result.n == 1) return res.status(201).end();
+                                            else return res.status(403).end();
+                                        }
+                                    }
+                                )
                             }
                         }
                     });
             })
-            .catch(function (err) {
+            .catch(function (error) {
                 console.log('unexpected error', error);
                 return res.status(500).json(error);
             });
