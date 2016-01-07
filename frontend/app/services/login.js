@@ -5,22 +5,22 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
     var factory = {
         logged: false,
         data: false,
-        login: function (mail, password) {
+        login: function (name, password) {
             var object = {
-                mail: mail,
+                username: name,
                 password: password
             };
             var deferred = $q.defer();
             $http({
                 method: 'POST',
-                url: 'http://localhost/login',
+                url: 'http://localhost:7070/api/sessions',
                 data: object,
                 headers: {'Content-Type': 'application/json'}
             }).success(function (data, status) {
-                if (data.status == "success") {
+                if (status == 201) {
                     factory.logged = true;
                     factory.data = true;
-                    window.localStorage.setItem('topmix_usermail', mail);
+                    window.localStorage.setItem('topmix_username', mail);
                     window.localStorage.setItem('topmix_userpassword', password);
                     deferred.resolve(data);
                 } else {
@@ -34,9 +34,8 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
         logout: function () {
             factory.data = false;
             factory.logged = false;
-            window.localStorage.removeItem('topmix_usermail');
+            window.localStorage.removeItem('topmix_username');
             window.localStorage.removeItem('topmix_userpassword');
-
         }
     };
     return factory;
