@@ -20,8 +20,9 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
                 if (status == 201) {
                     factory.logged = true;
                     factory.data = true;
-                    window.localStorage.setItem('topmix_username', mail);
+                    window.localStorage.setItem('topmix_username', name);
                     window.localStorage.setItem('topmix_userpassword', password);
+                    window.localStorage.setItem('topmix_usersessionid', data);
                     deferred.resolve(data);
                 } else {
                     deferred.reject(data);
@@ -36,6 +37,7 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
             factory.logged = false;
             window.localStorage.removeItem('topmix_username');
             window.localStorage.removeItem('topmix_userpassword');
+            window.localStorage.removeItem('topmix_usersessionid');
         }
     };
     return factory;

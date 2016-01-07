@@ -28,26 +28,31 @@
         <h4 class="modal-title">Login</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" name="loginForm" ng-submit="login()" novalidate>
           <fieldset>
         <div class="form-group">
-          <label for="inputEmail" class="col-md-2 control-label">Email</label>
+          <label for="inputUsername" class="col-md-2 control-label">Username</label>
           <div class="col-md-10">
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+            <input type="text" ng-model="username_loginModal" class="form-control" id="inputUsername" placeholder="Username" required>
           </div>
           </div>
           <div class="form-group">
             <label for="inputPassword" class="col-md-2 control-label">Password</label>
             <div class="col-md-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              <input type="password" ng-model="password_loginModal" class="form-control" id="inputPassword" placeholder="Password" required>
           </div>
-        </div>
-            </fieldset>
+
+          </div>
+            <div class="form-group right">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" value="Login" />
+            </div>
+
+          </fieldset>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Login</button>
+
       </div>
     </div>
   </div>

@@ -26,12 +26,14 @@ app.run([ '$rootScope', 'LoginFactory','$location', function ($rootScope, LoginF
     window.location.reload();
   };
   /************ Global Login ************/
-  $rootScope.login = function(mail, pass){
-    LoginFactory.login(mai, pass).then(
+  $rootScope.login = function(){
+    console.log("Trying to login with: "+$rootScope.username_loginModal+"/"+$rootScope.password_loginModal);
+    LoginFactory.login($rootScope.username_loginModal, $rootScope.password_loginModal).then(
         function(data){
           //success
+          console.log("Login success",data);
           $rootScope.logged = true;
-          $rootScope.user = data;
+          $rootScope.user_sessionid = data;
         },
         function(message){
           //error
@@ -39,8 +41,13 @@ app.run([ '$rootScope', 'LoginFactory','$location', function ($rootScope, LoginF
         }
     )
   };
-
-  if (window.localStorage.getItem('topmix_usermail') && window.localStorage.getItem('topmix_userpassword')) {
-    $rootScope.login(window.localStorage.getItem('topmix_usermail') , window.localStorage.getItem('topmix_userpassword') );
+/*
+  //TODO try to get the sessionid also
+  //TODO fix the bug -> when its called, the variables are still undefined
+  if (window.localStorage.getItem('topmix_username') && window.localStorage.getItem('topmix_userpassword')) {
+    $rootScope.login(window.localStorage.getItem('topmix_username') , window.localStorage.getItem('topmix_userpassword'));
   }
+  */
+
+
 }]);
