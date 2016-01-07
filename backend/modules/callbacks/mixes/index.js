@@ -98,13 +98,16 @@ module.exports = {
             .connect()
             .then(function (db) {
                 var mixes = db.collection('mixes');
+                var id = new ObjectID();
                 mixes
                     .update(
                     {
+                        userId : req.user._id,
                         _id: ObjectID(req.params.idMixes)
                     },
                     {
                         $push: { tracks: {
+                            _id: id,
                             name: req.body.name,
                             volume: 100,
                             samples: []
@@ -112,7 +115,7 @@ module.exports = {
                     }, function (err, result) {
                         if (err) { return res.status(500).json(err); }
                         else {
-                            if (result.result.n == 1) return res.status(201).end();
+                            if (result.result.n == 1) return res.status(201).json(id);
                             else return res.status(403).end();
                         }
                     }
@@ -124,9 +127,66 @@ module.exports = {
             });
     },
     putTracks : function(req, res) {
-        //TODO
+        var updateQuery =
+            {
+                $set : {}
+            };
+        if (req.body.name) updateQuery.$set['tracks.$.name']=req.body.name;
+        if (req.body.volume) updateQuery.$set['tracks.$.volume']=req.body.volume;
+        database
+            .connect()
+            .then(function (db) {
+                var mixes = db.collection('mixes');
+                mixes
+                    .update(
+                    {
+                        userId : req.user._id,
+                        _id : ObjectID(req.params.idMixes),
+                        tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
+                    },
+                    updateQuery,
+                    function (err, result) {
+                        if (err) { return res.status(500).json(err); }
+                        else {
+                            if (result.result.n == 1) return res.status(200).end();
+                            else return res.status(403).end();
+                        }
+                    }
+                );
+            })
+            .catch(function (error) {
+                console.log('unexpected error', error);
+                return res.status(500).json(error);
+            });
     },
     deleteTracks : function(req, res){
-        //TODO
+        database
+            .connect()
+            .then(function (db) {
+                var mixes = db.collection('mixes');
+                mixes
+                    .update(
+                    {
+                        userId : req.user._id,
+                        _id: ObjectID(req.params.idMixes)
+                    },
+                    {
+                        $pull : { tracks : { _id : ObjectID(req.params.idTracks)}}
+                    },
+                    function (err, result) {
+                        if (err) {
+                            console.log(err);
+                            return res.status(500).json(err); }
+                        else {
+                            if (result.result.n == 1) return res.status(204).end();
+                            else return res.status(403).end();
+                        }
+                    }
+                );
+            })
+            .catch(function (error) {
+                console.log('unexpected error', error);
+                return res.status(500).json(error);
+            });
     }
 };
