@@ -9,10 +9,11 @@ module.exports = function (router) {
     router.get('/api/mixes', callbacks.getMixes);
     router.post('/api/mixes', callbacks.postMixes);
     router.get('/api/mixes/:idMixes', callbacks.getOneMixes);
-    router.delete('/mixes/:idMixes/', callbacks.deleteMixes);
-    router.post('/mixes/:idMixes/tracks/', callbacks.postTracks);
-    router.put('/mixes/:idMixes/tracks/:name', callbacks.putTracks);
-    router.delete('/mixes/:idMixes/tracks/:name', callbacks.deleteTracks);
+    router.delete('/api/mixes/:idMixes/', callbacks.deleteMixes);
+    router.post('/api/mixes/:idMixes/tracks/', callbacks.postTracks);
+    router.put('/api/mixes/:idMixes/tracks/:name', callbacks.putTracks);
+    router.delete('/api/mixes/:idMixes/tracks/:name', callbacks.deleteTracks);
+
     return router;
 
 };

@@ -27,17 +27,12 @@ describe('Callbacks Tests', function () {
                 var users = db.collection('users');
                 users.remove({username: user.username}, function (err, response) {
                     assert.equal(1, response.result.n);
-                    var mixes = db.collection('mixes');
-                    mixes.remove({name: mix.name}, function (err, response) {
-                        //assert.equal(1, response.result.n);
-                        server.close(done);
-                    });
+                    server.close(done);
                 });
             })
             .catch(function (err) {
                 console.log('ERROR', err);
             });
-
     });
 
     describe('Post /api/users', function () {
@@ -101,6 +96,7 @@ describe('Callbacks Tests', function () {
                 .set('Accept', 'application/json')
                 .send({name: mix.name})
                 .end(function(err, res) {
+                    mix = res.body;
                     assert.equal(201, res.status);
                     done();
                 });
@@ -117,6 +113,19 @@ describe('Callbacks Tests', function () {
                 .end(function(err, res) {
                     assert.equal(1, res.body.length);
                     assert.equal(200, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/mixes', function () {
+        it ('Should Delete the mix previously created and getted', function (done) {
+            request(server)
+                .del('/api/mixes/' + mix._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    assert.equal(204, res.status);
                     done();
                 });
         });

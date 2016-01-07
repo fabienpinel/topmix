@@ -1,5 +1,6 @@
 var database = require('../../database');
 var uuid = require('node-uuid');
+var ObjectID = require("mongodb").ObjectID;
 
 module.exports = {
 
@@ -55,7 +56,7 @@ module.exports = {
                 mixes
                     .find({
                         userId: req.user._id,
-                        _id: req.params.idMixes
+                        _id: ObjectID(req.params.idMixes)
                     })
                     .toArray(function (err, docs) {
                         if (err) { return res.status(500).json(err); }
@@ -75,14 +76,14 @@ module.exports = {
             .then(function (db) {
                 var mixes = db.collection('mixes');
                 mixes
-                    .delete({
+                    .remove({
                         userId: req.user._id,
-                        _id: req.params.idMixes
+                        _id: ObjectID(req.params.idMixes)
                     }, function (err, result) {
                         if (err) { return res.status(500).json(err); }
                         else {
-                            if (result.ops.length === 1) return res.status(201).json(result.ops[0]);
-                            else return res.status(403).json(err);
+                            if (result.result.n == 1) return res.status(204).end();
+                            else return res.status(403).end();
                         }
                     }
                 );
