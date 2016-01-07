@@ -15,6 +15,7 @@ describe('Callbacks Tests', function () {
     };
 
     var track = {
+        _id: null,
         name: 'piste 1'
     };
 
@@ -58,7 +59,7 @@ describe('Callbacks Tests', function () {
                 .set('Accept', 'application/json')
                 .end(function(err, res){
                     assert.equal(500, res.status);
-                    assert(res.body.errmsg.indexOf('E11000 duplicate key error index: topmix.users.$username_1') >= 0);
+                    assert(res.body.errmsg.indexOf('E11000 duplicate key error index: topmix.users') >= 0);
                     done();
                 });
         });
@@ -107,7 +108,7 @@ describe('Callbacks Tests', function () {
         });
     });
 
-    describe('Update /api/mixes/:id', function () {
+    describe('Post /api/mixes/:id/tracks', function () {
         it ('Should Update a user\'s Mix', function (done) {
             request(server)
                 .post('/api/mixes/' + mix._id + '/tracks')
@@ -115,7 +116,37 @@ describe('Callbacks Tests', function () {
                 .set('Accept', 'application/json')
                 .send({name: track.name})
                 .end(function(err, res) {
+                    track._id = res.body;
                     assert.equal(201, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Put /api/mixes/:id/tracks/:id', function () {
+        it ('Should Update a user\'s Track', function (done) {
+            request(server)
+                .put('/api/mixes/' + mix._id + '/tracks/' + track._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .send({name: 'gorge', volume: 0})
+                .end(function(err, res) {
+                    track.name = 'gorge';
+                    track.volume = 0;
+                    assert.equal(200, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/mixes/:id/tracks/:id', function () {
+        it ('Should Delete a user\'s Track', function (done) {
+            request(server)
+                .delete('/api/mixes/' + mix._id + '/tracks/' + track._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    assert.equal(204, res.status);
                     done();
                 });
         });
