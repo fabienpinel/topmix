@@ -14,6 +14,10 @@ describe('Callbacks Tests', function () {
         name: 'mix 1'
     };
 
+    var track = {
+        name: 'piste 1'
+    };
+
     var sessionId = null;
 
     var server;
@@ -97,6 +101,20 @@ describe('Callbacks Tests', function () {
                 .send({name: mix.name})
                 .end(function(err, res) {
                     mix = res.body;
+                    assert.equal(201, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Update /api/mixes/:id', function () {
+        it ('Should Update a user\'s Mix', function (done) {
+            request(server)
+                .post('/api/mixes/' + mix._id + '/tracks')
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .send({name: track.name})
+                .end(function(err, res) {
                     assert.equal(201, res.status);
                     done();
                 });

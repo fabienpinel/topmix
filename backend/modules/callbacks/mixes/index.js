@@ -99,16 +99,21 @@ module.exports = {
             .then(function (db) {
                 var mixes = db.collection('mixes');
                 mixes
-                    .findOne({
-                        _id: req.params.idMixes
-                    })
                     .update(
                     {
-                        tracks: []//TODO
+                        _id: ObjectID(req.params.idMixes)
+                    },
+                    {
+                        $push: { tracks: {
+                            name: req.body.name,
+                            volume: 100,
+                            samples: []
+                        }}
                     }, function (err, result) {
                         if (err) { return res.status(500).json(err); }
                         else {
-                            //TODO
+                            if (result.result.n == 1) return res.status(201).end();
+                            else return res.status(403).end();
                         }
                     }
                 );
