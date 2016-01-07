@@ -28,3 +28,12 @@
   content: "";
   padding: 0;
 }
+.form-group{
+  margin:0;
+}
+.modal-content .modal-body{
+  padding-top: 0px;
+}
+.right{
+  float: right;
+}
