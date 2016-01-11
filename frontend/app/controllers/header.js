@@ -1,9 +1,16 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("HeaderController" , ['$scope','LoginFactory', 'SigninFactory', "$location", function($scope, LoginFactory, SigninFactory, $location){
+app.controller("HeaderController" , ['$scope', '$rootScope', 'LoginFactory', 'SigninFactory', "$location", function($scope,$rootScope, LoginFactory, SigninFactory, $location){
     $scope.logged = false;
     $scope.user = null;
+    $scope.user_sessionid = null;
+
+    $scope.$on("loginPossible", function(event, args) {
+        $scope.logged = args.logged;
+        $scope.user = args.user;
+        $scope.user_sessionid = args.user_sessionid;
+    });
 
     /************ Global Logout ************/
     $scope.logout = function () {

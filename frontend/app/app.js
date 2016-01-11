@@ -20,15 +20,16 @@ app.directive('header', function() {
 });
 
 
-app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($rootScope, LoginFactory, SigninFactory, $location){
+app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
 
 
   //TODO try to get the sessionid also
   //TODO fix the bug -> when its called, the variables are still undefined
- /* if (window.localStorage.getItem('topmix_username') && window.localStorage.getItem('topmix_userpassword')) {
-    $rootScope.login(window.localStorage.getItem('topmix_username') , window.localStorage.getItem('topmix_userpassword'));
+  if (window.localStorage.getItem('topmix_username') && window.localStorage.getItem('topmix_userpassword')) {
+      LoginFactory.checkLogin(window.localStorage.getItem('topmix_username'), window.localStorage.getItem('topmix_userpassword'));
+
   }
-  */
+
 
 
 
