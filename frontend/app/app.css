@@ -50,24 +50,33 @@ section#multipisteVolume{
 section{
   padding-top: 10px;
   padding-bottom:10px;
-  border-top: 1px solid #3399FF;
-  width:100%;
-}
-section#player{
 
+  width:100%;
   display: inline-block;
   text-align: center;
 }
+section#player{
+  border-top: 1px solid #3399FF;
+}
 section#player span{
-  font-size: 60px;
-  width:auto;
-  height:auto;
+   font-size: 60px;
+   width:auto;
+   height:auto;
+
+ }
+section#player .arrows{
+  margin-top:20px;
 }
 section#player label{
   height:100%;
   font-size: 40px;
 }
+section#multipisteVolume{
+  background-color: rgba(0,0,0,0.2);
+}
 .slidernx{
   font-size: 130%;
-
+}
+#multipisteVolume canvas{
+  padding: 2px 2px 2px 2px;
 }

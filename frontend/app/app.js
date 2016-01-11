@@ -18,7 +18,17 @@ app.directive('header', function() {
         restrict: "E"
     };
 });
+app.filter('range', function() {
+    return function(input, total) {
+        total = parseInt(total);
 
+        for (var i=0; i<total; i++) {
+            input.push(i);
+        }
+
+        return input;
+    };
+});
 
 app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
 
@@ -30,28 +40,18 @@ app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
 
   }
 
+    //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
     //TODO to be moved somewehere else
     nx.onload = function() {
-        //forces horizontal slider
+/*
+
         sliderPiste1.hslider = false;
         sliderPiste1.val.value = 50;
         sliderPiste1.draw();
 
-        sliderPiste2.hslider = false;
-        sliderPiste2.val.value = 100;
-        sliderPiste2.draw();
+*/
 
-        sliderPiste3.hslider = false;
-        sliderPiste3.val.value = 80;
-        sliderPiste3.draw();
 
-        sliderPiste4.hslider = false;
-        sliderPiste4.val.value = 80;
-        sliderPiste4.draw();
-
-        sliderPiste5.hslider = false;
-        sliderPiste5.val.value = 80;
-        sliderPiste5.draw();
 
     }
 
