@@ -38,12 +38,21 @@ app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($r
         sliderPiste1.draw();
 
         sliderPiste2.hslider = false;
-        sliderPiste2.val.value = 50;
+        sliderPiste2.val.value = 100;
         sliderPiste2.draw();
 
         sliderPiste3.hslider = false;
-        sliderPiste3.val.value = 50;
+        sliderPiste3.val.value = 80;
         sliderPiste3.draw();
+
+        sliderPiste4.hslider = false;
+        sliderPiste4.val.value = 80;
+        sliderPiste4.draw();
+
+        sliderPiste5.hslider = false;
+        sliderPiste5.val.value = 80;
+        sliderPiste5.draw();
+
     }
 
     nx.colorize("#3399FF")
