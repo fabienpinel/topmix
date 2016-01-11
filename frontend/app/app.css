@@ -44,6 +44,8 @@ html, body{
   position: absolute;
   bottom: 0;
   width:100%;
+  padding-top: 20px;
+  border-top: 1px solid #3399FF;
 }
 .slidernx{
   font-size: 130%;
