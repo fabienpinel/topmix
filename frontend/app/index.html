@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
+  <link rel="stylesheet" href="bower_components/material-design-icons/iconfont/material-icons.css">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -23,16 +24,29 @@
   <![endif]-->
 
   <div ng-view></div>
-
-  <section id="multipisteVolume">
+<div id="sections">
+  <section id="player">
     <div class="container">
-  <canvas nx="slider" id="sliderPiste1" min="0" max="100" label="Piste 1" height="200" width="80" class="slidernx"></canvas>
-  <canvas nx="slider" id="sliderPiste2" min="0" max="100" label="Piste 2" height="200" width="80" class="slidernx"></canvas>
-  <canvas nx="slider" id="sliderPiste3" min="0" max="100" label="Piste 3" height="200" width="80" class="slidernx"></canvas>
-  <canvas nx="slider" id="sliderPiste4" min="0" max="100" label="Piste 4" height="200" width="80" class="slidernx"></canvas>
-  <canvas nx="slider" id="sliderPiste5" min="0" max="100" label="Piste 5" height="200" width="80" class="slidernx"></canvas>
+      <span class="btn material-icons">skip_previous</span>
+      <span class="btn material-icons">play_arrow</span>
+      <span class="btn material-icons">pause</span>
+      <span class="btn material-icons">skip_next</span>
+      <span class="btn" disabled="true">3:11</span>
+      <span class="btn material-icons right" ng-show="!hideMultipisteVolume" ng-click="hideMultipisteVolume=true">arrow_drop_down</span>
+      <span class="btn material-icons right" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
     </div>
   </section>
+  <section id="multipisteVolume" ng-hide="hideMultipisteVolume">
+    <div class="container">
+      <canvas nx="slider" id="sliderPiste1" min="0" max="100" label="Piste 1" height="200" width="80" class="slidernx"></canvas>
+      <canvas nx="slider" id="sliderPiste2" min="0" max="100" label="Piste 2" height="200" width="80" class="slidernx"></canvas>
+      <canvas nx="slider" id="sliderPiste3" min="0" max="100" label="Piste 3" height="200" width="80" class="slidernx"></canvas>
+      <canvas nx="slider" id="sliderPiste4" min="0" max="100" label="Piste 4" height="200" width="80" class="slidernx"></canvas>
+      <canvas nx="slider" id="sliderPiste5" min="0" max="100" label="Piste 5" height="200" width="80" class="slidernx"></canvas>
+    </div>
+  </section>
+</div>
+
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->

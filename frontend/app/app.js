@@ -58,5 +58,4 @@ app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
     nx.colorize("#3399FF")
 
 
-
 }]);

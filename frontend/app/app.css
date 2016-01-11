@@ -39,13 +39,33 @@ html, body{
 .right{
   float: right;
 }
-
-#multipisteVolume{
+#sections{
   position: absolute;
   bottom: 0;
   width:100%;
-  padding-top: 20px;
+}
+section#multipisteVolume{
+
+}
+section{
+  padding-top: 10px;
+  padding-bottom:10px;
   border-top: 1px solid #3399FF;
+  width:100%;
+}
+section#player{
+
+  display: inline-block;
+  text-align: center;
+}
+section#player span{
+  font-size: 60px;
+  width:auto;
+  height:auto;
+}
+section#player label{
+  height:100%;
+  font-size: 40px;
 }
 .slidernx{
   font-size: 130%;
