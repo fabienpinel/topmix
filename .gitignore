@@ -1,3 +1,5 @@
 .idea
 .DS_STORE
 frontend/app/bower_components
+frontend/node_modules
+backend/node_modules

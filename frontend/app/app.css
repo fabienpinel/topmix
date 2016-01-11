@@ -1,5 +1,7 @@
 /* app css stylesheet */
-
+html, body{
+  height:100%;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -36,4 +38,36 @@
 }
 .right{
   float: right;
+}
+#sections{
+  position: absolute;
+  bottom: 0;
+  width:100%;
+}
+section#multipisteVolume{
+
+}
+section{
+  padding-top: 10px;
+  padding-bottom:10px;
+  border-top: 1px solid #3399FF;
+  width:100%;
+}
+section#player{
+
+  display: inline-block;
+  text-align: center;
+}
+section#player span{
+  font-size: 60px;
+  width:auto;
+  height:auto;
+}
+section#player label{
+  height:100%;
+  font-size: 40px;
+}
+.slidernx{
+  font-size: 130%;
+
 }

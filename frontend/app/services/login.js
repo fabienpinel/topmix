@@ -1,9 +1,8 @@
 /**
  * Created by fabienpinel on 07/01/16.
  */
-app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
+app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
     var factory = {
-        logged: false,
         data: false,
         login: function (name, password) {
             var object = {
@@ -18,8 +17,6 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
                 headers: {'Content-Type': 'application/json'}
             }).success(function (data, status) {
                 if (status == 201) {
-                    factory.logged = true;
-                    factory.data = true;
                     window.localStorage.setItem('topmix_username', name);
                     window.localStorage.setItem('topmix_userpassword', password);
                     window.localStorage.setItem('topmix_usersessionid', data);
@@ -33,11 +30,16 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
             return deferred.promise;
         },
         logout: function () {
-            factory.data = false;
-            factory.logged = false;
             window.localStorage.removeItem('topmix_username');
             window.localStorage.removeItem('topmix_userpassword');
             window.localStorage.removeItem('topmix_usersessionid');
+        },
+        checkLogin : function(user, password) {
+            this.login(user, password).then(
+                function(data){
+                    //success
+                    $rootScope.$broadcast("loginPossible", {logged : true, user_sessionid: factory.data});
+                })
         }
     };
     return factory;
