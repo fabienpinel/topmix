@@ -19,6 +19,8 @@ describe('Callbacks Tests', function () {
         name: 'piste 1'
     };
 
+    var insertSampleId = 17;
+
     var sessionId = null;
 
     var server;
@@ -52,6 +54,35 @@ describe('Callbacks Tests', function () {
                 });
         });
 
+        it ('Should fail when create a user because username and password < 6 char', function () {
+            request(server)
+                .post('/api/users')
+                .send({
+                    username:'user',
+                    password: 'pass'
+                })
+                .set('Accept', 'application/json')
+                .end(function(err, res){
+                    assert.equal(2, res.body.length); // number of errors
+                    assert.equal(400, res.status);
+                    done();
+                });
+        });
+
+        it ('Shoud fail when create a user because missing password field', function () {
+            request(server)
+                .post('/api/users')
+                .send({
+                    username:'username2'
+                })
+                .set('Accept', 'application/json')
+                .end(function(err, res){
+                    assert.equal(1, res.body.length); // number of errors
+                    assert.equal(400, res.status);
+                    done();
+                });
+        });
+
         it ('Should Fail when Create a user with same username', function (done) {
             request(server)
                 .post('/api/users')
@@ -78,7 +109,7 @@ describe('Callbacks Tests', function () {
                 });
         });
 
-        it ('Should Create a sessionId for the user', function (done) {
+        it ('Should not Create a sessionId for the user', function (done) {
             request(server)
                 .post('/api/sessions')
                 .send({
@@ -139,14 +170,15 @@ describe('Callbacks Tests', function () {
         });
     });
 
-    describe('Delete /api/mixes/:id/tracks/:id', function () {
-        it ('Should Delete a user\'s Track', function (done) {
+    describe('Post /api/mixes/:id/tracks/:id/samples', function () {
+        it ('Should add a sample to the previous updated track', function (done) {
             request(server)
-                .delete('/api/mixes/' + mix._id + '/tracks/' + track._id)
+                .post('/api/mixes/' + mix._id + '/tracks/' + track._id + '/samples')
                 .set('sessionid', sessionId)
                 .set('Accept', 'application/json')
+                .send({index: insertSampleId, _id: 'bonjourjesuisunsample'})
                 .end(function(err, res) {
-                    assert.equal(204, res.status);
+                    assert.equal(201, res.status);
                     done();
                 });
         });
@@ -162,6 +194,33 @@ describe('Callbacks Tests', function () {
                 .end(function(err, res) {
                     assert.equal(1, res.body.length);
                     assert.equal(200, res.status);
+                    assert.equal(insertSampleId + 1, res.body[0][0].tracks[0].samples.length);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/mixes/:id/tracks/:id/samples/:index', function () {
+        it ('Delete the previous sample inserted on the track', function (done) {
+            request(server)
+                .del('/api/mixes/' + mix._id + '/tracks/' + track._id + '/samples/' + insertSampleId)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    assert.equal(204, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/mixes/:id/tracks/:id', function () {
+        it ('Should Delete a user\'s Track', function (done) {
+            request(server)
+                .delete('/api/mixes/' + mix._id + '/tracks/' + track._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    assert.equal(204, res.status);
                     done();
                 });
         });
