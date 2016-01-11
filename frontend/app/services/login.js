@@ -18,8 +18,6 @@ app.factory('LoginFactory', ['$http', '$q', function ($http, $q) {
                 headers: {'Content-Type': 'application/json'}
             }).success(function (data, status) {
                 if (status == 201) {
-                    factory.logged = true;
-                    factory.data = true;
                     window.localStorage.setItem('topmix_username', name);
                     window.localStorage.setItem('topmix_userpassword', password);
                     window.localStorage.setItem('topmix_usersessionid', data);

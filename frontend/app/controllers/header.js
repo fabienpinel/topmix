@@ -10,6 +10,9 @@ app.controller("HeaderController" , ['$scope','LoginFactory', 'SigninFactory', "
         LoginFactory.logout();
         $scope.logged = false;
         $scope.user = null;
+        $scope.user_sessionid = null;
+       /* $location.path('/');
+        window.location.reload();*/
     };
     /************ Global Login ************/
     $scope.login = function(){
