@@ -30,6 +30,23 @@ app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($r
   }
   */
 
+    //TODO to be moved somewehere else
+    nx.onload = function() {
+        //forces horizontal slider
+        sliderPiste1.hslider = false;
+        sliderPiste1.val.value = 50;
+        sliderPiste1.draw();
+
+        sliderPiste2.hslider = false;
+        sliderPiste2.val.value = 50;
+        sliderPiste2.draw();
+
+        sliderPiste3.hslider = false;
+        sliderPiste3.val.value = 50;
+        sliderPiste3.draw();
+    }
+
+    nx.colorize("#3399FF")
 
 
 }]);

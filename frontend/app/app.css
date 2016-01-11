@@ -1,5 +1,7 @@
 /* app css stylesheet */
-
+html, body{
+  height:100%;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -36,4 +38,10 @@
 }
 .right{
   float: right;
+}
+
+#multipisteVolume{
+  position: absolute;
+  bottom: 0;
+  width:100%;
 }
