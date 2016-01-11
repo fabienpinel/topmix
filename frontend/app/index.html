@@ -14,147 +14,10 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
-  <link rel="stylesheet" href="view1/view1.css">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<div class="modal" id="signinModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Signin</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" name="signinForm" ng-submit="signin()" novalidate>
-          <fieldset>
-            <div class="form-group">
-              <label for="inputUsernameSignin" class="col-md-2 control-label">Username</label>
-              <div class="col-md-10">
-                <input type="text" ng-model="username_signinModal" class="form-control" id="inputUsernameSignin" placeholder="Username" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPasswordSignin" class="col-md-2 control-label">Password</label>
-              <div class="col-md-10">
-                <input type="password" ng-model="password_signinModal" class="form-control" id="inputPasswordSignin" placeholder="Password" required>
-              </div>
-
-            </div>
-            <div class="form-group right">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <input type="submit" class="btn btn-primary" value="Signin" />
-            </div>
-
-          </fieldset>
-        </form>
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal" id="loginModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Login</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" name="loginForm" ng-submit="login()" novalidate>
-          <fieldset>
-        <div class="form-group">
-          <label for="inputUsername" class="col-md-2 control-label">Username</label>
-          <div class="col-md-10">
-            <input type="text" ng-model="username_loginModal" class="form-control" id="inputUsername" placeholder="Username" required>
-          </div>
-          </div>
-          <div class="form-group">
-            <label for="inputPassword" class="col-md-2 control-label">Password</label>
-            <div class="col-md-10">
-              <input type="password" ng-model="password_loginModal" class="form-control" id="inputPassword" placeholder="Password" required>
-          </div>
-
-          </div>
-            <div class="form-group right">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <input type="submit" class="btn btn-primary" value="Login" />
-            </div>
-
-          </fieldset>
-        </form>
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="javascript:void(0)">Brand</a>
-    </div>
-    <div class="navbar-collapse collapse navbar-inverse-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="javascript:void(0)">Active</a></li>
-        <li><a href="javascript:void(0)">Link</a></li>
-        <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-            <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="javascript:void(0)">Action</a></li>
-            <li><a href="javascript:void(0)">Another action</a></li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Dropdown header</li>
-            <li><a href="javascript:void(0)">Separated link</a></li>
-            <li><a href="javascript:void(0)">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control col-md-8" placeholder="Search">
-        </div>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" data-toggle="modal" ng-if="!user_sessionid" data-target="#signinModal">Signin</a></li>
-        <li><a href="#" data-toggle="modal" ng-if="!user_sessionid" data-target="#loginModal">Login</a></li>
-        <li><a ng-if="user_sessionid" ng-click="logout()" >Disconnect</a></li>
-        <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-            <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="javascript:void(0)">Action</a></li>
-            <li><a href="javascript:void(0)">Another action</a></li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="javascript:void(0)">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
-
+  <header></header>
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
@@ -174,8 +37,6 @@
   <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
   <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
@@ -185,6 +46,7 @@
   <script src="services/signin.js"></script>
 
   <!-- Import Controllers -->
+  <script src="controllers/header.js"></script>
 
   <script type='text/javascript' src='nexusUI.js'></script>
 </body>
