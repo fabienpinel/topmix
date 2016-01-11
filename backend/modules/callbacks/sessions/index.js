@@ -19,7 +19,7 @@ module.exports = {
                         }, function (err, result) {
                             if (err) { return res.status(500).json(err); }
                             else {
-                                if (result.result.nModified === 1) {
+                                if (result.result.n === 1) {
                                     return res.status(201).json(sessionId);
                                 } else {
                                     return res.status(403).end();
@@ -49,7 +49,7 @@ module.exports = {
                         }, function (err, result) {
                             if (err) { return res.status(500).json(err); }
                             else {
-                                if (result.result.nModified === 1) {
+                                if (result.result.n === 1) {
                                     return res.status(204).end();
                                 } else {
                                     return res.status(403).end();

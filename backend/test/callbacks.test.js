@@ -14,6 +14,11 @@ describe('Callbacks Tests', function () {
         name: 'mix 1'
     };
 
+    var track = {
+        _id: null,
+        name: 'piste 1'
+    };
+
     var sessionId = null;
 
     var server;
@@ -27,17 +32,12 @@ describe('Callbacks Tests', function () {
                 var users = db.collection('users');
                 users.remove({username: user.username}, function (err, response) {
                     assert.equal(1, response.result.n);
-                    var mixes = db.collection('mixes');
-                    mixes.remove({name: mix.name}, function (err, response) {
-                        //assert.equal(1, response.result.n);
-                        server.close(done);
-                    });
+                    server.close(done);
                 });
             })
             .catch(function (err) {
                 console.log('ERROR', err);
             });
-
     });
 
     describe('Post /api/users', function () {
@@ -59,7 +59,7 @@ describe('Callbacks Tests', function () {
                 .set('Accept', 'application/json')
                 .end(function(err, res){
                     assert.equal(500, res.status);
-                    assert.equal(res.body.errmsg, 'E11000 duplicate key error index: topmix.users.$username_1 dup key: { : "username" }')
+                    assert(res.body.errmsg.indexOf('E11000 duplicate key error index: topmix.users') >= 0);
                     done();
                 });
         });
@@ -101,7 +101,52 @@ describe('Callbacks Tests', function () {
                 .set('Accept', 'application/json')
                 .send({name: mix.name})
                 .end(function(err, res) {
+                    mix = res.body;
                     assert.equal(201, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Post /api/mixes/:id/tracks', function () {
+        it ('Should Update a user\'s Mix', function (done) {
+            request(server)
+                .post('/api/mixes/' + mix._id + '/tracks')
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .send({name: track.name})
+                .end(function(err, res) {
+                    track._id = res.body;
+                    assert.equal(201, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Put /api/mixes/:id/tracks/:id', function () {
+        it ('Should Update a user\'s Track', function (done) {
+            request(server)
+                .put('/api/mixes/' + mix._id + '/tracks/' + track._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .send({name: 'gorge', volume: 0})
+                .end(function(err, res) {
+                    track.name = 'gorge';
+                    track.volume = 0;
+                    assert.equal(200, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/mixes/:id/tracks/:id', function () {
+        it ('Should Delete a user\'s Track', function (done) {
+            request(server)
+                .delete('/api/mixes/' + mix._id + '/tracks/' + track._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    assert.equal(204, res.status);
                     done();
                 });
         });
@@ -117,6 +162,19 @@ describe('Callbacks Tests', function () {
                 .end(function(err, res) {
                     assert.equal(1, res.body.length);
                     assert.equal(200, res.status);
+                    done();
+                });
+        });
+    });
+
+    describe('Delete /api/mixes', function () {
+        it ('Should Delete the mix previously created and getted', function (done) {
+            request(server)
+                .del('/api/mixes/' + mix._id)
+                .set('sessionid', sessionId)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    assert.equal(204, res.status);
                     done();
                 });
         });
