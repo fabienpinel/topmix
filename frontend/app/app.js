@@ -9,7 +9,7 @@ var app = angular.module('TopMix', [
 ]).
 config(['$routeProvider', function($routeProvider) {
       $.material.init();
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 
@@ -41,7 +41,7 @@ app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($r
         }
     )
   };
-  /************ Global Signin ************/
+  /************ Global Logout ************/
   $rootScope.signin = function(){
     console.log("Trying to signin with: "+$rootScope.username_signinModal+"/"+$rootScope.password_signinModal);
     SigninFactory.signin($rootScope.username_signinModal, $rootScope.password_signinModal).then(
@@ -56,6 +56,7 @@ app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($r
           console.log("Error Login: "+message);
         }
     )
+
   };
 /*
   //TODO try to get the sessionid also

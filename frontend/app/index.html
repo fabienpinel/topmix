@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
   <link rel="stylesheet" href="view1/view1.css">
   <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 <div class="modal" id="signinModal">
@@ -131,8 +130,9 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" data-toggle="modal" data-target="#signinModal">Signin</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
+        <li><a href="#" data-toggle="modal" ng-if="!user_sessionid" data-target="#signinModal">Signin</a></li>
+        <li><a href="#" data-toggle="modal" ng-if="!user_sessionid" data-target="#loginModal">Login</a></li>
+        <li><a ng-if="user_sessionid" ng-click="logout()" >Disconnect</a></li>
         <li class="dropdown">
           <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
             <b class="caret"></b></a>
@@ -165,9 +165,11 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+
+<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
   <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
