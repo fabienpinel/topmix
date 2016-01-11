@@ -3,9 +3,6 @@
  */
 app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
     var factory = {
-        logged: false,
-        user:null,
-        user_sessionid: null,
         data: false,
         login: function (name, password) {
             var object = {
@@ -23,8 +20,6 @@ app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $
                     window.localStorage.setItem('topmix_username', name);
                     window.localStorage.setItem('topmix_userpassword', password);
                     window.localStorage.setItem('topmix_usersessionid', data);
-                    factory.logged = true;
-                    factory.user_sessionid = data;
                     deferred.resolve(data);
                 } else {
                     deferred.reject(data);
@@ -35,9 +30,6 @@ app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $
             return deferred.promise;
         },
         logout: function () {
-            factory.data = false;
-            factory.logged = false;
-            factory.user = null;
             window.localStorage.removeItem('topmix_username');
             window.localStorage.removeItem('topmix_userpassword');
             window.localStorage.removeItem('topmix_usersessionid');
@@ -46,7 +38,7 @@ app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $
             this.login(user, password).then(
                 function(data){
                     //success
-                    $rootScope.$broadcast("loginPossible", {logged : factory.logged, user : factory.user, user_sessionid: factory.data});
+                    $rootScope.$broadcast("loginPossible", {logged : true, user_sessionid: factory.data});
                 })
         }
     };
