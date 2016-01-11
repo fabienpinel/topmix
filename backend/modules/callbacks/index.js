@@ -7,6 +7,7 @@ module.exports = {
 
     postUsers: usersCB.postUsers,
 
+    getSessions: sessionsCB.getSessions,
     postSessions: sessionsCB.postSessions,
     deleteSessions: sessionsCB.deleteSessions,
 
@@ -19,5 +20,6 @@ module.exports = {
     deleteTracks: mixesCB.deleteTracks,
 
     getSamples: samplesCB.getSamples,
-    postSamples: samplesCB.postSamples
+    postSamples: samplesCB.postSamples,
+    deleteSamples: samplesCB.deleteSamples
 };

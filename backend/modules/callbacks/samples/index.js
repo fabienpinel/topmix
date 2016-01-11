@@ -3,6 +3,13 @@ var uuid = require('node-uuid');
 var ObjectID = require("mongodb").ObjectID;
 
 module.exports = {
+
+    /**
+     * Get sample list
+     *
+     * @param req
+     * @param res
+     */
     getSamples: function (req, res) {
         database
             .connect()
@@ -22,11 +29,18 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * add a sample to a track
+     *
+     * @param req must contains {index, _id}
+     * @param res
+     */
     postSamples : function (req, res) {
         database
             .connect()
             .then(function (db) {
-                var mixes = db.collection('samples');
+                var mixes = db.collection('mixes');
                 mixes
                     .find({
                         userId : req.user._id,
@@ -41,12 +55,12 @@ module.exports = {
                                 var samples = docs[0].tracks[0].samples;
                                 var index = parseInt(req.body.index);
                                 if(samples.length > index){
-                                    samples[index] = req.param._id;
+                                    samples[index] = req.body._id;
                                 } else {
-                                    for (var i = samples.length; i < index - 1; i++) {
+                                    for (var i = samples.length; i < index; i++) {
                                         samples.push(null);
                                     }
-                                    samples.push(req.param._id);
+                                    samples.push(req.body._id);
                                 }
                                 mixes.update(
                                     {
@@ -68,6 +82,62 @@ module.exports = {
                             }
                         }
                     });
+            })
+            .catch(function (error) {
+                console.log('unexpected error', error);
+                return res.status(500).json(error);
+            });
+    },
+
+    /**
+     * Delete a sample on a track in a given index
+     *
+     * @param req
+     * @param res
+     */
+    deleteSamples: function (req, res) {
+        database
+            .connect()
+            .then(function (db) {
+                var mixes = db.collection('mixes');
+                mixes
+                    .find({
+                        userId : req.user._id,
+                        _id : ObjectID(req.params.idMixes),
+                        tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
+                    }).toArray(function (err, docs) {
+                    if (err) { return res.status(500).json(err); }
+                    else {
+                        if (docs.length === 0 || docs[0].tracks.length !== 1) {
+                            return res.status(403).end();
+                        } else {
+                            var samples = docs[0].tracks[0].samples;
+                            var index = parseInt(req.params.idSamples);
+                            if (index < samples.length) {
+                                samples[index] = req.body._id;
+                            } else {
+                                return res.status(400).end();
+                            }
+                            mixes.update(
+                                {
+                                    userId : req.user._id,
+                                    _id : ObjectID(req.params.idMixes),
+                                    tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
+                                },
+                                {
+                                    $set : {'tracks.$.samples': samples}
+                                },
+                                function (err, result) {
+                                    if (err) { return res.status(500).json(err); }
+                                    else {
+                                        if (result.result.n == 1) return res.status(204).end();
+                                        else return res.status(403).end();
+                                    }
+                                }
+                            )
+                        }
+                    }
+                });
             })
             .catch(function (error) {
                 console.log('unexpected error', error);

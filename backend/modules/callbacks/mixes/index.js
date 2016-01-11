@@ -1,9 +1,14 @@
 var database = require('../../database');
-var uuid = require('node-uuid');
 var ObjectID = require("mongodb").ObjectID;
 
 module.exports = {
 
+    /**
+     * Get all the mix of the current user
+     *
+     * @param req
+     * @param res
+     */
     getMixes: function (req, res) {
         database
             .connect()
@@ -23,7 +28,25 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * Create a new mix
+     *
+     * @param req must contains {name}
+     * @param res
+     */
     postMixes: function (req, res) {
+
+        req.checkBody({
+            'name': {
+                notEmpty: true,
+                errorMessage: 'Field "name" cannot be empty'
+            }
+        });
+
+        var errors = req.validationErrors();
+        if (errors) return res.status(400).json(errors);
+
         database
             .connect()
             .then(function (db) {
@@ -48,6 +71,13 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * Get a single mix
+     *
+     * @param req
+     * @param res
+     */
     getOneMixes : function(req, res) {
         database
             .connect()
@@ -70,6 +100,13 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * Delete a mix
+     *
+     * @param req
+     * @param res
+     */
     deleteOneMixes : function(req, res) {
         database
             .connect()
@@ -93,7 +130,25 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * add a new track
+     *
+     * @param req must contains {name}
+     * @param res
+     */
     postTracks : function(req, res) {
+
+        req.checkBody({
+            'name': {
+                notEmpty: true,
+                errorMessage: 'Field "name" cannot be empty'
+            }
+        });
+
+        var errors = req.validationErrors();
+        if (errors) return res.status(400).json(errors);
+
         database
             .connect()
             .then(function (db) {
@@ -126,13 +181,27 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * Update track info
+     *
+     * @param req must contains {name, volume}
+     * @param res
+     */
     putTracks : function(req, res) {
-        var updateQuery =
-            {
-                $set : {}
-            };
-        if (req.body.name) updateQuery.$set['tracks.$.name']=req.body.name;
-        if (req.body.volume) updateQuery.$set['tracks.$.volume']=req.body.volume;
+        var updateQuery = { $set : {} };
+        if (req.body.name) {
+            req.checkBody('name', 'Invalid name').notEmpty();
+            updateQuery.$set['tracks.$.name'] = req.body.name;
+        }
+        if (req.body.volume) {
+            req.checkBody('volume', 'Invalid name').notEmpty().isInt();
+            updateQuery.$set['tracks.$.volume'] = req.body.volume;
+        }
+        var errors = req.validationErrors();
+        if (errors) return res.status(400).json(errors);
+
+
         database
             .connect()
             .then(function (db) {
@@ -159,6 +228,13 @@ module.exports = {
                 return res.status(500).json(error);
             });
     },
+
+    /**
+     * Delete a specific track by id
+     *
+     * @param req
+     * @param res
+     */
     deleteTracks : function(req, res){
         database
             .connect()

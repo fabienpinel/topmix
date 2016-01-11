@@ -12,6 +12,7 @@
     "body-parser": "^1.14.2",
     "cors": "^2.7.1",
     "express": "^4.13.3",
+    "express-validator": "^2.18.0",
     "mocha": "^2.3.4",
     "mongodb": "^2.0.52",
     "mongoose": "^4.3.1",

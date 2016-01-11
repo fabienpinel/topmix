@@ -4,8 +4,10 @@ var router = require('./modules/router')(express.Router());
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var authenticate = require('./modules/router/authentication-middleware');
+var expressValidator = require('express-validator');
 
 app.use(bodyParser.json());
+app.use(expressValidator());
 app.use(cors());
 app.use(authenticate);
 app.use('/',router);
