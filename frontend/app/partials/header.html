@@ -1,4 +1,4 @@
-<div class="modal" id="signinModal">
+<div class="modal fade" id="signinModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -37,7 +37,7 @@
 </div>
 
 
-<div class="modal" id="loginModal">
+<div class="modal fade" id="loginModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -112,7 +112,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" data-toggle="modal" ng-if="!user_sessionid" data-target="#signinModal">Signin</a></li>
                 <li><a href="#" data-toggle="modal" ng-if="!user_sessionid" data-target="#loginModal">Login</a></li>
-                <li><a ng-if="user_sessionid" ng-click="logout()" >Disconnect</a></li>
+                <li><a ng-if="user_sessionid" ng-click="logout()" href="#" >Disconnect</a></li>
                 <li class="dropdown">
                     <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
                         <b class="caret"></b></a>

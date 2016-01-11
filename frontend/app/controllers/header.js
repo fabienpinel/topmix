@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("HeaderController" , ['$scope','LoginFactory', 'SigninFactory', function($scope, LoginFactory, SigninFactory){
+app.controller("HeaderController" , ['$scope','LoginFactory', 'SigninFactory', "$location", function($scope, LoginFactory, SigninFactory, $location){
     $scope.logged = false;
     $scope.user = null;
 
@@ -10,8 +10,6 @@ app.controller("HeaderController" , ['$scope','LoginFactory', 'SigninFactory', f
         LoginFactory.logout();
         $scope.logged = false;
         $scope.user = null;
-        $location.path('/');
-        window.location.reload();
     };
     /************ Global Login ************/
     $scope.login = function(){
