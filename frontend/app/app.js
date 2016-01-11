@@ -18,6 +18,14 @@ app.directive('header', function() {
         restrict: "E"
     };
 });
+app.directive('musicManager', function() {
+    return {
+        controller: "MusicManagerController",
+        templateUrl: "partials/musicManager.html",
+        scope: {},
+        restrict: "E"
+    };
+});
 app.filter('range', function() {
     return function(input, total) {
         total = parseInt(total);
@@ -40,22 +48,7 @@ app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
 
   }
 
-    //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
-    //TODO to be moved somewehere else
-    nx.onload = function() {
-/*
 
-        sliderPiste1.hslider = false;
-        sliderPiste1.val.value = 50;
-        sliderPiste1.draw();
-
-*/
-
-
-
-    }
-
-    nx.colorize("#3399FF")
 
 
 }]);
