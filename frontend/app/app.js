@@ -34,10 +34,13 @@ app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($r
           console.log("Login success",data);
           $rootScope.logged = true;
           $rootScope.user_sessionid = data;
+            //hide the modal
+            $("#loginModal").modal('hide');
         },
         function(message){
           //error
           console.log("Error Login: "+message);
+            //TODO show error de login
         }
     )
   };
@@ -54,6 +57,7 @@ app.run([ '$rootScope', 'LoginFactory','SigninFactory','$location', function ($r
         function(message){
           //error
           console.log("Error Login: "+message);
+            //TODO show error de signin
         }
     )
   };
