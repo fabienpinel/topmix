@@ -41,6 +41,7 @@ module.exports = {
                         mixCount: 0,
                         sessionId: null
                     }, function (err) {
+                        db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             return res.status(201).end();
