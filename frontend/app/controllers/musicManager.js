@@ -13,26 +13,28 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
     nx.colorize("#3399FF");
 
     $scope.audios= [
-        ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
-        ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav')
+        {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
+            volume: 50
+        },
+        {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav'),
+            volume: 50
+        }
     ];
 
     $.material.init();
-
-
 
     $scope.togglePlayPause = function(){
         if($scope.paused){
             //play
             //play all sounds from audios table
             $scope.audios.forEach(function(audio){
-                audio.play();
+                audio.file.play();
             });
             $scope.paused = false;
         }else{
             //pause
             $scope.audios.forEach(function(audio){
-                audio.pause();
+                audio.file.pause();
             });
             $scope.paused=true;
 
@@ -40,13 +42,13 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
     }
     $scope.restart = function(){
         $scope.audios.forEach(function(audio){
-            audio.restart();
+            audio.file.restart();
         });
     }
 
     $scope.toggleLoop = function(){
             $scope.audios.forEach(function(audio){
-                audio.loop = $scope.loop;
+                audio.file.loop = $scope.loop;
             });
     }
 
