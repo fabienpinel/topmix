@@ -17,13 +17,13 @@
     <section id="player">
         <div class="container">
             <span class="btn material-icons">skip_previous</span>
-            <span class="btn material-icons" ng-click='audio.paused ? audio.play() : audio.pause()'>{{audio.paused ? "play_arrow" : "pause" }}</span>
-            <span class="btn material-icons" ng-click='audio.restart()'>stop</span>
+            <span class="btn material-icons" ng-click='togglePlayPause()'>{{paused ? "play_arrow" : "pause" }}</span>
+            <span class="btn material-icons" ng-click='restart()'>stop</span>
             <span class="btn material-icons">skip_next</span>
             <span class="btn" disabled="true">3:11</span>
             <span class="togglebutton">
                 <label>
-                    <input type="checkbox" ng-model=audio.loop checked="true">
+                    <input type="checkbox" ng-model="loop" ng-change="toggleLoop()" checked="true">
                     <span class="labelToggle">Loop</span>
                 </label>
             </span>
