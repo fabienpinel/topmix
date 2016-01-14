@@ -1,8 +1,9 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", function($scope,$rootScope, $location) {
+app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScope',"$location", function(dragulaService, $scope,$rootScope, $location) {
     //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
+
     nx.onload = function() {
         /*
          sliderPiste1.hslider = false;
@@ -11,4 +12,17 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", f
          */
     }
     nx.colorize("#3399FF");
+    $scope.draggableObjects = [
+        {name: '1'},
+        {name: '2'},
+        {name: '3'},
+        {name: '4'},
+        {name: '5'},
+        {name: '6'},
+        {name: '7'},
+        {name: '8'},
+        {name: '9'},
+        {name: '10'}
+    ];
+
 }]);
