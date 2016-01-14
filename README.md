@@ -8,3 +8,4 @@ Réaliser une webapp qui permet de gérer des sons multipistes.
 http://nexusosc.com/
 http://fezvrasta.github.io/bootstrap-material-design
 https://design.google.com/icons/
+https://danielstern.github.io/ngAudio/#/docs
