@@ -5,13 +5,20 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
     //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
     $scope.paused = true;
     nx.onload = function() {
-         sliderPiste1.hslider = false;
-         sliderPiste1.val.value = 50;
-         sliderPiste1.draw();
-
+        sliderPiste1.hslider = false;
+        sliderPiste1.val.value = 50;
+        sliderPiste1.draw();
+        sliderPiste1.on('*', function(data) {
+            $scope.sliderPiste1Changed(data.value);
+        });
     };
     nx.colorize("#3399FF");
 
+    $scope.sliderPiste1Changed = function(val){
+        console.log("changed ",val);
+        $scope.audios[0].volume = val;
+        console.log($scope.audios);
+    };
     $scope.audios= [
         {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
             volume: 50
@@ -47,9 +54,13 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
     }
 
     $scope.toggleLoop = function(){
-            $scope.audios.forEach(function(audio){
-                audio.file.loop = $scope.loop;
-            });
+        $scope.audios.forEach(function(audio){
+            audio.file.loop = $scope.loop;
+        });
     }
 
+
+    /*
+    * Parcourir l'objet $scope.audios et ajouter le NX slider pour chaque fichier audio + ajouter listener aussi
+    * */
 }]);
