@@ -1,11 +1,33 @@
 <div id="sections">
+    <section id="sounds">
+        <div class="container">
+            <form class=form-inline>
+            <div class='form-group col-xs-9'>
+                <button class='btn btn-neutral' ng-click='audio.muting = !audio.muting'>{{audio.muting ? "Unmute" : "Mute" }}</button>
+                <!-- <div class='checkbox pull-right'>
+                    <label>
+                        <input type=checkbox ng-model=audio.loop ng-click='audio.loop = !audio.loop'>Loop
+                    </label>
+                </div> -->
+            </div>
+
+            </form>
+        </div>
+    </section>
     <section id="player">
         <div class="container">
             <span class="btn material-icons">skip_previous</span>
-            <span class="btn material-icons">play_arrow</span>
-            <span class="btn material-icons">pause</span>
+            <span class="btn material-icons" ng-click='audio.paused ? audio.play() : audio.pause()'>{{audio.paused ? "play_arrow" : "pause" }}</span>
+            <span class="btn material-icons" ng-click='audio.restart()'>stop</span>
             <span class="btn material-icons">skip_next</span>
             <span class="btn" disabled="true">3:11</span>
+            <span class="togglebutton">
+                <label>
+                    <input type="checkbox" ng-model=audio.loop checked="true">
+                    <span class="labelToggle">Loop</span>
+                </label>
+            </span>
+
             <span class="btn material-icons right arrows" ng-show="!hideMultipisteVolume" ng-click="hideMultipisteVolume=true">arrow_drop_down</span>
             <span class="btn material-icons right arrows" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
         </div>

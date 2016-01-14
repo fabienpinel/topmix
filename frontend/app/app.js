@@ -3,10 +3,11 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('TopMix', [
   'ngRoute',
-  'myApp.version'
+  'myApp.version',
+    'ngAudio'
 ]).
 config(['$routeProvider', function($routeProvider) {
-      $.material.init();
+
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
@@ -39,7 +40,6 @@ app.filter('range', function() {
 });
 
 app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
-
 
   //TODO try to get the sessionid also
   //TODO fix the bug -> when its called, the variables are still undefined
