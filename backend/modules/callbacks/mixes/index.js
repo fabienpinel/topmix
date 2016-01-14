@@ -116,7 +116,7 @@ module.exports = {
             .then(function (db) {
                 var mixes = db.collection('mixes');
                 mixes
-                    .remove({
+                    .deleteOne({
                         userId: req.user._id,
                         _id: ObjectID(req.params.idMixes)
                     }, function (err, result) {
