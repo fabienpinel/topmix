@@ -23,38 +23,17 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
-<div id="sections">
-  <section id="player">
-    <div class="container">
-      <span class="btn material-icons">skip_previous</span>
-      <span class="btn material-icons">play_arrow</span>
-      <span class="btn material-icons">pause</span>
-      <span class="btn material-icons">skip_next</span>
-      <span class="btn" disabled="true">3:11</span>
-      <span class="btn material-icons right" ng-show="!hideMultipisteVolume" ng-click="hideMultipisteVolume=true">arrow_drop_down</span>
-      <span class="btn material-icons right" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
-    </div>
-  </section>
-  <section id="multipisteVolume" ng-hide="hideMultipisteVolume">
-    <div class="container">
-      <canvas nx="slider" id="sliderPiste1" min="0" max="100" label="Piste 1" height="200" width="80" class="slidernx"></canvas>
-      <canvas nx="slider" id="sliderPiste2" min="0" max="100" label="Piste 2" height="200" width="80" class="slidernx"></canvas>
-      <canvas nx="slider" id="sliderPiste3" min="0" max="100" label="Piste 3" height="200" width="80" class="slidernx"></canvas>
-      <canvas nx="slider" id="sliderPiste4" min="0" max="100" label="Piste 4" height="200" width="80" class="slidernx"></canvas>
-      <canvas nx="slider" id="sliderPiste5" min="0" max="100" label="Piste 5" height="200" width="80" class="slidernx"></canvas>
-    </div>
-  </section>
-</div>
+  <music-manager></music-manager>
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
   <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
@@ -69,6 +48,7 @@
 
   <!-- Import Controllers -->
   <script src="controllers/header.js"></script>
+  <script src="controllers/musicManager.js"></script>
 
   <script type='text/javascript' src='nexusUI.js'></script>
 </body>
