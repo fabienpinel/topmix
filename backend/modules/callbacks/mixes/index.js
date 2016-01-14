@@ -17,6 +17,7 @@ module.exports = {
                 mixes
                     .find({ userId: req.user._id })
                     .toArray(function (err, docs) {
+                        db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             return res.status(200).json([docs]);
@@ -58,6 +59,7 @@ module.exports = {
                             userId: [req.user._id],
                             tracks: []
                         }, function (err, result) {
+                            db.close();
                             if (err) { return res.status(500).json(err); }
                             else {
                                 if (result.ops.length === 1) return res.status(201).json(result.ops[0]);
@@ -89,6 +91,7 @@ module.exports = {
                         _id: ObjectID(req.params.idMixes)
                     })
                     .toArray(function (err, docs) {
+                        db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             return res.status(200).json([docs]);
@@ -117,6 +120,7 @@ module.exports = {
                         userId: req.user._id,
                         _id: ObjectID(req.params.idMixes)
                     }, function (err, result) {
+                        db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             if (result.result.n == 1) return res.status(204).end();
@@ -168,6 +172,7 @@ module.exports = {
                             samples: []
                         }}
                     }, function (err, result) {
+                            db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             if (result.result.n == 1) return res.status(201).json(id);
@@ -215,6 +220,7 @@ module.exports = {
                     },
                     updateQuery,
                     function (err, result) {
+                        db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             if (result.result.n == 1) return res.status(200).end();
@@ -250,8 +256,8 @@ module.exports = {
                         $pull : { tracks : { _id : ObjectID(req.params.idTracks)}}
                     },
                     function (err, result) {
+                        db.close();
                         if (err) {
-                            console.log(err);
                             return res.status(500).json(err); }
                         else {
                             if (result.result.n == 1) return res.status(204).end();
