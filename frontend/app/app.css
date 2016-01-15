@@ -56,7 +56,7 @@ section{
 section#player{
   border-top: 1px solid #3399FF;
 }
-section#player span{
+section#player span:not(.toggle){
    font-size: 60px;
    width:auto;
    height:auto;
@@ -64,7 +64,7 @@ section#player span{
 section#player .arrows {
   margin-top:20px;
 }
-section#player label{
+section#player label:not(.togglebutton label){
   height:100%;
   font-size: 40px;
 }
@@ -94,4 +94,9 @@ section .head {
   width: 125px;
   padding: 2px 0;
   border-right: 1px solid #aaa;
+}
+
+.labelToggle{
+  position: absolute;
+  font-size: 20px !important;
 }

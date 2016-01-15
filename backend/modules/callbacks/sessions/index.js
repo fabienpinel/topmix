@@ -55,6 +55,7 @@ module.exports = {
                         {
                             $set: {sessionId: sessionId}
                         }, function (err, result) {
+                            db.close();
                             if (err) { return res.status(500).json(err); }
                             else {
                                 if (result.result.n === 1) {
@@ -92,6 +93,7 @@ module.exports = {
                         {
                             $set: {sessionId: null}
                         }, function (err, result) {
+                            db.close();
                             if (err) { return res.status(500).json(err); }
                             else {
                                 if (result.result.n === 1) {

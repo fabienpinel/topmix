@@ -18,6 +18,7 @@ module.exports = {
                 mixes
                     .find({})
                     .toArray(function (err, docs) {
+                        db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
                             return res.status(200).json(docs);
@@ -47,9 +48,13 @@ module.exports = {
                         _id : ObjectID(req.params.idMixes),
                         tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
                     }).toArray(function (err, docs) {
-                        if (err) { return res.status(500).json(err); }
+                        if (err) {
+                            db.close();
+                            return res.status(500).json(err);
+                        }
                         else {
                             if (docs.length === 0 || docs[0].tracks.length !== 1) {
+                                db.close();
                                 return res.status(403).end();
                             } else {
                                 var samples = docs[0].tracks[0].samples;
@@ -72,6 +77,7 @@ module.exports = {
                                         $set : {'tracks.$.samples': samples}
                                     },
                                     function (err, result) {
+                                        db.close();
                                         if (err) { return res.status(500).json(err); }
                                         else {
                                             if (result.result.n == 1) return res.status(201).end();
@@ -106,9 +112,13 @@ module.exports = {
                         _id : ObjectID(req.params.idMixes),
                         tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
                     }).toArray(function (err, docs) {
-                    if (err) { return res.status(500).json(err); }
+                    if (err) {
+                        db.close();
+                        return res.status(500).json(err);
+                    }
                     else {
                         if (docs.length === 0 || docs[0].tracks.length !== 1) {
+                            db.close();
                             return res.status(403).end();
                         } else {
                             var samples = docs[0].tracks[0].samples;
@@ -128,6 +138,7 @@ module.exports = {
                                     $set : {'tracks.$.samples': samples}
                                 },
                                 function (err, result) {
+                                    db.close();
                                     if (err) { return res.status(500).json(err); }
                                     else {
                                         if (result.result.n == 1) return res.status(204).end();
