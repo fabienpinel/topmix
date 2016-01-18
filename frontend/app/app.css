@@ -108,3 +108,16 @@ section .head {
 section#player{
   padding:0;
 }
+
+
+.tracks .handle {
+  top: 4px;
+  position: absolute;
+  left: 5px;
+  cursor:move;
+}
+
+.tracks .head {
+  position: relative;
+  padding-left: 10px;
+}
