@@ -1,8 +1,10 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScope',"$location", "ngAudio", function(dragulaService, $scope,$rootScope, $location, ngAudio) {
+app.controller("MusicManagerController" , ['dragulaService','$scope', "$location", "ngAudio", function(dragulaService, $scope, $location, ngAudio) {
     //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
+
+
 
     $scope.paused = true;
 
@@ -60,18 +62,18 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScop
             $scope.paused=true;
 
         }
-    }
+    };
     $scope.restart = function(){
         $scope.audios.forEach(function(audio){
             audio.file.restart();
         });
-    }
+    };
 
     $scope.toggleLoop = function(){
         $scope.audios.forEach(function(audio){
             audio.file.loop = $scope.loop;
         });
-    }
+    };
 
     $scope.initSliders = function(){
         for(var i=0; i<$scope.audios.length; i++){
@@ -79,7 +81,7 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScop
                 parent: "multipisteVolume",
                 w: "60px",
                 h: "160px",
-                name: "piste-"+i,
+                name: "piste-"+i
         });
             console.log("nx wodgets ",nx.widgets);
         }
