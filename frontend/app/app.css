@@ -2,6 +2,12 @@
 html, body{
   height:100%;
 }
+
+.clear1px {
+  clear: both;
+  height: 0;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -84,6 +90,7 @@ section#contains-tracks {
 }
 section .tracks {
   border-bottom: 1px solid #CCC;
+  clear: both;
 }
 
 section .tracks .label {
@@ -93,6 +100,7 @@ section .tracks .label {
 section .head {
   width: 125px;
   padding: 2px 0;
+  float: left;
   border-right: 1px solid #aaa;
 }
 
@@ -120,4 +128,16 @@ section#player{
 .tracks .head {
   position: relative;
   padding-left: 10px;
+}
+
+.multi-tracks {
+  float: left;
+  padding: 6px 5px 5px;
+}
+
+.multi-tracks div {
+  background-color: #ccccee;
+  padding: 2px 2px;
+  margin-right: 5px;
+  display: inline;
 }
