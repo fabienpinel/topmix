@@ -14,7 +14,7 @@
         <div class="container">
             <form class=form-inline>
             <div class='form-group col-xs-9'>
-                <button class='btn btn-neutral' ng-click='audio.muting = !audio.muting'>{{audio.muting ? "Unmute" : "Mute" }}</button>
+                <button class='btn btn-neutral' ng-click="test()">{{audio.muting ? "Unmute" : "Mute" }}</button>
                 <!-- <div class='checkbox pull-right'>
                     <label>
                         <input type=checkbox ng-model=audio.loop ng-click='audio.loop = !audio.loop'>Loop
@@ -44,8 +44,10 @@
         </div>
     </section>
     <section id="multipisteVolume" ng-hide="hideMultipisteVolume">
-        <div class="container">
-            <canvas ng-repeat="n in [] | range: 10" nx="slider" id="sliderPiste{{$index+1}}" min="0" max="100" label="Piste {{$index+1}}" height="200" width="80" class="slidernx"></canvas>
+        <div class="container" >
+            <!--
+            <canvas ng-repeat="n in audios" nx="slider" id="sliderPiste{{$index+1}}" min="0" max="100" label="Piste {{$index+1}}" height="200" width="80" class="slidernx"></canvas>
+               -->
         </div>
     </section>
 </div>
