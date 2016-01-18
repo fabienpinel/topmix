@@ -57,7 +57,7 @@ section#player{
   border-top: 1px solid #3399FF;
 }
 section#player span:not(.toggle){
-   font-size: 60px;
+   font-size: 30px;
    width:auto;
    height:auto;
  }
@@ -99,4 +99,12 @@ section .head {
 .labelToggle{
   position: absolute;
   font-size: 20px !important;
+}
+#player .btn, .input-group-btn .btn{
+  padding: 0px 20px;
+  margin:0;
+
+}
+section#player{
+  padding:0;
 }

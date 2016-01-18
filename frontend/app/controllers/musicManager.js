@@ -7,13 +7,9 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', "$location
 
 
     $scope.paused = true;
+
+
     nx.onload = function() {
-        sliderPiste1.hslider = false;
-        sliderPiste1.val.value = 50;
-        sliderPiste1.draw();
-        sliderPiste1.on('*', function(data) {
-            $scope.sliderPiste1Changed(data.value);
-        });
     };
     nx.colorize("#3399FF");
     $scope.draggableObjects = [
@@ -29,17 +25,21 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', "$location
         {name: '10'}
     ];
 
-    $scope.sliderPiste1Changed = function(val){
-        console.log("changed ",val);
-        $scope.audios[0].volume = val;
-        console.log($scope.audios);
-    };
+    $scope.test = function() {
+        $scope.audios.push({   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
+            volume: 34
+        });
+    }
+
+    $scope.changeVolume = function(id, data){
+        $scope.audios[(id.split("-")[1])].file.volume = data;
+    }
     $scope.audios= [
         {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
-            volume: 50
+            name:"1"
         },
         {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav'),
-            volume: 50
+            name:"piste 2"
         }
     ];
 
@@ -74,6 +74,29 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', "$location
         });
     };
 
+    $scope.initSliders = function(){
+        for(var i=0; i<$scope.audios.length; i++){
+            nx.add("slider", {
+                parent: "multipisteVolume",
+                w: "60px",
+                h: "160px",
+                name: "piste-"+i
+        });
+            console.log("nx wodgets ",nx.widgets);
+        }
+
+
+        angular.forEach(nx.widgets, function(w) {
+            if(w.type == "slider"){
+                w.on('*', function(data) {
+                    $scope.changeVolume(w.canvas.id, w.val.value);
+                });
+            }
+        });
+
+    };
+
+    $scope.initSliders();
     /*
     * Parcourir l'objet $scope.audios et ajouter le NX slider pour chaque fichier audio + ajouter listener aussi
     * */
