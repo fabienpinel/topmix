@@ -1,8 +1,9 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "ngAudio", function($scope,$rootScope, $location, ngAudio) {
+app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScope',"$location", "ngAudio", function(dragulaService, $scope,$rootScope, $location, ngAudio) {
     //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
+
     $scope.paused = true;
     nx.onload = function() {
         sliderPiste1.hslider = false;
@@ -14,6 +15,18 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
         });
     };
     nx.colorize("#3399FF");
+    $scope.draggableObjects = [
+        {name: '1'},
+        {name: '2'},
+        {name: '3'},
+        {name: '4'},
+        {name: '5'},
+        {name: '6'},
+        {name: '7'},
+        {name: '8'},
+        {name: '9'},
+        {name: '10'}
+    ];
 
     $scope.sliderPiste1Changed = function(val){
         console.log("changed ",val);
@@ -63,8 +76,6 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
             audio.file.loop = $scope.loop;
         });
     }
-
-
     /*
     * Parcourir l'objet $scope.audios et ajouter le NX slider pour chaque fichier audio + ajouter listener aussi
     * */

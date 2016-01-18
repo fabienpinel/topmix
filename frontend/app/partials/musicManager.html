@@ -1,4 +1,15 @@
-<div id="sections">
+<div id="sections" ng-controller="MusicManagerController">
+    <section id="contains-tracks">
+        <div id="mesure"></div>
+        <div class="tracks-zone" ng-repeat="n in draggableObjects" nx="slider" id="piste{{n}}" min="0" max="100" dragula='"first-bag"' dragula-scope='$parent'>
+            <div class="tracks" dragula-model='items'>
+                <div class="head">
+                    <span class="label">piste {{n.name}}</span>
+                    <span class="material-icons">close</span>
+                    <span class="material-icons">volume_mute</span>
+                </div>
+            </div>
+    </section>
     <section id="sounds">
         <div class="container">
             <form class=form-inline>

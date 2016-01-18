@@ -40,8 +40,6 @@ html, body{
   float: right;
 }
 #sections{
-  position: absolute;
-  bottom: 0;
   width:100%;
 }
 section#multipisteVolume{
@@ -62,9 +60,8 @@ section#player span:not(.toggle){
    font-size: 60px;
    width:auto;
    height:auto;
-
  }
-section#player .arrows{
+section#player .arrows {
   margin-top:20px;
 }
 section#player label:not(.togglebutton label){
@@ -80,6 +77,25 @@ section#multipisteVolume{
 #multipisteVolume canvas{
   padding: 2px 2px 2px 2px;
 }
+
+section#contains-tracks {
+  height: 300px;
+  overflow: auto;
+}
+section .tracks {
+  border-bottom: 1px solid #CCC;
+}
+
+section .tracks .label {
+  vertical-align: 7px;
+}
+
+section .head {
+  width: 125px;
+  padding: 2px 0;
+  border-right: 1px solid #aaa;
+}
+
 .labelToggle{
   position: absolute;
   font-size: 20px !important;
