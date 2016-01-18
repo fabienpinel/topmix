@@ -8,6 +8,7 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
         sliderPiste1.hslider = false;
         sliderPiste1.val.value = 50;
         sliderPiste1.draw();
+
         sliderPiste1.on('*', function(data) {
             $scope.sliderPiste1Changed(data.value);
         });
@@ -19,6 +20,10 @@ app.controller("MusicManagerController" , ['$scope', '$rootScope',"$location", "
         $scope.audios[0].volume = val;
         console.log($scope.audios);
     };
+
+    $scope.sliderChangeListener = function(data){
+        //generic listener for a slider
+    }
     $scope.audios= [
         {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
             volume: 50
