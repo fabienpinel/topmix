@@ -133,6 +133,9 @@ section#player{
 .multi-tracks {
   float: left;
   padding: 6px 5px 5px;
+  text-align: left;
+  width: 68%;
+  white-space: nowrap;
 }
 
 .multi-tracks div {
@@ -140,4 +143,5 @@ section#player{
   padding: 2px 2px;
   margin-right: 5px;
   display: inline;
+  cursor: move;
 }
