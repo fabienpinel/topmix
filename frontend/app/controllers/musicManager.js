@@ -8,6 +8,7 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScop
 
 
     nx.onload = function() {
+
     };
     nx.colorize("#3399FF");
     $scope.draggableObjects = [
