@@ -76,8 +76,8 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', '$rootScop
         for(var i=0; i<$scope.audios.length; i++){
             nx.add("slider", {
                 parent: "multipisteVolume",
-                w: "80px",
-                h: "200px",
+                w: "60px",
+                h: "160px",
                 name: "piste-"+i,
         });
             console.log("nx wodgets ",nx.widgets);
