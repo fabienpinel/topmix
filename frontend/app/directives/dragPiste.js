@@ -1,14 +1,21 @@
-app.directive('dragPiste',['dragulaService', function(dragulaService) {
+app.directive('dragPiste', function() {
     return {
         restrict: 'E',
         templateUrl: 'partials/piste.html',
         scope: {tracks: '=tracks'},
         controller: function($scope, dragulaService) {
-            $scope.draggableObjects = $scope.tracks;
+
+            $scope.tracks = [];
+
             dragulaService.options($scope, "sixth-bag", {
                 moves: function (el, container, handle) {
                     return handle.className === 'handle';
                 }
+            });
+
+            $scope.$on('singleMix', function (name, data) {
+                $scope.tracks = data.tracks;
+                console.log($scope.tracks);
             });
 
 
@@ -39,4 +46,4 @@ app.directive('dragPiste',['dragulaService', function(dragulaService) {
 
         }
     }
-}]);
+});

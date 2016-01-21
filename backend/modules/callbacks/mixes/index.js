@@ -94,7 +94,8 @@ module.exports = {
                         db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
-                            return res.status(200).json([docs]);
+                            if (docs.length === 1)return res.status(200).json(docs[0]);
+                            else return res.status(404).end();
                         }
                     });
             })

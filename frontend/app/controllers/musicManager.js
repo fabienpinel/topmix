@@ -1,106 +1,99 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , ['dragulaService','$scope', "$location", "ngAudio", function(dragulaService, $scope, $location, ngAudio) {
-    //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
+app.controller("MusicManagerController" , function(dragulaService, $scope, ngAudio, MixesFactory, TracksFactory, $stateParams) {
 
+    $scope.mix = {};
+
+    function getMix() {
+        MixesFactory
+            .getMixById($stateParams.id)
+            .then(function (mix) {
+                $scope.mix = mix;
+            })
+            .catch(function (err) {
+                console.error(err);
+                $scope.mix = {};
+            });
+    }
+    getMix();
+
+    $scope.postTrack = function () {
+        TracksFactory
+            .postTracks($stateParams.id, 'piste sans nom')
+            .then(function (mix) {
+                $scope.mix = mix;
+            })
+            .catch(function (err) {
+                console.error(err);
+                $scope.mix = {};
+            });
+    };
 
 
     $scope.paused = true;
 
-
-    nx.onload = function() {
-
-    };
-    nx.colorize("#3399FF");
     $scope.draggableObjects = [
-        {name: '1'},
-        {name: '2'},
-        {name: '3'},
-        {name: '4'},
-        {name: '5'},
-        {name: '6'},
-        {name: '7'},
-        {name: '8'},
-        {name: '9'},
-        {name: '10'}
+        {name: '1', volume: 100},
+        {name: '2', volume: 100},
+        {name: '3', volume: 100}
     ];
 
-    $scope.test = function() {
-        $scope.audios.push({   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
+    $scope.test = function () {
+        $scope.audios.push({
+            file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
             volume: 34
         });
-    }
+    };
 
-    $scope.changeVolume = function(id, data){
-        $scope.audios[(id.split("-")[1])].file.volume = data;
-    }
-    $scope.audios= [
-        {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
-            name:"1"
+    $scope.changeVolume = function (id, data) {
+        $scope.audios[id].file.volume = data;
+    };
+    $scope.audios = [
+        {
+            file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
+            name: "1"
         },
-        {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav'),
-            name:"piste 2"
+        {
+            file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav'),
+            name: "piste 2"
         }
     ];
 
     $.material.init();
 
-    $scope.togglePlayPause = function(){
-        if($scope.paused){
+    $scope.togglePlayPause = function () {
+        if ($scope.paused) {
             //play
             //play all sounds from audios table
-            $scope.audios.forEach(function(audio){
+            $scope.audios.forEach(function (audio) {
                 audio.file.play();
             });
             $scope.paused = false;
-        }else{
+        } else {
             //pause
-            $scope.audios.forEach(function(audio){
+            $scope.audios.forEach(function (audio) {
                 audio.file.pause();
             });
-            $scope.paused=true;
+            $scope.paused = true;
 
         }
     };
-    $scope.restart = function(){
-        $scope.audios.forEach(function(audio){
+    $scope.restart = function () {
+        $scope.audios.forEach(function (audio) {
             audio.file.restart();
         });
     };
 
-    $scope.toggleLoop = function(){
-        $scope.audios.forEach(function(audio){
+    $scope.toggleLoop = function () {
+        $scope.audios.forEach(function (audio) {
             audio.file.loop = $scope.loop;
         });
     };
 
-    $scope.initSliders = function(){
-        for(var i=0; i<$scope.audios.length; i++){
-            nx.add("slider", {
-                parent: "multipisteVolume",
-                w: "60px",
-                h: "160px",
-                name: "piste-"+i
-        });
-            console.log("nx wodgets ",nx.widgets);
-        }
+    $scope.volumeHasChanged = function (object, index) {
+        $scope.changeVolume(index, object.volume / 100);
+    }
 
 
-        angular.forEach(nx.widgets, function(w) {
-            if(w.type == "slider"){
-                w.on('*', function(data) {
-                    $scope.changeVolume(w.canvas.id, w.val.value);
-                });
-            }
-        });
-
-    };
-
-    $scope.initSliders();
-    /*
-    * Parcourir l'objet $scope.audios et ajouter le NX slider pour chaque fichier audio + ajouter listener aussi
-    * */
-
-
-}]);
+});

@@ -3,8 +3,10 @@
  */
 app.factory('MixesFactory', ['$http', '$q', '$rootScope', 'LoginFactory', function ($http, $q, $rootScope, LoginFactory) {
 
+
     var factory = {
         data: [],
+        singleMix: {},
 
         /**
          * Get all the mixes of the current user
@@ -22,6 +24,33 @@ app.factory('MixesFactory', ['$http', '$q', '$rootScope', 'LoginFactory', functi
                 }).success(function (data, status) {
                     if (status == 200) {
                         factory.data = data;
+                        deferred.resolve(data);
+                    } else {
+                        deferred.reject(data);
+                    }
+                }).error(function (err) {
+                    deferred.reject(err);
+                });
+            } else {
+                deferred.reject(new Error('You must be logged in'))
+            }
+            return deferred.promise;
+        },
+
+        getMixById: function (id) {
+            var deferred = $q.defer();
+            if (LoginFactory.data) {
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:7070/api/mixes/' + id,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'sessionid': LoginFactory.data
+                    }
+                }).success(function (data, status) {
+                    if (status == 200) {
+                        factory.singleMix = data;
+                        $rootScope.$broadcast('singleMix', data);
                         deferred.resolve(data);
                     } else {
                         deferred.reject(data);

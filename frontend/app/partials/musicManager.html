@@ -1,22 +1,9 @@
 <div id="sections" ng-controller="MusicManagerController">
-<drag-piste tracks="draggableObjects"></drag-piste>
-    <section id="sounds">
-        <div class="container">
-            <form class=form-inline>
-            <div class='form-group col-xs-9'>
-                <!--
-                <button class='btn btn-neutral' ng-click="test()">{{audio.muting ? "Unmute" : "Mute" }}</button>
-                -->
-                <!-- <div class='checkbox pull-right'>
-                    <label>
-                        <input type=checkbox ng-model=audio.loop ng-click='audio.loop = !audio.loop'>Loop
-                    </label>
-                </div> -->
-            </div>
 
-            </form>
-        </div>
-    </section>
+    <!-- Horizontal Tracks-->
+    <drag-piste tracks="draggableObjects"></drag-piste>
+
+    <!-- Player -->
     <section id="player">
         <div class="container">
             <span class="btn material-icons">skip_previous</span>
@@ -35,11 +22,19 @@
             <span class="btn material-icons right arrows" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
         </div>
     </section>
-    <section id="multipisteVolume" ng-hide="hideMultipisteVolume">
-        <div class="container" >
-            <!--
-            <canvas ng-repeat="n in audios" nx="slider" id="sliderPiste{{$index+1}}" min="0" max="100" label="Piste {{$index+1}}" height="200" width="80" class="slidernx"></canvas>
-               -->
+
+    <button ng-click="postTrack()">add track</button>
+
+    <!-- Draw all tracks settings -->
+    <section id="tracks-settings">
+        <div ng-repeat="object in draggableObjects">
+            <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    ng-model="object.volume"
+                    ng-change="volumeHasChanged(object, $index)">
         </div>
     </section>
 </div>

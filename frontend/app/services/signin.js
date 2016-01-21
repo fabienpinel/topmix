@@ -1,9 +1,3 @@
-/**
- * Created by fabienpinel on 07/01/16.
- */
-/**
- * Created by fabienpinel on 07/01/16.
- */
 app.factory('SigninFactory', ['$http', '$q', function ($http, $q) {
     var factory = {
         logged: false,
@@ -27,7 +21,7 @@ app.factory('SigninFactory', ['$http', '$q', function ($http, $q) {
                 } else {
                     deferred.reject(data);
                 }
-            }).error(function (data, status) {
+            }).error(function () {
                 deferred.reject('Erreur de connexion !');
             });
             return deferred.promise;
