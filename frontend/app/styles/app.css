@@ -133,8 +133,9 @@ section#player{
 }
 
 .tracks .head {
-  position: relative;
+  position: absolute;
   padding-left: 10px;
+  left:0px;
 }
 
 .multi-tracks {
@@ -142,6 +143,8 @@ section#player{
   padding: 6px 5px 5px;
   text-align: left;
   white-space: nowrap;
+  position:relative;
+  padding-left: 150px;
 }
 
 .multi-tracks td {

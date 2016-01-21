@@ -101,4 +101,6 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', "$location
     /*
     * Parcourir l'objet $scope.audios et ajouter le NX slider pour chaque fichier audio + ajouter listener aussi
     * */
+
+
 }]);

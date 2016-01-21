@@ -10,6 +10,33 @@ app.directive('dragPiste',['dragulaService', function(dragulaService) {
                     return handle.className === 'handle';
                 }
             });
+
+
+
+
+
+
+
+            // TODO MAXIME : make a directive
+            // TODO MAXIME : make a directive
+            // TODO MAXIME : make a directive
+            // TODO MAXIME : make a directive
+
+            $scope.myMarginStyle = {marginLeft: '0px'};
+            var containsTracks = document.querySelector('#contains-tracks');
+            containsTracks.addEventListener("scroll", function() {
+                $scope.myMarginStyle = {marginLeft: containsTracks.scrollLeft + 'px'};
+            }, false);
+
+            // TODO MAXIME : make a directive
+            // TODO MAXIME : make a directive
+            // TODO MAXIME : make a directive
+            // TODO MAXIME : make a directive
+
+
+
+
+
         }
     }
 }]);
