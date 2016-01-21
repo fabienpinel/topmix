@@ -6,7 +6,7 @@ var database = require('../modules/database');
 describe('Callbacks Tests', function () {
 
     var user = {
-        username: 'username',
+        username: 'usernamefoerjoeropoepegoejgegiouernîujbgvidfujn',
         password: 'password'
     };
 
@@ -194,7 +194,7 @@ describe('Callbacks Tests', function () {
                 .end(function(err, res) {
                     assert.equal(1, res.body.length);
                     assert.equal(200, res.status);
-                    assert.equal(insertSampleId + 1, res.body[0][0].tracks[0].samples.length);
+                    assert.equal(insertSampleId + 1, res.body[0].tracks[0].samples.length);
                     done();
                 });
         });

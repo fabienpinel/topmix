@@ -1,21 +1,21 @@
 <section id="contains-tracks" dragula='"sixth-bag"' >
     <div id="mesure"></div>
     <div class="tracks-zone" ng-repeat="n in draggableObjects" nx="slider" id="piste{{n}}" min="0" max="100">
-        <div class="tracks">
-            <div class="head">
-                <span class="handle">
-                   &#8597;
-                </span>
-                <span class="label">piste {{n.name}}</span>
-                <span class="material-icons">close</span>
-                <span class="material-icons">volume_mute</span>
-            </div>
-            <div class="multi-tracks" dragula="first-bag">
-                <div>knkfejnfkefj {{n.name}}</div>
-                <div>knkfejnfkefj {{n.name}} +1</div>
-            </div>
+        <table class="tracks">
+            <tr class="multi-tracks">
+                <td class="head" ng-style="myMarginStyle">
+                    <span class="handle">
+                       &#8597;
+                    </span>
+                    <span class="label">piste {{n.name}}</span>
+                    <span class="material-icons">close</span>
+                    <span class="material-icons">volume_mute</span>
+                </td>
+                <td class="blank" ng-repeat="i in [] | range:10" dragula="first-bag"></td>
+                <td dragula="first-bag"><div>knkfejnfkefj {{n.name}} +1</div></td>
+            </tr>
             <div class="clear1px">&nbsp;</div>
-        </div>
+        </table>
     </div>
 </section>
 <div class="clear1px">&nbsp;</div>

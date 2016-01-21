@@ -1,0 +1,158 @@
+/* app css stylesheet */
+html, body{
+  height:100%;
+}
+
+.clear1px {
+  clear: both;
+  height: 0;
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+.form-group{
+  margin:0;
+}
+.modal-content .modal-body{
+  padding-top: 0px;
+}
+.right{
+  float: right;
+}
+#sections{
+  width:100%;
+}
+section#multipisteVolume{
+
+}
+section{
+  padding-top: 10px;
+  padding-bottom:10px;
+
+  width:100%;
+  display: inline-block;
+  text-align: center;
+}
+section#player{
+  border-top: 1px solid #3399FF;
+}
+section#player span:not(.toggle){
+   font-size: 30px;
+   width:auto;
+   height:auto;
+ }
+section#player .arrows {
+  margin-top:20px;
+}
+section#player label:not(.togglebutton label){
+  height:100%;
+  font-size: 40px;
+}
+section#multipisteVolume{
+  background-color: rgba(0,0,0,0.2);
+}
+.slidernx{
+  font-size: 130%;
+}
+#multipisteVolume canvas{
+  padding: 2px 2px 2px 2px;
+}
+
+section#contains-tracks {
+  height: 300px;
+  overflow: auto;
+  width: 100%;
+}
+section .tracks {
+  border-bottom: 1px solid #999;
+  clear: both;
+}
+
+section .tracks .label {
+  vertical-align: 7px;
+}
+
+.labelToggle{
+  position: absolute;
+  font-size: 20px !important;
+}
+#player .btn, .input-group-btn .btn{
+  padding: 0px 20px;
+  margin:0;
+
+}
+section#player{
+  padding:0;
+}
+
+.tracks {
+  width: 200%;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 32px;
+}
+
+.tracks .handle {
+  top: 4px;
+  position: absolute;
+  left: 5px;
+  cursor:move;
+}
+
+.tracks .head {
+  position: absolute;
+  padding-left: 15px;
+  width: 115px;
+  border-right: 1px solid #999;
+  left: 0px;
+}
+
+.multi-tracks {
+  float: left;
+  text-align: left;
+  white-space: nowrap;
+  position:relative;
+  padding-left: 150px;
+}
+
+.multi-tracks td {
+  background-color: #ccccee;
+  padding: 3px;
+  overflow: hidden;
+  margin-right: 5px;
+  display: inline-block;
+  cursor: move;
+  width: 100px;
+  height: 32px;
+}
+
+.multi-tracks td:empty {
+  background-color: transparent;
+}
+
