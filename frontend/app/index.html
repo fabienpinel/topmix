@@ -24,7 +24,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <music-manager></music-manager>
+  <div ui-view></div>
 
 
   <!-- In production use:
@@ -49,11 +49,14 @@
   <!-- Import Services -->
   <script src="services/login.js"></script>
   <script src="services/signin.js"></script>
+  <script src="services/mixes.js"></script>
+
   <script src="directives/dragPiste.js"></script>
 
   <!-- Import Controllers -->
   <script src="controllers/header.js"></script>
   <script src="controllers/musicManager.js"></script>
+  <script src="controllers/MixesCtrl.js"></script>
 
   <script type='text/javascript' src='libs/nexusUI.js'></script>
 </body>

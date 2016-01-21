@@ -1,0 +1,15 @@
+<div>
+
+    <div>
+        <form ng-submit="postMixes()">
+            <input type="text" ng-model="newMix.name">
+            <input type="submit">
+        </form>
+    </div>
+
+    <div ng-repeat="mix in mixes">
+        <button ng-click="deleteMixes(mix._id)">&times</button>
+        <a ng-href="#/mixes/{{mix._id}}">{{mix.name}}</a>
+    </div>
+
+</div>

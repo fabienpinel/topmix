@@ -5,7 +5,8 @@
 var app = angular.module('TopMix', [
   'ngRoute',
   angularDragula(angular),
-    'ngAudio'
+    'ngAudio',
+    'ui.router'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
@@ -45,12 +46,26 @@ app.run(['$rootScope','LoginFactory', function ($rootScope, LoginFactory){
 
   //TODO try to get the sessionid also
   //TODO fix the bug -> when its called, the variables are still undefined
-  if (window.localStorage.getItem('topmix_username') && window.localStorage.getItem('topmix_userpassword')) {
-      LoginFactory.checkLogin(window.localStorage.getItem('topmix_username'), window.localStorage.getItem('topmix_userpassword'));
-
+  if (window.localStorage.getItem('topmix_usersessionid')) {
+      LoginFactory.checkLogin(window.localStorage.getItem('topmix_usersessionid'));
   }
 
-
-
-
 }]);
+
+app.config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
+    $stateProvider
+        .state('home', {
+            url: "/",
+            templateUrl: "partials/home.html"
+        })
+        .state('mixes', {
+            url: "/mixes",
+            templateUrl: "partials/mixes.html",
+            controller: 'MixesCtrl'
+        })
+        .state('singleMix', {
+            url: "/mixes/:id",
+            template: "<music-manager></music-manager>"
+        })
+});

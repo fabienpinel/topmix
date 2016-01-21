@@ -3,10 +3,12 @@
  */
 app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
     var factory = {
-        data: false,
-        login: function (name, password) {
+
+        data: window.localStorage.getItem('topmix_usersessionid'),
+
+        login: function (username, password) {
             var object = {
-                username: name,
+                username: username,
                 password: password
             };
             var deferred = $q.defer();
@@ -17,29 +19,47 @@ app.factory('LoginFactory', ['$http', '$q', '$rootScope', function ($http, $q, $
                 headers: {'Content-Type': 'application/json'}
             }).success(function (data, status) {
                 if (status == 201) {
-                    window.localStorage.setItem('topmix_username', name);
+                    window.localStorage.setItem('topmix_username', username);
                     window.localStorage.setItem('topmix_userpassword', password);
                     window.localStorage.setItem('topmix_usersessionid', data);
+                    factory.data = data;
                     deferred.resolve(data);
                 } else {
                     deferred.reject(data);
                 }
-            }).error(function (data, status) {
+            }).error(function () {
                 deferred.reject('Erreur de connexion !');
             });
             return deferred.promise;
         },
+
         logout: function () {
             window.localStorage.removeItem('topmix_username');
             window.localStorage.removeItem('topmix_userpassword');
             window.localStorage.removeItem('topmix_usersessionid');
         },
-        checkLogin : function(user, password) {
-            this.login(user, password).then(
-                function(data){
-                    //success
-                    $rootScope.$broadcast("loginPossible", {logged : true, user_sessionid: factory.data});
-                })
+
+        checkLogin : function(sessionId) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'http://localhost:7070/api/sessions',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'sessionid': sessionId
+                }
+            }).success(function (data, status) {
+                if (status == 200) {
+                    factory.data = sessionId;
+                    $rootScope.$broadcast("loginPossible", {logged : true, user_sessionid: sessionId});
+                    deferred.resolve(data);
+                } else {
+                    deferred.reject(data);
+                }
+            }).error(function () {
+                deferred.reject('Erreur de connexion !');
+            });
+            return deferred.promise;
         }
     };
     return factory;
