@@ -87,6 +87,7 @@ section#multipisteVolume{
 section#contains-tracks {
   height: 300px;
   overflow: auto;
+  width: 100%;
 }
 section .tracks {
   border-bottom: 1px solid #CCC;
@@ -117,6 +118,12 @@ section#player{
   padding:0;
 }
 
+.tracks {
+  width: 200%;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 32px;
+}
 
 .tracks .handle {
   top: 4px;
@@ -134,14 +141,20 @@ section#player{
   float: left;
   padding: 6px 5px 5px;
   text-align: left;
-  width: 68%;
   white-space: nowrap;
 }
 
-.multi-tracks div {
+.multi-tracks td {
   background-color: #ccccee;
   padding: 2px 2px;
   margin-right: 5px;
-  display: inline;
+  display: inline-block;
   cursor: move;
+  width: 100px;
+  height: 32px;
 }
+
+.multi-tracks div.blank {
+  background-color: transparent;
+}
+
