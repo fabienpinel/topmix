@@ -90,19 +90,12 @@ section#contains-tracks {
   width: 100%;
 }
 section .tracks {
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #999;
   clear: both;
 }
 
 section .tracks .label {
   vertical-align: 7px;
-}
-
-section .head {
-  width: 125px;
-  padding: 2px 0;
-  float: left;
-  border-right: 1px solid #aaa;
 }
 
 .labelToggle{
@@ -134,13 +127,14 @@ section#player{
 
 .tracks .head {
   position: absolute;
-  padding-left: 10px;
-  left:0px;
+  padding-left: 15px;
+  width: 115px;
+  border-right: 1px solid #999;
+  left: 0px;
 }
 
 .multi-tracks {
   float: left;
-  padding: 6px 5px 5px;
   text-align: left;
   white-space: nowrap;
   position:relative;
@@ -157,7 +151,7 @@ section#player{
   height: 32px;
 }
 
-.multi-tracks div.blank {
+.multi-tracks td:empty {
   background-color: transparent;
 }
 
