@@ -1,12 +1,12 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , ['dragulaService','$scope', "$location", "ngAudio", function(dragulaService, $scope, $location, ngAudio) {
+app.controller("MusicManagerController" , ['dragulaService','$scope', "$location",  function(dragulaService, $scope, $location) {
     //nx.add("slider", {parent : "multipisteVolume", label: "coucou",height: 200, width: 80});
-
-
+    $.material.init();
 
     $scope.paused = true;
+    $scope.loop = false;
 
 
     nx.onload = function() {
@@ -33,59 +33,120 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', "$location
     }
 
     $scope.changeVolume = function(id, data){
-        $scope.audios[(id.split("-")[1])].file.volume = data;
+        var index = (id.split("-")[1]);
+        for(var i=0; i<$scope.lines[index].song.length; i++){
+            $scope.lines[index].song[i].file.setVolume(data);
+        }
     }
-    $scope.audios= [
-        {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
-            name:"1"
+
+    $scope.line1 =[
+        {   fileName: '../samples/songs/VFH2128BPMCoolKit2.wav',
+            name:"piste 2",
+            file:""
         },
-        {   file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav'),
-            name:"piste 2"
+        {   fileName: '../samples/songs/VFH2128BPMCoolKit1.wav',
+            name:"1",
+            file: ""
+        },
+        {   fileName: '../samples/songs/VFH2128BPMCoolKit2.wav',
+            name:"piste 2",
+            file:""
+        }
+
+    ];
+    $scope.line2 =[
+        {   fileName: '../samples/songs/VFH2128BPMCoolKit1.wav',
+            name:"1",
+            file: ""
         }
     ];
+    $scope.lines= [
+        {
+            song : $scope.line1,
+            counter: 0
+        },
+        {
+            song : $scope.line2,
+            counter: 0
+        }
 
-    $.material.init();
+    ];
 
-    $scope.togglePlayPause = function(){
+    $scope.play = function(line, index){
+        //play
+        setTimeout(function(){
+            if(++index < line.song.length){
+                line.song[index].file.play();
+                $scope.play(line, index);
+            }
+
+
+        }, (line.song[index].file.getDuration()*1000));
+
+    }
+    $scope.togglePlayStop = function(){
         if($scope.paused){
-            //play
+            var index = 0;
             //play all sounds from audios table
-            $scope.audios.forEach(function(audio){
-                audio.file.play();
+            $scope.lines.forEach(function(line){
+                console.log("next song in ", line.song[index].file.getDuration()*1000);
+                line.song[index].file.play();
+                $scope.play(line, index);
+
             });
+
             $scope.paused = false;
         }else{
-            //pause
-            $scope.audios.forEach(function(audio){
-                audio.file.pause();
-            });
-            $scope.paused=true;
+            $scope.lines.forEach(function(line){
+                line.song.forEach(function(lineSong) {
+                    if(lineSong.file.isPlaying()){
+                        lineSong.file.stop();
 
+                    }else{
+                        lineSong.file.seekTo(0);
+
+                    }
+                });
+            });
+            $scope.paused = true;
         }
-    };
-    $scope.restart = function(){
-        $scope.audios.forEach(function(audio){
-            audio.file.restart();
-        });
     };
 
     $scope.toggleLoop = function(){
-        $scope.audios.forEach(function(audio){
-            audio.file.loop = $scope.loop;
-        });
+        $scope.loop != $scope.loop ;
     };
 
+
     $scope.initSliders = function(){
-        for(var i=0; i<$scope.audios.length; i++){
+        console.log($scope.lines.length);
+        for(var i=0; i<$scope.lines.length; i++){
             nx.add("slider", {
                 parent: "multipisteVolume",
                 w: "60px",
                 h: "160px",
                 name: "piste-"+i
-        });
-            console.log("nx wodgets ",nx.widgets);
-        }
+            });
+            for(var j=0; j<$scope.lines[i].song.length; j++){
+                $scope.lines[i].song[j].file = Object.create(WaveSurfer);
+                $scope.lines[i].song[j].file.init({
+                    container: '#wave',
+                    waveColor: 'violet',
+                    progressColor: 'purple',
+                    barWidth: 4
+                });
 
+                $scope.lines[i].song[j].file.on('ready', function () {
+                    console.log("Wavesurer Ready");
+                    //wavesurfer.play();
+                });
+
+                $scope.lines[i].song[j].file.load($scope.lines[i].song[j].fileName);
+
+                console.log("nx widgets ",nx.widgets);
+                console.log($scope.lines);
+            }
+
+        }
 
         angular.forEach(nx.widgets, function(w) {
             if(w.type == "slider"){

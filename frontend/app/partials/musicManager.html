@@ -1,4 +1,4 @@
-<div id="sections" ng-controller="MusicManagerController">
+<div id="sections">
 <drag-piste tracks="draggableObjects"></drag-piste>
     <section id="sounds">
         <div class="container">
@@ -20,13 +20,12 @@
     <section id="player">
         <div class="container">
             <span class="btn material-icons">skip_previous</span>
-            <span class="btn material-icons" ng-click='togglePlayPause()'>{{paused ? "play_arrow" : "pause" }}</span>
-            <span class="btn material-icons" ng-click='restart()'>stop</span>
+            <span class="btn material-icons" ng-click='togglePlayStop()'>{{paused ? "play_arrow" : "stop" }}</span>
             <span class="btn material-icons">skip_next</span>
             <span class="btn" disabled="true">3:11</span>
             <span class="togglebutton">
                 <label>
-                    <input type="checkbox" ng-model="loop" ng-change="toggleLoop()" checked="true">
+                    <input type="checkbox" ng-model="loop" ng-change="toggleLoop()">
                     <span class="labelToggle">Loop</span>
                 </label>
             </span>
@@ -41,5 +40,8 @@
             <canvas ng-repeat="n in audios" nx="slider" id="sliderPiste{{$index+1}}" min="0" max="100" label="Piste {{$index+1}}" height="200" width="80" class="slidernx"></canvas>
                -->
         </div>
+    </section>
+    <section id="wave">
+
     </section>
 </div>
