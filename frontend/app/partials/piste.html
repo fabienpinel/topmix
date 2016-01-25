@@ -1,4 +1,4 @@
-<section id="contains-tracks" dragula='"sixth-bag"' class="md-col-8">
+<section id="contains-tracks" dragula='"sixth-bag"' class="col-xs-8">
     <div id="mesure"></div>
     <div class="tracks-zone" ng-repeat="n in tracks" nx="slider" id="piste{{n}}" min="0" max="100">
         <table class="tracks">
@@ -17,5 +17,30 @@
             <div class="clear1px">&nbsp;</div>
         </table>
     </div>
+</section>
+
+<section class="col-xs-4 sample-picker">
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <input type="text" placeholder="Recherche" class="search-input" ng-model="searchSample"/>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="pointer" ng-click="order('name')">Name</th>
+                <th class="pointer" ng-click="order('bpm')">BPM</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="sample in samples | orderBy:predicate:reverse | filter:searchSample">
+                <td>{{sample.name}}</td>
+                <td>{{sample.bpm}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
 </section>
 <div class="clear1px">&nbsp;</div>

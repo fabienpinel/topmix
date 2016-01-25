@@ -84,11 +84,28 @@ section#multipisteVolume{
   padding: 2px 2px 2px 2px;
 }
 
-section#contains-tracks, .sample-picker {
+section#contains-tracks, section.sample-picker {
   height: 300px;
   overflow: auto;
-  width: 100%;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
 }
+
+.search-input {
+  width: 100%;
+  color:black;
+}
+
+.pointer {
+  cursor:pointer;
+}
+
+.sample {
+  background-color:grey;
+  height:35px;
+  margin-bottom:5px;
+}
+
 section .tracks {
   border-bottom: 1px solid #999;
   clear: both;
