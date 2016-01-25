@@ -92,6 +92,11 @@ section#contains-tracks, .sample-picker {
 
 .search-input {
   width: 100%;
+  color:black;
+}
+
+.pointer {
+  cursor:pointer;
 }
 
 .sample {

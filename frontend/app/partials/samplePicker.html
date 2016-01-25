@@ -1,10 +1,22 @@
 <div class="panel panel-info sample-picker">
     <div class="panel-heading">
-        <input type="text" placeholder="Recherche" class="search-input"/>
+        <input type="text" placeholder="Recherche" class="search-input" ng-model="searchSample"/>
     </div>
     <div class="panel-body">
-        <div class="sample" ng-repeat="sample in samples">
-            {{sample.name}} {{sample.bpm}}
-        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="pointer" ng-click="order('name')">Name</th>
+                <th class="pointer" ng-click="order('bpm')">BPM</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sample in samples | orderBy:predicate:reverse | filter:searchSample">
+                    <td>{{sample.name}}</td>
+                    <td>{{sample.bpm}}</td>
+                </tr>
+            </tbody>
+
+        </table>
     </div>
 </div>

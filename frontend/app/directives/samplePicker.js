@@ -17,6 +17,11 @@ app.directive('samplePicker', function(SamplesFactory) {
                     console.error(err);
                 });
 
+            $scope.order = function(predicate) {
+                $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                $scope.predicate = predicate;
+            };
+
         }
     };
 });
