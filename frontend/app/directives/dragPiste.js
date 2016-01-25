@@ -3,15 +3,9 @@ app.directive('dragPiste', function(SamplesFactory) {
         restrict: 'E',
         templateUrl: 'partials/piste.html',
         scope: {tracks: '=tracks'},
-        controller: function($scope, dragulaService, $stateParams, TracksFactory) {
+        controller: function($scope, $stateParams, TracksFactory) {
 
             $scope.tracks = [];
-
-            dragulaService.options($scope, "sixth-bag", {
-                moves: function (el, container, handle) {
-                    return handle.className === 'handle';
-                }
-            });
 
             $scope.$on('singleMix', function (name, data) {
                 $scope.tracks = data.tracks;

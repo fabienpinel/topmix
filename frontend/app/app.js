@@ -4,7 +4,6 @@
 
 var app = angular.module('TopMix', [
   'ngRoute',
-  angularDragula(angular),
     'ngAudio',
     'ui.router'
 ]).
