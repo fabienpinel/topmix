@@ -3,15 +3,9 @@
 // Declare app level module which depends on views, and components
 
 var app = angular.module('TopMix', [
-  'ngRoute',
     'ngAudio',
     'ui.router'
-]).
-
-config(['$routeProvider', function($routeProvider) {
-
-  $routeProvider.otherwise({redirectTo: '/'});
-}]);
+]);
 
 app.directive('header', function() {
     return {

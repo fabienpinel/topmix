@@ -11,8 +11,6 @@ app.directive('dragPiste', function(SamplesFactory) {
                 $scope.tracks = data.tracks;
             });
 
-
-
             $scope.deleteTrack = function (trackId) {
                 console.log($stateParams.id, trackId);
                 TracksFactory
