@@ -40,7 +40,7 @@ app.controller("MusicManagerController" , function(dragulaService, $scope, ngAud
 
     $scope.test = function () {
         $scope.audios.push({
-            file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
+            file: ngAudio.load('../samples/VFH2_Cool_Kit_1.wav'),
             volume: 34
         });
     };
@@ -50,11 +50,11 @@ app.controller("MusicManagerController" , function(dragulaService, $scope, ngAud
     };
     $scope.audios = [
         {
-            file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit1.wav'),
+            file: ngAudio.load('../samples/VFH2_Cool_Kit_1.wav'),
             name: "1"
         },
         {
-            file: ngAudio.load('../samples/songs/VFH2128BPMCoolKit2.wav'),
+            file: ngAudio.load('../samples/VFH2_Cool_Kit_2.wav'),
             name: "piste 2"
         }
     ];
