@@ -8,7 +8,7 @@
                        &#8597;
                     </span>
                     <span class="label">piste {{n.name}}</span>
-                    <span class="material-icons">close</span>
+                    <span class="material-icons" ng-click="deleteTrack(n._id)">close</span>
                     <span class="material-icons">volume_mute</span>
                 </td>
                 <td class="blank" ng-repeat="i in [] | range:10" dragula="first-bag"></td>

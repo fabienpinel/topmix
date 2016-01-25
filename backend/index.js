@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var authenticate = require('./modules/router/authentication-middleware');
 var expressValidator = require('express-validator');
+var db = require('./modules/database');
 
 app.use(bodyParser.json());
 app.use(expressValidator());
@@ -16,9 +17,17 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 var server = app.listen(7070, function () {
     console.log("Server Launched on port " + server.address().port + "...");
+    db
+        .init()
+        .then(function () {
+            console.info('Success created Samples');
+        })
+        .catch(function (err) {
+            console.error(err.stack);
+            server.close();
+        });
 });
 
 module.exports = server;
