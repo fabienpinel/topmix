@@ -1,4 +1,4 @@
-app.directive('dragPiste', function() {
+app.directive('dragPiste', function(SamplesFactory) {
     return {
         restrict: 'E',
         templateUrl: 'partials/piste.html',
@@ -40,6 +40,26 @@ app.directive('dragPiste', function() {
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
+        },
+        link: function ($scope) {
+
+            $scope.samples = [];
+
+            SamplesFactory
+                .getSamples()
+                .then(function (samples) {
+                    $scope.samples = samples;
+                    console.log(samples);
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
+
+            $scope.order = function(predicate) {
+                $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                $scope.predicate = predicate;
+            };
+
         }
     }
 });
