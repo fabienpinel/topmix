@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function(dragulaService, $scope, ngAudio, MixesFactory, TracksFactory, $stateParams) {
+app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, $stateParams) {
 
     $scope.mix = {};
 

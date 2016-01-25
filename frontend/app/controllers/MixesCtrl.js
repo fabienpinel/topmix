@@ -37,7 +37,6 @@ app.controller('MixesCtrl', function ($scope, MixesFactory) {
             .catch(function (err) {
                 console.error(err);
             });
-    }
-
-
+    };
+    
 });
