@@ -1,5 +1,13 @@
 <section id="contains-tracks" dragula='"sixth-bag"' >
-    <div id="mesure"></div>
+    <div id="mesure">
+        <table>
+            <tr>
+                <td ng-repeat="n in draggableObjects" style="border-left: 1px solid black">
+
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="tracks-zone" ng-repeat="n in draggableObjects" nx="slider" id="piste{{n}}" min="0" max="100">
         <table class="tracks">
             <tr class="multi-tracks">

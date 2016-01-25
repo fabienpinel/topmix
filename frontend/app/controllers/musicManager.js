@@ -83,7 +83,12 @@ app.controller("MusicManagerController" , ['dragulaService','$scope', "$location
 
         }, (line.song[index].file.getDuration()*1000));
 
-    }
+    };
+
+    dragulaService.options($scope, 'fifth-bag', {
+        copy: true
+    });
+
     $scope.togglePlayStop = function(){
         if($scope.paused){
             var index = 0;
