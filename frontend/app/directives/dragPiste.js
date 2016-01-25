@@ -17,13 +17,6 @@ app.directive('dragPiste', function() {
                 $scope.tracks = data.tracks;
                 console.log($scope.tracks);
             });
-
-
-
-
-
-
-
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
@@ -39,11 +32,6 @@ app.directive('dragPiste', function() {
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
-
-
-
-
-
         }
     }
 });
