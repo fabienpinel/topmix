@@ -1,9 +1,9 @@
 <div class="panel panel-info sample-picker">
     <div class="panel-heading">
-        <input type="text" placeholder="Recherche"/>
+        <input type="text" placeholder="Recherche" class="search-input"/>
     </div>
     <div class="panel-body">
-        <div style="background-color:grey; height:35px; margin-bottom:5px" ng-repeat="sample in samples">
+        <div class="sample" ng-repeat="sample in samples">
             {{sample.name}} {{sample.bpm}}
         </div>
     </div>

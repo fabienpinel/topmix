@@ -24,7 +24,7 @@ app.directive('dragPiste', function() {
                 TracksFactory
                     .removeTracks($stateParams.id, trackId);
             };
-            
+
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive

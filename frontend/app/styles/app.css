@@ -89,6 +89,22 @@ section#contains-tracks, .sample-picker {
   overflow: auto;
   width: 100%;
 }
+
+.search-input {
+  width: 100%;
+}
+
+.sample {
+  background-color:grey;
+  height:35px;
+  margin-bottom:5px;
+}
+
+drag-piste.col-xs-8, sample-picker.col-xs-4{
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
 section .tracks {
   border-bottom: 1px solid #999;
   clear: both;
