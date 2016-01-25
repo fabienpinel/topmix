@@ -30,7 +30,6 @@ app.controller("MusicManagerController" , function(dragulaService, $scope, ngAud
             });
     };
 
-
     $scope.paused = true;
 
     $scope.draggableObjects = [

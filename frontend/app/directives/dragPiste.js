@@ -3,7 +3,7 @@ app.directive('dragPiste', function() {
         restrict: 'E',
         templateUrl: 'partials/piste.html',
         scope: {tracks: '=tracks'},
-        controller: function($scope, dragulaService) {
+        controller: function($scope, dragulaService, $stateParams, TracksFactory) {
 
             $scope.tracks = [];
 
@@ -15,8 +15,16 @@ app.directive('dragPiste', function() {
 
             $scope.$on('singleMix', function (name, data) {
                 $scope.tracks = data.tracks;
-                console.log($scope.tracks);
             });
+
+
+
+            $scope.deleteTrack = function (trackId) {
+                console.log($stateParams.id, trackId);
+                TracksFactory
+                    .removeTracks($stateParams.id, trackId);
+            };
+            
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
