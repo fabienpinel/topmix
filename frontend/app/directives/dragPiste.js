@@ -6,9 +6,13 @@ app.directive('dragPiste', function(SamplesFactory) {
         controller: function($scope, $stateParams, TracksFactory) {
 
             $scope.tracks = [];
+            console.log($stateParams);
 
             $scope.$on('singleMix', function (name, data) {
                 $scope.tracks = data.tracks;
+                $scope.tracks.forEach(function (track) {
+                    for (var i = 0; i < 10; i++) track.samples.push(null);
+                });
             });
 
             $scope.deleteTrack = function (trackId) {
@@ -16,6 +20,17 @@ app.directive('dragPiste', function(SamplesFactory) {
                 TracksFactory
                     .removeTracks($stateParams.id, trackId);
             };
+
+
+            var _selectedSample = null;
+            $scope.selectSample = function (sample) {
+                _selectedSample = sample;
+            };
+            $scope.dropSample = function (trackId, $index) {
+                console.log(trackId);
+                TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample._id)
+            };
+
 
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
