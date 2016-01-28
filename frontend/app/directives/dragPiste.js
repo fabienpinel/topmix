@@ -23,12 +23,31 @@ app.directive('dragPiste', function(SamplesFactory) {
 
 
             var _selectedSample = null;
+            var fromTrack = null;
+            var fromIndex = null;
             $scope.selectSample = function (sample) {
-                _selectedSample = sample;
+                _selectedSample = sample._id;
             };
             $scope.dropSample = function (trackId, $index) {
                 console.log(trackId);
-                TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample._id)
+                if (_selectedSample) {
+                    if (fromTrack && fromIndex) {
+                        // if we come from sample
+                        TracksFactory.deleteSamples($stateParams.id, fromTrack, fromIndex, _selectedSample);
+                        TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample);
+                        fromTrack = null;
+                        fromIndex = null;
+                    } else {
+                        // if we some from library
+                        TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample);
+                    }
+                    _selectedSample = null;
+                }
+            };
+            $scope.deleteSample = function (trackId, $index, sample) {
+                _selectedSample = sample;
+                fromTrack = trackId;
+                fromIndex = $index;
             };
 
 
