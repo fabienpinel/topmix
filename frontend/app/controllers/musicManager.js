@@ -97,6 +97,8 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             var index = 0;
             //play all sounds from audios table
             $scope.lines.forEach(function(line){
+                console.log($scope.lines);
+                console.log("foreach debug line.song ", line);
                 console.log("next song in ", line.song[index].file.getDuration()*1000);
                 line.song[index].file.play();
                 $scope.play(line, index);
