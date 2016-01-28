@@ -44,10 +44,13 @@ app.directive('dragPiste', function(SamplesFactory) {
                     _selectedSample = null;
                 }
             };
-            $scope.deleteSample = function (trackId, $index, sample) {
+            $scope.dragSample = function (trackId, $index, sample) {
                 _selectedSample = sample;
                 fromTrack = trackId;
                 fromIndex = $index;
+            };
+            $scope.deleteSample = function (trackId, $index, sample) {
+                TracksFactory.deleteSamples($stateParams.id, trackId, $index, sample);
             };
 
 

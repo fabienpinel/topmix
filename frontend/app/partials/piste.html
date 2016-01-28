@@ -15,7 +15,8 @@
                         class="blank"
                         ng-repeat="sample in track.samples track by $index"
                         ng-mouseup="dropSample(track._id, $index)"
-                        ng-mousedown="deleteSample(track._id, $index, sample)"
+                        ng-mousedown="dragSample(track._id, $index, sample)"
+                        ng-dblclick="deleteSample(track._id, $index, sample)"
                 >{{sample}}</td>
             </tr>
             <div class="clear1px">&nbsp;</div>
