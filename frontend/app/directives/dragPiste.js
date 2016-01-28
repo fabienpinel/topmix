@@ -6,7 +6,6 @@ app.directive('dragPiste', function(SamplesFactory) {
         controller: function($scope, $stateParams, TracksFactory) {
 
             $scope.tracks = [];
-            console.log($stateParams);
 
             $scope.$on('singleMix', function (name, data) {
                 $scope.tracks = data.tracks;
@@ -21,31 +20,48 @@ app.directive('dragPiste', function(SamplesFactory) {
                     .removeTracks($stateParams.id, trackId);
             };
 
+            $scope.myDragStyle = {display: 'none', left:'0px', right:'0px', position: 'fixed', background: 'red', zIndex:'100000', width: '100px'};
+            document.addEventListener('mousemove', function (event) {
+                $scope.myDragStyle.left = (event.clientX+1) + 'px';
+                $scope.myDragStyle.top = event.clientY + 'px';
+                $scope.$apply();
+            }, false);
+            document.addEventListener('mouseup', function () {
+                $scope.myDragStyle.display = 'none';
+                $scope.$apply();
+                $scope.selectedSample = null;
+            }, false);
 
-            var _selectedSample = null;
+
+            $scope.selectedSample = null;
             var fromTrack = null;
             var fromIndex = null;
+
+
+
+
             $scope.selectSample = function (sample) {
-                _selectedSample = sample._id;
+                $scope.selectedSample = sample._id;
+                $scope.myDragStyle.display = 'block';
             };
             $scope.dropSample = function (trackId, $index) {
-                console.log(trackId);
-                if (_selectedSample) {
+                if ($scope.selectedSample) {
                     if (fromTrack && fromIndex >= 0 && fromIndex !== null) {
                         // if we come from sample
-                        TracksFactory.deleteSamples($stateParams.id, fromTrack, fromIndex, _selectedSample);
-                        TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample);
+                        TracksFactory.deleteSamples($stateParams.id, fromTrack, fromIndex, $scope.selectedSample);
+                        TracksFactory.postSamples($stateParams.id, trackId, $index, $scope.selectedSample);
                         fromTrack = null;
                         fromIndex = null;
                     } else {
                         // if we some from library
-                        TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample);
+                        TracksFactory.postSamples($stateParams.id, trackId, $index, $scope.selectedSample);
                     }
-                    _selectedSample = null;
+                    $scope.selectedSample = null;
                 }
             };
             $scope.dragSample = function (trackId, $index, sample) {
-                _selectedSample = sample;
+                $scope.selectedSample = sample;
+                $scope.myDragStyle.display = 'block';
                 fromTrack = trackId;
                 fromIndex = $index;
             };
