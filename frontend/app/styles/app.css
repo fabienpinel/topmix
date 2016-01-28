@@ -1,6 +1,15 @@
 /* app css stylesheet */
 html, body{
   height:100%;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;
+}
+
+.move {
+  cursor: move;
 }
 
 .clear1px {
@@ -128,7 +137,7 @@ section#player{
 .tracks .head {
   position: absolute;
   padding-left: 15px;
-  width: 115px;
+  width: 200px;
   border-right: 1px solid #999;
   left: 0px;
 }
@@ -138,7 +147,7 @@ section#player{
   text-align: left;
   white-space: nowrap;
   position:relative;
-  padding-left: 150px;
+  padding-left: 200px;
 }
 
 .multi-tracks td {
@@ -158,5 +167,7 @@ section#player{
 
 .sample-picker {
   padding: 0;
+  height: 300px;
+  overflow: scroll;
 }
 
