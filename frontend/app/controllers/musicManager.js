@@ -173,6 +173,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             if($scope.mix.tracks[i].samples[j] != null) {
                     $scope.lines[i].song[j].file.load("../samples/"+path.name);
             }
+                else $scope.lines[i].song[j].file.load("../samples/empty.wav");
 
                     console.log("nx widgets ",nx.widgets);
                     console.log($scope.lines);
@@ -190,6 +191,14 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
         });
 
     };
+
+    $scope.resetSliders = function() {
+        console.log("c'est la fête");
+    }
+
+    $scope.$watch('mix', function() {
+        if($scope.mix != undefined) $scope.resetSliders();
+    });
 
     getMix();
 
