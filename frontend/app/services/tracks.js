@@ -59,6 +59,35 @@ app.factory('TracksFactory', function ($http, $q, $rootScope, LoginFactory, Mixe
                 deferred.reject(new Error('You must be logged in'))
             }
             return deferred.promise;
+        },
+
+        postSamples: function (mixId, trackId, index, sampleId) {
+            var deferred = $q.defer();
+            if (LoginFactory.data) {
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:7070/api/mixes/' + mixId + '/tracks/' + trackId + '/samples',
+                    data: {
+                        _id: sampleId,
+                        index: index
+                    },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'sessionid': LoginFactory.data
+                    }
+                }).success(function (data, status) {
+                    if (status == 201) {
+                        deferred.resolve(MixesFactory.getMixById(mixId));
+                    } else {
+                        deferred.reject(data);
+                    }
+                }).error(function (err) {
+                    deferred.reject(err);
+                });
+            } else {
+                deferred.reject(new Error('You must be logged in'))
+            }
+            return deferred.promise;
         }
 
     };
