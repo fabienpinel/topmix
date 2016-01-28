@@ -31,7 +31,7 @@ app.directive('dragPiste', function(SamplesFactory) {
             $scope.dropSample = function (trackId, $index) {
                 console.log(trackId);
                 if (_selectedSample) {
-                    if (fromTrack && fromIndex) {
+                    if (fromTrack && fromIndex >= 0) {
                         // if we come from sample
                         TracksFactory.deleteSamples($stateParams.id, fromTrack, fromIndex, _selectedSample);
                         TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample);
@@ -59,11 +59,6 @@ app.directive('dragPiste', function(SamplesFactory) {
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
 
-            $scope.myMarginStyle = {marginLeft: '0px'};
-            var containsTracks = document.querySelector('#contains-tracks');
-            containsTracks.addEventListener("scroll", function() {
-                $scope.myMarginStyle = {marginLeft: containsTracks.scrollLeft + 'px'};
-            }, false);
 
             // TODO MAXIME : make a directive
             // TODO MAXIME : make a directive
@@ -88,6 +83,13 @@ app.directive('dragPiste', function(SamplesFactory) {
                 $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                 $scope.predicate = predicate;
             };
+
+            $scope.myMarginStyle = {marginLeft: '0px'};
+            var containsTracks = document.querySelector('#contains-tracks');
+            containsTracks.addEventListener("scroll", function() {
+                $scope.myMarginStyle = {marginLeft: containsTracks.scrollLeft + 'px'};
+                $scope.$apply();
+            }, false);
 
         }
     }
