@@ -87,7 +87,7 @@ section#multipisteVolume{
 section#contains-tracks {
   height: 300px;
   overflow: auto;
-  width: 100%;
+  padding: 0;
 }
 section .tracks {
   border-bottom: 1px solid #999;
@@ -154,5 +154,9 @@ section#player{
 
 .multi-tracks td:empty {
   background-color: transparent;
+}
+
+.sample-picker {
+  padding: 0;
 }
 
