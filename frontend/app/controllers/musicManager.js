@@ -13,34 +13,32 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     };
     nx.colorize("#3399FF");
 
-    $scope.line1 =[
-        {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
-            name:"piste 2",
-            file:""
-        },
-        {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
-            name:"1",
-            file: ""
-        },
-        {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
-            name:"piste 2",
-            file:""
-        }
-
-    ];
-    $scope.line2 =[
-        {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
-            name:"1",
-            file: ""
-        }
-    ];
     $scope.lines= [
         {
-            song : $scope.line1,
+            song : [
+                {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
+                    name:"piste 2",
+                    file:""
+                },
+                {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
+                    name:"1",
+                    file: ""
+                },
+                {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
+                    name:"piste 2",
+                    file:""
+                }
+
+            ],
             counter: 0
         },
         {
-            song : $scope.line2,
+            song : [
+                {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
+                    name:"1",
+                    file: ""
+                }
+            ],
             counter: 0
         }
 
