@@ -116,7 +116,7 @@ app.factory('TracksFactory', function ($http, $q, $rootScope, LoginFactory, Mixe
                 deferred.reject(new Error('You must be logged in'))
             }
             return deferred.promise;
-        }
+        },
 
     };
     return factory;

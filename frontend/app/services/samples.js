@@ -30,6 +30,14 @@ app.factory('SamplesFactory', ['$http', '$q', 'LoginFactory', function ($http, $
                 deferred.reject(new Error('You must be logged in'))
             }
             return deferred.promise;
+        },
+        getSampleById: function(id){
+            for(var i in factory.data){
+                if(factory.data[i]._id == id){
+                    return factory.data[i];
+                }
+            }
+            return null;
         }
 
     };
