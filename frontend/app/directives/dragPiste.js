@@ -31,7 +31,7 @@ app.directive('dragPiste', function(SamplesFactory) {
             $scope.dropSample = function (trackId, $index) {
                 console.log(trackId);
                 if (_selectedSample) {
-                    if (fromTrack && fromIndex >= 0) {
+                    if (fromTrack && fromIndex >= 0 && fromIndex !== null) {
                         // if we come from sample
                         TracksFactory.deleteSamples($stateParams.id, fromTrack, fromIndex, _selectedSample);
                         TracksFactory.postSamples($stateParams.id, trackId, $index, _selectedSample);
