@@ -83,13 +83,14 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.play = function(line, index){
         //play
-        setTimeout(function(){
-            if(++index < line.song.length){
-                line.song[index].file.play();
-                $scope.play(line, index);
-            }
-        }, (line.song[index].file.getDuration()*1000));
-
+        if ($scope.paused) {
+            setTimeout(function () {
+                if (++index < line.song.length && !$scope.paused) {
+                    line.song[index].file.play();
+                    $scope.play(line, index);
+                }
+            }, (line.song[index].file.getDuration() * 1000));
+        }
     };
 
     $scope.togglePlayStop = function(){
