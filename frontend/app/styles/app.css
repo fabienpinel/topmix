@@ -1,6 +1,15 @@
 /* app css stylesheet */
 html, body{
   height:100%;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;
+}
+
+.move {
+  cursor: move;
 }
 
 .clear1px {
@@ -63,10 +72,10 @@ section#player{
   border-top: 1px solid #3399FF;
 }
 section#player span:not(.toggle){
-   font-size: 30px;
-   width:auto;
-   height:auto;
- }
+  font-size: 30px;
+  width:auto;
+  height:auto;
+}
 section#player .arrows {
   margin-top:20px;
 }
@@ -84,28 +93,11 @@ section#multipisteVolume{
   padding: 2px 2px 2px 2px;
 }
 
-section#contains-tracks, section.sample-picker {
+section#contains-tracks {
   height: 300px;
   overflow: auto;
-  padding-right: 0px !important;
-  padding-left: 0px !important;
+  padding: 0;
 }
-
-.search-input {
-  width: 100%;
-  color:black;
-}
-
-.pointer {
-  cursor:pointer;
-}
-
-.sample {
-  background-color:grey;
-  height:35px;
-  margin-bottom:5px;
-}
-
 section .tracks {
   border-bottom: 1px solid #999;
   clear: both;
@@ -145,7 +137,7 @@ section#player{
 .tracks .head {
   position: absolute;
   padding-left: 15px;
-  width: 115px;
+  width: 200px;
   border-right: 1px solid #999;
   left: 0px;
 }
@@ -155,12 +147,13 @@ section#player{
   text-align: left;
   white-space: nowrap;
   position:relative;
-  padding-left: 150px;
+  padding-left: 200px;
 }
 
 .multi-tracks td {
   background-color: #ccccee;
-  padding: 2px 2px;
+  padding: 3px;
+  overflow: hidden;
   margin-right: 5px;
   display: inline-block;
   cursor: move;
@@ -170,5 +163,11 @@ section#player{
 
 .multi-tracks td:empty {
   background-color: transparent;
+}
+
+.sample-picker {
+  padding: 0;
+  height: 300px;
+  overflow: scroll;
 }
 

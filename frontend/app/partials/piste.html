@@ -20,9 +20,12 @@
                         ng-dblclick="deleteSample(track._id, $index, sample)"
                 >{{sample}}</td>
             </tr>
-            <div class="clear1px">&nbsp;</div>
+            <div class="clear1px"></div>
         </table>
     </div>
+
+    <div id="during-drag" ng-style="myDragStyle">{{selectedSample}}</div>
+
 </section>
 
 <section class="col-xs-4 sample-picker">
@@ -39,7 +42,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="sample in samples | orderBy:predicate:reverse | filter:searchSample" ng-mousedown="selectSample(sample)">
+            <tr class="move" ng-repeat="sample in samples | orderBy:predicate:reverse | filter:searchSample" ng-mousedown="selectSample(sample)">
                 <td>{{sample.name}}</td>
                 <td>{{sample.bpm}}</td>
             </tr>
