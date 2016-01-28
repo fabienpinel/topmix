@@ -20,7 +20,8 @@ app.directive('dragPiste', function(SamplesFactory) {
                     .removeTracks($stateParams.id, trackId);
             };
 
-            $scope.myDragStyle = {display: 'none', left:'0px', right:'0px', position: 'fixed', background: 'red', zIndex:'100000', width: '100px'};
+            $scope.myDragStyle = {display: 'none', left:'0px', right:'0px', position: 'fixed', background: '#ccccee', zIndex:'10', width: '100px', padding: '3px', overflow: 'hidden', height: '32px'};
+
             document.addEventListener('mousemove', function (event) {
                 $scope.myDragStyle.left = (event.clientX+1) + 'px';
                 $scope.myDragStyle.top = event.clientY + 'px';
