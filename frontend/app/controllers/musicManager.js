@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, $stateParams) {
+app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams) {
 
     $scope.mix = {};
     $scope.paused = true;
@@ -45,19 +45,21 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     ];
 
 
-
     function getMix() {
         MixesFactory
             .getMixById($stateParams.id)
             .then(function (mix) {
                 $scope.mix = mix;
+                //instanciate the waveforms
+                setTimeout(function(){  $scope.initSliders(); }, 500);
+
+                console.log("Mixes", $scope.mix);
             })
             .catch(function (err) {
                 console.error(err);
                 $scope.mix = {};
             });
     }
-    getMix();
 
     $scope.postTrack = function () {
         TracksFactory
@@ -71,20 +73,12 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             });
     };
 
-
-    $scope.test = function () {
-        $scope.audios.push({
-            file: ngAudio.load('../samples/VFH2_Cool_Kit_1.wav'),
-            volume: 34
-        });
-    };
-
     $scope.changeVolume = function(id, data){
         var index = (id.split("-")[1]);
         for(var i=0; i<$scope.lines[index].song.length; i++){
             $scope.lines[index].song[i].file.setVolume(data);
         }
-    }
+    };
 
 
     $scope.play = function(line, index){
@@ -94,11 +88,10 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                 line.song[index].file.play();
                 $scope.play(line, index);
             }
-
-
         }, (line.song[index].file.getDuration()*1000));
 
     };
+
     $scope.togglePlayStop = function(){
         if($scope.paused){
             var index = 0;
@@ -133,32 +126,48 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
 
     $scope.initSliders = function(){
-        console.log($scope.lines.length);
-        for(var i=0; i<$scope.lines.length; i++){
+        console.log($scope.mix);
+        console.log($scope.mix.tracks.length);
+        for(var i=0; i<$scope.mix.tracks.length; i++){
             nx.add("slider", {
                 parent: "multipisteVolume",
                 w: "60px",
                 h: "160px",
                 name: "piste-"+i
             });
-            for(var j=0; j<$scope.lines[i].song.length; j++){
-                $scope.lines[i].song[j].file = Object.create(WaveSurfer);
-                $scope.lines[i].song[j].file.init({
-                    container: '#wave',
-                    waveColor: 'violet',
-                    progressColor: 'purple',
-                    barWidth: 4
-                });
+            console.log("boucle ",$scope.mix.tracks[i].samples.length);
+            for(var j=0; j<$scope.mix.tracks[i].samples.length; j++){
+                console.log('#sample'+$scope.mix.tracks[i]._id+j);
+                if($scope.mix.tracks[i].samples[j] != null){
 
-                $scope.lines[i].song[j].file.on('ready', function () {
-                    console.log("Wavesurer Ready");
-                    //wavesurfer.play();
-                });
+                    $scope.lines = [$scope.mix.tracks.length];
+                    $scope.lines[i] = {song: null};
+                    $scope.lines[i].song = [$scope.mix.tracks[i].samples.length];
+                    $scope.lines[i].song[j] = {file: null};
 
-                $scope.lines[i].song[j].file.load($scope.lines[i].song[j].fileName);
+                    $scope.lines[i].song[j].file = (Object.create(WaveSurfer));
+                    $scope.lines[i].song[j].file.init({
+                        container: '#sample'+$scope.mix.tracks[i]._id+j,
+                        waveColor: 'violet',
+                        progressColor: 'purple',
+                        barWidth: 4
+                    });
 
-                console.log("nx widgets ",nx.widgets);
-                console.log($scope.lines);
+
+                    var path = SamplesFactory.getSampleById($scope.mix.tracks[i].samples[j]);
+                    console.log("path ", path);
+                    // $scope.mix.tracks[i].samples[j].file
+
+                    $scope.lines[i].song[j].file.on('ready', function () {
+                        console.log("Wavesurer Ready");
+                        //wavesurfer.play();
+                    });
+
+                    $scope.lines[i].song[j].file.load("../samples/"+path.name);
+
+                    console.log("nx widgets ",nx.widgets);
+                    console.log($scope.lines);
+                }
             }
 
         }
@@ -173,7 +182,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     };
 
-    $scope.initSliders();
+    getMix();
 
 
 });
