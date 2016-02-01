@@ -234,14 +234,11 @@ module.exports = {
      * @param res
      */
     putTracks : function(req, res) {
-        var updateQuery = { $set : {} };
         if (req.body.name) {
             req.checkBody('name', 'Invalid name').notEmpty();
-            updateQuery.$set['tracks.$.name'] = req.body.name;
         }
         if (req.body.volume) {
             req.checkBody('volume', 'Invalid name').notEmpty().isInt();
-            updateQuery.$set['tracks.$.volume'] = req.body.volume;
         }
         var errors = req.validationErrors();
         if (errors) return res.status(400).json(errors);
@@ -252,22 +249,39 @@ module.exports = {
             .then(function (db) {
                 var mixes = db.collection('mixes');
                 mixes
-                    .update(
-                    {
+                    .find({
                         userId : req.user._id,
-                        _id : ObjectID(req.params.idMixes),
-                        tracks: {$elemMatch :{_id: ObjectID(req.params.idTracks)}}
-                    },
-                    updateQuery,
-                    function (err, result) {
-                        db.close();
-                        if (err) { return res.status(500).json(err); }
+                        _id : ObjectID(req.params.idMixes)
+                    })
+                    .toArray(function (err, docs) {
+                        if (err) { db.close(); return res.status(500).json(err); }
                         else {
-                            if (result.result.n == 1) return res.status(200).end();
-                            else return res.status(403).end();
+                            if (docs.length == 1) {
+                                var tracks = docs[0].tracks;
+                                for (var i = 0; i < tracks.length; i++) {
+                                    if ( (''+tracks[i]._id) == (''+req.params.idTracks)) {
+                                        if (req.body.name) tracks[i].name = req.body.name;
+                                        if (req.body.volume) tracks[i].volume = req.body.volume;
+                                        break;
+                                    }
+                                }
+                                mixes
+                                    .update({
+                                        userId : req.user._id,
+                                        _id : ObjectID(req.params.idMixes)
+                                    }, {
+                                        $set: {tracks: tracks}
+                                    }, function (err) {
+                                        db.close();
+                                        if (err) return res.status(500).json(err);
+                                        res.status(200).end();
+                                    })
+                            } else {
+                                return res.status(403).end();
+                            }
+
                         }
-                    }
-                );
+                    });
             })
             .catch(function (error) {
                 console.log('unexpected error', error);
