@@ -3,7 +3,7 @@ app.directive('dragPiste', function(SamplesFactory) {
         restrict: 'E',
         templateUrl: 'partials/piste.html',
         scope: {tracks: '=tracks'},
-        controller: function($scope, $stateParams, TracksFactory) {
+        controller: function($scope, $stateParams, TracksFactory, $rootScope) {
 
             $scope.tracks = [];
 
@@ -65,6 +65,12 @@ app.directive('dragPiste', function(SamplesFactory) {
             };
             $scope.deleteSample = function (trackId, $index, sample) {
                 TracksFactory.deleteSamples($stateParams.id, trackId, $index, sample);
+            };
+            $scope.drawWaveForm = function(trackid, id){
+                setTimeout(function(){
+                    $rootScope.$broadcast("drawSample", trackid, id);
+                }
+                , 100);
             };
         },
         link: function ($scope) {
