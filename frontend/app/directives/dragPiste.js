@@ -20,16 +20,13 @@ app.directive('dragPiste', function(SamplesFactory) {
                     .removeTracks($stateParams.id, trackId);
             };
 
-            $scope.myDragStyle = {display: 'none', left:'0px', right:'0px', position: 'fixed', background: '#ccccee', zIndex:'10', width: '100px', padding: '3px', overflow: 'hidden', height: '32px'};
 
             document.addEventListener('mousemove', function (event) {
-                $scope.myDragStyle.left = (event.clientX+1) + 'px';
-                $scope.myDragStyle.top = event.clientY + 'px';
-                $scope.$apply();
+                document.getElementById('floatingSample').style.left = (event.clientX+1) + 'px';
+                document.getElementById('floatingSample').style.top = event.clientY + 'px';
             }, false);
             document.addEventListener('mouseup', function () {
-                $scope.myDragStyle.display = 'none';
-                $scope.$apply();
+                document.getElementById('floatingSample').style.display = 'none';
                 $scope.selectedSample = null;
             }, false);
 
@@ -43,7 +40,7 @@ app.directive('dragPiste', function(SamplesFactory) {
 
             $scope.selectSample = function (sample) {
                 $scope.selectedSample = sample._id;
-                $scope.myDragStyle.display = 'block';
+                document.getElementById('floatingSample').style.display = 'block';
             };
             $scope.dropSample = function (trackId, $index) {
                 if ($scope.selectedSample) {
@@ -62,25 +59,13 @@ app.directive('dragPiste', function(SamplesFactory) {
             };
             $scope.dragSample = function (trackId, $index, sample) {
                 $scope.selectedSample = sample;
-                $scope.myDragStyle.display = 'block';
+                document.getElementById('floatingSample').style.display = 'block';
                 fromTrack = trackId;
                 fromIndex = $index;
             };
             $scope.deleteSample = function (trackId, $index, sample) {
                 TracksFactory.deleteSamples($stateParams.id, trackId, $index, sample);
             };
-
-
-            // TODO MAXIME : make a directive
-            // TODO MAXIME : make a directive
-            // TODO MAXIME : make a directive
-            // TODO MAXIME : make a directive
-
-
-            // TODO MAXIME : make a directive
-            // TODO MAXIME : make a directive
-            // TODO MAXIME : make a directive
-            // TODO MAXIME : make a directive
         },
         link: function ($scope) {
 
@@ -100,13 +85,6 @@ app.directive('dragPiste', function(SamplesFactory) {
                 $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                 $scope.predicate = predicate;
             };
-
-            $scope.myMarginStyle = {marginLeft: '0px'};
-            var containsTracks = document.querySelector('#contains-tracks');
-            containsTracks.addEventListener("scroll", function() {
-                $scope.myMarginStyle = {marginLeft: containsTracks.scrollLeft + 'px'};
-                $scope.$apply();
-            }, false);
 
         }
     }

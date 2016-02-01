@@ -57,9 +57,7 @@ html, body{
 #sections{
   width:100%;
 }
-section#multipisteVolume{
 
-}
 section{
   padding-top: 10px;
   padding-bottom:10px;
@@ -84,8 +82,9 @@ section#player label:not(.togglebutton label){
   font-size: 40px;
 }
 section#multipisteVolume{
-  background-color: rgba(0,0,0,0.2);
+  background-color: #D4D4D1;
 }
+
 .slidernx{
   font-size: 130%;
 }
@@ -134,31 +133,45 @@ section#player{
   cursor:move;
 }
 
-.tracks .head {
-  position: absolute;
-  padding-left: 15px;
-  width: 200px;
-  border-right: 1px solid #999;
-  left: 0px;
-}
-
 .multi-tracks {
   float: left;
-  text-align: left;
   white-space: nowrap;
   position:relative;
   padding-left: 200px;
 }
 
-.multi-tracks td {
-  background-color: #ccccee;
-  padding: 3px;
+#floatingSample {
+  display: none;
+  left:0px;
+  right:0px;
+  position: fixed;
+  z-index:2 !important;
   overflow: hidden;
-  margin-right: 5px;
+  height: 32px;
+  width:32px;
+}
+
+.multi-tracks td {
+  background-color: #D4D4D1;
+  overflow: hidden;
   display: inline-block;
   cursor: move;
   width: 100px;
   height: 32px;
+}
+
+.multi-tracks td:not(:first-child):hover {
+  background-color: white;
+}
+
+.multi-tracks td:first-child {
+  padding: 3px;
+  position: absolute;
+  padding-left: 15px;
+  width: 200px;
+  border-right: 1px solid #999;
+  left: 0px;
+  z-index:3;
 }
 
 .multi-tracks td:empty {
