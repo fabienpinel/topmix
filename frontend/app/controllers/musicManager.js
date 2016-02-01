@@ -167,9 +167,8 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
                     $scope.lines[i].song[j].file.init({
                         container: '#sample' + $scope.mix.tracks[i]._id + j,
-                        waveColor: 'violet',
-                        progressColor: 'purple',
-                        barWidth: 4,
+                        waveColor: '#03a9f4',
+                        progressColor: '#3F51B5',
                         height:32,
                         hideScrollbar:true
                     });
