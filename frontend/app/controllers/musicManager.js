@@ -178,7 +178,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                         height:32,
                         hideScrollbar:true
                     });
-
+                $scope.lines[i].song[j].file.toggleInteraction();
                     var path = SamplesFactory.getSampleById($scope.mix.tracks[i].samples[j]);
                     console.log("path ", path);
                     // $scope.mix.tracks[i].samples[j].file
