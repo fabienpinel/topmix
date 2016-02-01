@@ -160,6 +160,10 @@ section#player{
   height: 32px;
 }
 
+.multi-tracks td:not(:first-child):hover {
+  background-color: white;
+}
+
 .multi-tracks td:first-child {
   padding: 3px;
   position: absolute;

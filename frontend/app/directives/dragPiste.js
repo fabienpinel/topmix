@@ -24,11 +24,9 @@ app.directive('dragPiste', function(SamplesFactory) {
             document.addEventListener('mousemove', function (event) {
                 document.getElementById('floatingSample').style.left = (event.clientX+1) + 'px';
                 document.getElementById('floatingSample').style.top = event.clientY + 'px';
-                $scope.$apply();
             }, false);
             document.addEventListener('mouseup', function () {
                 document.getElementById('floatingSample').style.display = 'none';
-                $scope.$apply();
                 $scope.selectedSample = null;
             }, false);
 
@@ -61,7 +59,7 @@ app.directive('dragPiste', function(SamplesFactory) {
             };
             $scope.dragSample = function (trackId, $index, sample) {
                 $scope.selectedSample = sample;
-                document.getElementById('floatingSample')[0].style.display = 'block';
+                document.getElementById('floatingSample').style.display = 'block';
                 fromTrack = trackId;
                 fromIndex = $index;
             };
@@ -87,13 +85,6 @@ app.directive('dragPiste', function(SamplesFactory) {
                 $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                 $scope.predicate = predicate;
             };
-
-            $scope.myMarginStyle = {marginLeft: '0px'};
-            var containsTracks = document.querySelector('#contains-tracks');
-            containsTracks.addEventListener("scroll", function() {
-                $scope.myMarginStyle = {marginLeft: containsTracks.scrollLeft + 'px'};
-                $scope.$apply();
-            }, false);
 
         }
     }
