@@ -204,6 +204,7 @@ describe('Callbacks Tests', function () {
         it ('Delete the previous sample inserted on the track', function (done) {
             request(server)
                 .del('/api/mixes/' + mix._id + '/tracks/' + track._id + '/samples/' + insertSampleId)
+                .send({index: insertSampleId})
                 .set('sessionid', sessionId)
                 .set('Accept', 'application/json')
                 .end(function(err, res) {

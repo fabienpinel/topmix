@@ -5,6 +5,8 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.mix = {};
     $scope.paused = true;
+    $scope.allTheTimeouts = [];
+    $scope.currentTimeout;
     $.material.init();
 
 
@@ -83,12 +85,15 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.play = function(line, index){
         //play
-            setTimeout(function () {
+            $scope.currentTimeout = setTimeout(function () {
                 if (++index < line.song.length && !$scope.paused) {
                     line.song[index].file.play();
                     $scope.play(line, index);
                 }
             }, (line.song[index].file.getDuration() * 1000));
+
+            $scope.allTheTimeouts.push($scope.currentTimeout);
+            console.log("pushing a timeout", $scope.allTheTimeouts);
     };
 
     $scope.togglePlayStop = function(){
@@ -118,6 +123,13 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                     }
                 });
             });
+            //loop on the timeouts in order to erase all of them
+            $scope.allTheTimeouts.forEach(function(to){
+                clearTimeout(to);
+            });
+            $scope.allTheTimeouts = [];
+
+
             $scope.paused = true;
         }
     };
@@ -191,7 +203,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     $scope.resetSliders = function() {
         console.log("c'est la fête");
         //$scope.initSliders();
-
     }
 
     $scope.$watch('mix', function() {
