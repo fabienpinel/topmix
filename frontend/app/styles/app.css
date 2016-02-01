@@ -140,6 +140,17 @@ section#player{
   padding-left: 200px;
 }
 
+#floatingSample {
+  display: none;
+  left:0px;
+  right:0px;
+  position: fixed;
+  z-index:2 !important;
+  overflow: hidden;
+  height: 32px;
+  width:32px;
+}
+
 .multi-tracks td {
   background-color: #D4D4D1;
   overflow: hidden;
