@@ -57,9 +57,7 @@ html, body{
 #sections{
   width:100%;
 }
-section#multipisteVolume{
 
-}
 section{
   padding-top: 10px;
   padding-bottom:10px;
@@ -84,7 +82,7 @@ section#player label:not(.togglebutton label){
   font-size: 40px;
 }
 section#multipisteVolume{
-  background-color: rgba(0,0,0,0.2);
+  background-color: #D4D4D1;
 }
 
 .slidernx{
@@ -135,26 +133,16 @@ section#player{
   cursor:move;
 }
 
-.tracks .head {
-  position: absolute;
-  padding-left: 15px;
-  width: 200px;
-  border-right: 1px solid #999;
-  left: 0px;
-}
-
 .multi-tracks {
   float: left;
-  text-align: left;
   white-space: nowrap;
   position:relative;
   padding-left: 200px;
 }
 
 .multi-tracks td {
-  background-color: #ccccee;
+  background-color: #D4D4D1;
   overflow: hidden;
-  margin-right: 5px;
   display: inline-block;
   cursor: move;
   width: 100px;
@@ -163,6 +151,12 @@ section#player{
 
 .multi-tracks td:first-child {
   padding: 3px;
+  position: absolute;
+  padding-left: 15px;
+  width: 200px;
+  border-right: 1px solid #999;
+  left: 0px;
+  z-index:3;
 }
 
 .multi-tracks td:empty {
@@ -174,4 +168,5 @@ section#player{
   height: 300px;
   overflow: scroll;
 }
+
 
