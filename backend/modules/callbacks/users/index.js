@@ -53,5 +53,43 @@ module.exports = {
                 console.log('unexpected error', error);
                 return res.status(500).json(error);
             });
+    },
+
+    getUsers: function (req, res) {
+
+        req.checkQuery({
+            'q': {
+                notEmpty: true,
+                errorMessage: 'Field "q" cannot be empty'
+            }
+        });
+
+        var errors = req.validationErrors();
+        if (errors) return res.status(400).json(errors);
+
+        database
+            .connect()
+            .then(function (db) {
+                var users = db.collection('users');
+                users
+                    .find({
+                        username: {$regex : ".*" + req.query.q + ".*"}
+                    }, {
+                        username: true,
+                        _id: true
+                    })
+                    .toArray(function (err, docs) {
+                        db.close();
+                        if (err) { return res.status(500).json(err); }
+                        else {
+                            return res.status(200).end(docs);
+                        }
+                    });
+            })
+            .catch(function (error) {
+                console.log('unexpected error', error);
+                return res.status(500).json(error);
+            });
+
     }
 };

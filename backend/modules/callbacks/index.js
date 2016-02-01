@@ -6,6 +6,7 @@ var samplesCB = require('./samples');
 module.exports = {
 
     postUsers: usersCB.postUsers,
+    getUsers: usersCB.getUsers,
 
     getSessions: sessionsCB.getSessions,
     postSessions: sessionsCB.postSessions,

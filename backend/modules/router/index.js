@@ -4,6 +4,7 @@ var callbacks = require('../callbacks');
 module.exports = function (router) {
 
     router.post('/api/users', callbacks.postUsers); // done
+    router.get('/api/users', callbacks.getUsers);
 
     router.get('/api/sessions', callbacks.getSessions); // done
     router.post('/api/sessions', callbacks.postSessions); // done

@@ -271,5 +271,9 @@ module.exports = {
                 console.log('unexpected error', error);
                 return res.status(500).json(error);
             });
+    },
+
+    addUserToMix: function (req, res) {
+
     }
 };
