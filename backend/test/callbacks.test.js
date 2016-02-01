@@ -113,7 +113,7 @@ describe('Callbacks Tests', function () {
             request(server)
                 .post('/api/sessions')
                 .send({
-                    username: 'coucou',
+                    username: 'coucouvreoieovsùofsoigsogsihogshuiegshiuegsqersuilqeiluh',
                     password: 'password'
                 })
                 .set('Accept', 'application/json')

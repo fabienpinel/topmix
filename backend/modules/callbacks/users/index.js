@@ -82,7 +82,10 @@ module.exports = {
                         db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
-                            return res.status(200).end(docs);
+
+                            return res.status(200).json(docs.filter(function (doc) {
+                                return doc.username != req.user.username;
+                            }));
                         }
                     });
             })

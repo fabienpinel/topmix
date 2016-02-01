@@ -1,43 +1,63 @@
-app.controller('MixesCtrl', function ($scope, MixesFactory) {
+app.controller('MixesCtrl', function ($scope, MixesFactory, $rootScope) {
 
-    $scope.mixes = MixesFactory.data;
-    $scope.newMix = {};
+    var vm = this;
+
+    vm.mixes = MixesFactory.data;
+    vm.newMix = {};
 
     function getMixes() {
         MixesFactory
             .getMixes()
             .then(function (mixes) {
-                $scope.mixes = mixes;
+                console.log(mixes);
+                vm.mixes = mixes;
             })
             .catch(function (err) {
                 console.error(err);
-                $scope.mixes = [];
+                vm.mixes = [];
             });
     }
     getMixes();
 
-    $scope.postMixes = function () {
+    $rootScope.$on('mixesChange', function (name, mixes) {
+        vm.mixes = mixes;
+        for (var i = 0; i < mixes.length; i++) {
+            if (mixes[i]._id == vm.selectedMix._id) {
+                $rootScope.$broadcast('selectedMix', mixes[i]);
+            }
+            break;
+        }
+    });
+
+    vm.postMixes = function () {
         MixesFactory
-            .postMixes($scope.newMix.name)
+            .postMixes(vm.newMix.name)
             .then(function (mixes) {
-                $scope.newMix = {};
-                $scope.mixes = mixes;
+                vm.newMix = {};
+                vm.mixes = mixes;
             })
             .catch(function (err) {
                 console.error(err);
             });
     };
 
-    $scope.deleteMixes = function (id) {
+    vm.deleteMixes = function (id) {
         MixesFactory
             .deleteMixes(id)
             .then(function (mixes) {
-                $scope.mixes = mixes;
+                vm.mixes = mixes;
             })
             .catch(function (err) {
                 console.error(err);
             });
-    }
+    };
+
+    vm.selectedMix = {};
+    vm.openAddDialog = function (mix) {
+        $('#add-collaborator').modal('show');
+        vm.selectedMix = mix;
+        $rootScope.$broadcast('selectedMix', mix);
+    };
 
 
 });

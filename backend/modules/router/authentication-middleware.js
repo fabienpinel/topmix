@@ -1,7 +1,7 @@
 var database = require('../database');
 
 module.exports = function (req, res, next) {
-    if (req.url.indexOf('/api/users') >= 0
+    if ( (req.url.indexOf('/api/users') >= 0 && req.method == 'POST')
         || (
             req.url.indexOf('/api/sessions') >= 0 && req.method == 'POST'
         )) {

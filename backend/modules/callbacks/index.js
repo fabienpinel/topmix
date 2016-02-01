@@ -20,6 +20,9 @@ module.exports = {
     putTracks: mixesCB.putTracks,
     deleteTracks: mixesCB.deleteTracks,
 
+    shareMix: mixesCB.shareMix,
+    unShareMix: mixesCB.unShareMix,
+
     getSamples: samplesCB.getSamples,
     postSamples: samplesCB.postSamples,
     deleteSamples: samplesCB.deleteSamples

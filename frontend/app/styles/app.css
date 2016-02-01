@@ -171,3 +171,14 @@ section#player{
   overflow: scroll;
 }
 
+.user-add {
+  background:lightblue;
+  padding:5px;
+  display:inline-block;
+  cursor:pointer;
+  margin-right:5px;
+}
+
+.user-add .plus {
+  font-weight: bold;
+}
