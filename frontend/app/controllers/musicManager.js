@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams) {
+app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout) {
 
     $scope.mix = {};
     $scope.paused = true;
@@ -53,7 +53,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             .then(function (mix) {
                 $scope.mix = mix;
                 //instanciate the waveforms
-                setTimeout(function(){  $scope.initSliders(); });
+                $timeout(function(){  $scope.initSliders(); });
 
                 console.log("Mixes", $scope.mix);
             })
@@ -94,7 +94,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.play = function(line, index){
         //play
-            $scope.currentTimeout = setTimeout(function () {
+            $scope.currentTimeout = $timeout(function () {
                 if (++index < line.song.length && !$scope.paused) {
                     line.song[index].file.play();
                     $scope.play(line, index);
@@ -134,7 +134,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             });
             //loop on the timeouts in order to erase all of them
             $scope.allTheTimeouts.forEach(function(to){
-                clearTimeout(to);
+                $timeout.cancel(to);
             });
             $scope.allTheTimeouts = [];
 
