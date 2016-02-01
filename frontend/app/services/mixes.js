@@ -116,6 +116,56 @@ app.factory('MixesFactory', ['$http', '$q', '$rootScope', 'LoginFactory', functi
                 deferred.reject(new Error('You must be logged in'))
             }
             return deferred.promise;
+        },
+
+        shareMix: function (mixId, userId) {
+            var deferred = $q.defer();
+            if (LoginFactory.data) {
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:7070/api/mixes/' + mixId + '/share/' + userId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'sessionid': LoginFactory.data
+                    }
+                }).success(function (data, status) {
+                    if (status == 201) {
+                        deferred.resolve(factory.getMixes());
+                    } else {
+                        deferred.reject(data);
+                    }
+                }).error(function (err) {
+                    deferred.reject(err);
+                });
+            } else {
+                deferred.reject(new Error('You must be logged in'))
+            }
+            return deferred.promise;
+        },
+
+        unshareMix: function (mixId, userId) {
+            var deferred = $q.defer();
+            if (LoginFactory.data) {
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:7070/api/mixes/' + mixId + '/unshare/' + userId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'sessionid': LoginFactory.data
+                    }
+                }).success(function (data, status) {
+                    if (status == 201) {
+                        deferred.resolve(factory.getMixes());
+                    } else {
+                        deferred.reject(data);
+                    }
+                }).error(function (err) {
+                    deferred.reject(err);
+                });
+            } else {
+                deferred.reject(new Error('You must be logged in'))
+            }
+            return deferred.promise;
         }
     };
     return factory;

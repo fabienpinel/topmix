@@ -36,7 +36,6 @@ app.factory('TracksFactory', function ($http, $q, $rootScope, LoginFactory, Mixe
             return deferred.promise;
         },
         changeVolume: function (mixId, trackId, volume) {
-            //TODO JY doit passer ici
             var deferred = $q.defer();
             if (LoginFactory.data) {
                 $http({
@@ -50,8 +49,8 @@ app.factory('TracksFactory', function ($http, $q, $rootScope, LoginFactory, Mixe
                         'sessionid': LoginFactory.data
                     }
                 }).success(function (data, status) {
-                    if (status == 201) {
-                        deferred.resolve();
+                    if (status == 200) {
+                        deferred.resolve(MixesFactory.getMixById(mixId));
                     } else {
                         deferred.reject(data);
                     }

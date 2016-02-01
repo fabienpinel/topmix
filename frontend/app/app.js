@@ -55,7 +55,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('mixes', {
             url: "/mixes",
             templateUrl: "partials/mixes.html",
-            controller: 'MixesCtrl'
+            controller: 'MixesCtrl',
+            controllerAs: 'MixesCtrl'
         })
         .state('singleMix', {
             url: "/mixes/:id",

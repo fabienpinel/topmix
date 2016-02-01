@@ -1,12 +1,12 @@
 <div class="container">
-    <form class="form-horizontal" ng-submit="postMixes()">
+    <form class="form-horizontal" ng-submit="MixesCtrl.postMixes()">
         <fieldset>
             <legend>New mix</legend>
             <div class="form-group">
                 <label for="inputName" class="col-md-2 control-label">Title</label>
 
                 <div class="col-md-10">
-                    <input ng-model="newMix.name" class="form-control" id="inputName" placeholder="Title" type="text">
+                    <input ng-model="MixesCtrl.newMix.name" class="form-control" id="inputName" placeholder="Title" type="text">
                 </div>
             </div>
             <div class="form-group">
@@ -20,18 +20,71 @@
         <thead>
         <tr>
             <th>Remove</th>
+            <th>Add User</th>
             <th>Name</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="mix in mixes">
+        <tr ng-repeat="mix in MixesCtrl.mixes">
             <td>
-                <button class="btn btn-raised btn-link" ng-click="deleteMixes(mix._id)">
+                <button class="btn btn-raised btn-link" ng-click="MixesCtrl.deleteMixes(mix._id)">
                     <i class="material-icons">delete</i>
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-raised btn-link" ng-click="MixesCtrl.openAddDialog(mix)">
+                    <i class="material-icons">person_add</i> ({{mix.userId.length}})
                 </button>
             </td>
             <td><a ng-href="#/mixes/{{mix._id}}">{{mix.name}}</a></td>
         </tr>
         </tbody>
     </table>
+</div>
+
+<div class="modal" id="add-collaborator" ng-controller="AddCollaboratorCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Add collaborator to {{mix.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3>Users</h3>
+                    <div>
+                        <div ng-repeat="user in mix.userId"
+                            class="user-add"
+                            ng-click="deleteUser(user._id)">
+                            <span class="plus">&times</span> <span class="username">{{user.username}}</span>
+                        </div>
+                        <div ng-show="mix.userId.length == 0">
+                            No user added to collaborate
+                        </div>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="text" ng-model="searchQuery" ng-change="searchUser()" class="form-control" id="inputPassword" placeholder="Username" required>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="user-add"
+                         ng-repeat="user in searchResults"
+                         ng-click="addUser(user._id)">
+                        <span class="plus">+</span> <span class="username">{{user.username}}</span>
+                    </div>
+                    <div ng-show="searchResults.length == 0">
+                        No user were found...
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
