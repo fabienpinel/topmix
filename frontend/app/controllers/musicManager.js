@@ -79,7 +79,13 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
         var index = (id.split("-")[1]);
         for(var i=0; i<$scope.lines[index].song.length; i++){
             $scope.lines[index].song[i].file.setVolume(data);
+
         }
+        $scope.mix.tracks[index].volume = data;
+        TracksFactory.changeVolume($scope.mix._id, $scope.mix.tracks[index]._id , (data*100));
+
+        console.log("MIX",$scope.mix);
+
     };
 
 
@@ -152,8 +158,10 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                 parent: "multipisteVolume",
                 w: "60px",
                 h: "160px",
-                name: "piste-"+i
+                name: "piste-"+i,
             });
+            nx.widgets["piste-"+i].val.value = ($scope.mix.tracks[i].volume/100);
+            nx.widgets["piste-"+i].draw();
             $scope.lines[i] = {song: null};
             $scope.lines[i].song = [];
 
@@ -162,8 +170,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                 $scope.lines[i].song[j] = {file: null};
 
                     $scope.lines[i].song[j].file = (Object.create(WaveSurfer));
-
-
 
                     $scope.lines[i].song[j].file.init({
                         container: '#sample' + $scope.mix.tracks[i]._id + j,
@@ -200,7 +206,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     };
 
     $scope.resetSliders = function() {
-        console.log("c'est la fête");
+        console.log("c'est la fï¿½te");
         //$scope.initSliders();
     }
 
