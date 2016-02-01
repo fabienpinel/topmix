@@ -11,7 +11,6 @@
             <span class="btn material-icons" ng-click='togglePlayStop()'>{{paused ? "play_arrow" : "stop" }}</span>
             <span class="btn material-icons">skip_next</span>
             <span class="btn" disabled="true">3:11</span>
-
             <span class="btn material-icons right arrows" ng-show="!hideMultipisteVolume" ng-click="hideMultipisteVolume=true">arrow_drop_down</span>
             <span class="btn material-icons right arrows" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
         </div>
@@ -21,10 +20,12 @@
 
     <!-- Draw all tracks settings -->
     <section id="multipisteVolume" ng-hide="hideMultipisteVolume">
-        <div class="container" >
-            <!--
-            <canvas ng-repeat="n in audios" nx="slider" id="sliderPiste{{$index+1}}" min="0" max="100" label="Piste {{$index+1}}" height="200" width="80" class="slidernx"></canvas>
-               -->
+        <div class="container">
+            <div ng-repeat="track in draggableObjects" class="volume-slider">
+                <input orient="vertical" type="range" min="0" max="100" ng-model="track.volume" ng-mouseup="changeVolume(track._id, track.volume, $index)">
+                <br>
+                <span>{{track.name}}</span>
+            </div>
         </div>
     </section>
     <section id="wave">

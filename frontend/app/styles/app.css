@@ -195,3 +195,14 @@ section#player{
 .user-add .plus {
   font-weight: bold;
 }
+
+.volume-slider {
+  display:inline-block;
+  width: 50px;
+  height:200px;
+}
+
+.volume-slider input {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+}
