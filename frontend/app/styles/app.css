@@ -86,6 +86,7 @@ section#player label:not(.togglebutton label){
 section#multipisteVolume{
   background-color: rgba(0,0,0,0.2);
 }
+
 .slidernx{
   font-size: 130%;
 }

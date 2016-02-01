@@ -11,12 +11,6 @@
             <span class="btn material-icons" ng-click='togglePlayStop()'>{{paused ? "play_arrow" : "stop" }}</span>
             <span class="btn material-icons">skip_next</span>
             <span class="btn" disabled="true">3:11</span>
-            <span class="togglebutton">
-                <label>
-                    <input type="checkbox" ng-model="loop" ng-change="toggleLoop()">
-                    <span class="labelToggle">Loop</span>
-                </label>
-            </span>
 
             <span class="btn material-icons right arrows" ng-show="!hideMultipisteVolume" ng-click="hideMultipisteVolume=true">arrow_drop_down</span>
             <span class="btn material-icons right arrows" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
