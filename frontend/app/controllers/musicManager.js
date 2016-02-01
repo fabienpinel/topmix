@@ -9,6 +9,11 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     $scope.currentTimeout;
     $.material.init();
 
+    $scope.searchBox = function() {
+        $scope.$broadcast('searchBox');
+        console.log('emit');
+    };
+
 
     nx.onload = function() {
 

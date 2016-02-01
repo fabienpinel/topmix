@@ -70,6 +70,14 @@ app.directive('dragPiste', function(SamplesFactory) {
         link: function ($scope) {
 
             $scope.samples = [];
+            $scope.searchBoxVisible = false;
+
+            $scope.searchBoxVisible = true;
+
+            $scope.$on('searchBox', function() {
+                console.log('receiveed');
+                $scope.searchBoxVisible = !$scope.searchBoxVisible;
+            });
 
             SamplesFactory
                 .getSamples()
@@ -85,6 +93,13 @@ app.directive('dragPiste', function(SamplesFactory) {
                 $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                 $scope.predicate = predicate;
             };
+
+            $scope.myMarginStyle = {marginLeft: '0px'};
+            var containsTracks = document.querySelector('#contains-tracks');
+            containsTracks.addEventListener("scroll", function() {
+                $scope.myMarginStyle = {marginLeft: containsTracks.scrollLeft + 'px'};
+                $scope.$apply();
+            }, false);
 
         }
     }

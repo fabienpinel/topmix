@@ -1,23 +1,19 @@
 <div id="sections">
+    <section id="player">
+        Mix : {{mix.name}}
+        <span class="btn material-icons" ng-click='togglePlayStop()'>{{paused ? "play_arrow" : "stop" }}</span>
+        <span class="btn material-icons right" ng-click="searchBox()">queue_music</span>
+        <span class="btn material-icons right" ng-click="postTrack()">add</span>
+
+    </section>
 
     <!-- Horizontal Tracks-->
     <drag-piste tracks="draggableObjects"></drag-piste>
 
 
     <!-- Player -->
-    <section id="player">
-        <div class="container">
-            <span class="btn material-icons">skip_previous</span>
-            <span class="btn material-icons" ng-click='togglePlayStop()'>{{paused ? "play_arrow" : "stop" }}</span>
-            <span class="btn material-icons">skip_next</span>
-            <span class="btn" disabled="true">3:11</span>
 
-            <span class="btn material-icons right arrows" ng-show="!hideMultipisteVolume" ng-click="hideMultipisteVolume=true">arrow_drop_down</span>
-            <span class="btn material-icons right arrows" ng-show="hideMultipisteVolume" ng-click="hideMultipisteVolume=false">arrow_drop_up</span>
-        </div>
-    </section>
-
-    <button ng-click="postTrack()">add track</button>
+    <!-- <div ng-click="postTrack()" class="btn btn-danger btn-raised add-track"><i class="material-icons icon-plus">add</i></div> -->
 
     <!-- Draw all tracks settings -->
     <section id="multipisteVolume" ng-hide="hideMultipisteVolume">
@@ -26,8 +22,5 @@
             <canvas ng-repeat="n in audios" nx="slider" id="sliderPiste{{$index+1}}" min="0" max="100" label="Piste {{$index+1}}" height="200" width="80" class="slidernx"></canvas>
                -->
         </div>
-    </section>
-    <section id="wave">
-
     </section>
 </div>

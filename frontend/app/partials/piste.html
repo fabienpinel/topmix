@@ -1,4 +1,4 @@
-<section id="contains-tracks" class="col-xs-8">
+<section id="contains-tracks" ng-class="searchBoxVisible ? 'col-xs-8' : 'col-xs-12'">
     <div id="mesure"></div>
     <div class="tracks-zone" ng-repeat="track in tracks" nx="slider" id="piste{{$index}}" min="0" max="100">
         <table class="tracks">
@@ -28,7 +28,7 @@
 
 </section>
 
-<section class="col-xs-4 sample-picker">
+<section class="col-xs-4 sample-picker" ng-class="searchBoxVisible ? '' : 'searchBoxHide'">
 <div class="panel panel-info">
     <div class="panel-heading">
         <input type="text" placeholder="Recherche" class="search-input" ng-model="searchSample"/>

@@ -8,6 +8,10 @@ html, body{
   user-select: none;
 }
 
+.navbar {
+  margin-bottom: 0px !important;
+}
+
 .move {
   cursor: move;
 }
@@ -54,35 +58,43 @@ html, body{
 .right{
   float: right;
 }
-#sections{
-  width:100%;
-}
 
 section{
   padding-top: 10px;
   padding-bottom:10px;
-
   width:100%;
   display: inline-block;
   text-align: center;
 }
-section#player{
-  border-top: 1px solid #3399FF;
+
+#sections {
+  height: 100%;
 }
+
+drag-piste section {
+  height:60%;
+}
+
 section#player span:not(.toggle){
   font-size: 30px;
   width:auto;
   height:auto;
 }
-section#player .arrows {
-  margin-top:20px;
+section#player  {
+  border-bottom: 1px solid black;
+  text-align:left;
+  padding-left: 15px !important;
 }
+
 section#player label:not(.togglebutton label){
   height:100%;
   font-size: 40px;
 }
 section#multipisteVolume{
   background-color: #D4D4D1;
+  overflow-x:scroll;
+ white-space: nowrap;
+  height:38%;
 }
 
 .slidernx{
@@ -93,9 +105,10 @@ section#multipisteVolume{
 }
 
 section#contains-tracks {
-  height: 300px;
   overflow: auto;
   padding: 0;
+  moz-transition: width ease 1s;
+  -webkit-transition: width ease 1s;
 }
 section .tracks {
   border-bottom: 1px solid #999;
@@ -180,8 +193,48 @@ section#player{
 
 .sample-picker {
   padding: 0;
-  height: 300px;
   overflow: scroll;
+  transition: all ease 1s;
+  moz-transition: width ease 1s;
+  -webkit-transition: width ease 1s;
+  overflow-x:hidden;
 }
 
+.searchBoxHide {
+  width:0px !important;
+}
+
+.arrows {
+  position:fixed;
+  bottom:0;
+  right:50%;
+  left:50%;
+}
+
+.add-track {
+  position:fixed !important;
+  bottom:5%;
+  right:2%;
+  border-radius: 50%;
+  font-size: 24px;
+  height: 56px;
+  margin: auto;
+  min-width: 56px;
+  width: 56px;
+  padding: 0;
+  overflow: hidden;
+  z-index:4;
+}
+
+.icon-plus {
+  margin-top: 15px;
+}
+
+.view-app {
+  height:calc(100% - 80px);
+}
+
+.panel-heading {
+  border-radius: 0px;
+}
 
