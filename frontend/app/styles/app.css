@@ -264,6 +264,22 @@ section#player{
   right: 13px;
 }
 
+.search-input {
+  color: #ffffff !important;
+  border: none;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  margin-left: 50px;
+}
+
+.search {
+  left: 13px;
+  top: 12px;
+  position: absolute;
+  font-size: 3em;
+}
+
 input[type=range] {
   -webkit-appearance: none;
   width: 200px !important;
