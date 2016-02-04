@@ -188,9 +188,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.$on('singleMix', function (name, data) {
         $scope.mix = data;
-        $scope.mix.tracks.forEach(function (track) {
-            for (var i = 0; i < 10; i++) track.samples.push(null);
-        });
     });
 
     getMix();
