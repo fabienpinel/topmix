@@ -13,42 +13,7 @@ app.controller("MusicManagerController" , function($scope, MixesFactory, TracksF
         $scope.$broadcast('searchBox');
     };
 
-
-    nx.onload = function() {
-
-    };
-    nx.colorize("#3399FF");
-
-    $scope.lines= [
-        {
-            song : [
-                {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
-                    name:"piste 2",
-                    file:""
-                },
-                {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
-                    name:"1",
-                    file: ""
-                },
-                {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
-                    name:"piste 2",
-                    file:""
-                }
-
-            ],
-            counter: 0
-        },
-        {
-            song : [
-                {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
-                    name:"1",
-                    file: ""
-                }
-            ],
-            counter: 0
-        }
-
-    ];
+    $scope.lines= [];
 
 
     function getMix() {
