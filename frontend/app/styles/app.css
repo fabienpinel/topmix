@@ -144,7 +144,6 @@ section#player{
   top: 4px;
   position: absolute;
   left: 5px;
-  cursor:move;
 }
 
 .multi-tracks {
@@ -176,6 +175,7 @@ section#player{
 
 .multi-tracks td:not(:first-child):hover {
   background-color: white;
+  cursor:move;
 }
 
 .multi-tracks td:first-child {
