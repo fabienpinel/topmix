@@ -11,7 +11,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.searchBox = function() {
         $scope.$broadcast('searchBox');
-        console.log('emit');
     };
 
 
@@ -59,8 +58,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                 $scope.mix = mix;
                 //instanciate the waveforms
                 $timeout(function(){  $scope.initSliders(); });
-
-                console.log("Mixes", $scope.mix);
             })
             .catch(function (err) {
                 console.error(err);
@@ -82,7 +79,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.changeVolume = function(trackId, volume, index){
         for(var i=0; i<$scope.lines[index].song.length; i++){
-            console.log('set volume', trackId, volume, index);
             $scope.lines[index].song[i].file.setVolume(volume/100);
         }
         TracksFactory
@@ -106,7 +102,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             }, (line.song[index].file.getDuration() * 1000));
 
             $scope.allTheTimeouts.push($scope.currentTimeout);
-            console.log("pushing a timeout", $scope.allTheTimeouts);
     };
 
     $scope.togglePlayStop = function(){
@@ -114,8 +109,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             var index = 0;
             //play all sounds from audios table
             $scope.lines.forEach(function(line){
-                console.log("LINES ",$scope.lines);
-                console.log("foreach debug line.song ", line);
 
                 //console.log("next song in ", line.song[index].file.getDuration()*1000);
                 line.song[index].file.play();
@@ -148,7 +141,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     };
 
     $scope.$on("drawSample", function(name,trackid, index){
-        console.log('gorge');
         if ($scope.lines.length != $scope.mix.tracks.length) {
             for (var i=0; i<$scope.mix.tracks.length; i++){
                 $scope.lines[i] = {song: []};
@@ -185,7 +177,6 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
         }
     });
     $scope.initSliders = function() {
-        console.log('suce');
         $scope.lines = [];
         for(var i=0; i<$scope.mix.tracks.length; i++){
             $scope.lines.push({song: []});

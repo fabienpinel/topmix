@@ -9,7 +9,7 @@ app.controller('MixesCtrl', function ($scope, MixesFactory, $rootScope) {
         MixesFactory
             .getMixes()
             .then(function (mixes) {
-                console.log(mixes);
+                //console.log(mixes);
                 vm.mixes = mixes;
             })
             .catch(function (err) {

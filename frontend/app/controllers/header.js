@@ -21,11 +21,11 @@ app.controller("HeaderController" , ['$scope', '$rootScope', 'LoginFactory', 'Si
     };
     /************ Global Login ************/
     $scope.login = function(){
-        console.log("Trying to login with: "+$scope.username_loginModal+"/"+$scope.password_loginModal);
+        //console.log("Trying to login with: "+$scope.username_loginModal+"/"+$scope.password_loginModal);
         LoginFactory.login($scope.username_loginModal, $scope.password_loginModal).then(
             function(data){
                 //success
-                console.log("Login success",data);
+                //console.log("Login success",data);
                 $scope.logged = true;
                 $scope.user_sessionid = data;
                 //hide the modal
@@ -33,24 +33,24 @@ app.controller("HeaderController" , ['$scope', '$rootScope', 'LoginFactory', 'Si
             },
             function(message){
                 //error
-                console.log("Error Login: "+message);
+                //console.log("Error Login: "+message);
                 //TODO show error de login
             }
         )
     };
     /************ Global Logout ************/
     $scope.signin = function(){
-        console.log("Trying to signin with: "+$scope.username_signinModal+"/"+$scope.password_signinModal);
+        //console.log("Trying to signin with: "+$scope.username_signinModal+"/"+$scope.password_signinModal);
         SigninFactory.signin($scope.username_signinModal, $scope.password_signinModal).then(
             function(data){
                 //success
-                console.log("Signin success",data);
+                //console.log("Signin success",data);
                 $scope.logged = true;
                 $scope.user_sessionid = data;
             },
             function(message){
                 //error
-                console.log("Error Login: "+message);
+                //console.log("Error Login: "+message);
                 //TODO show error de signin
             }
         )

@@ -23,7 +23,6 @@ app.directive('dragPiste', function(SamplesFactory) {
             });
 
             $scope.deleteTrack = function (trackId) {
-                console.log($stateParams.id, trackId);
                 TracksFactory
                     .removeTracks($stateParams.id, trackId);
             };
@@ -89,7 +88,6 @@ app.directive('dragPiste', function(SamplesFactory) {
             $scope.searchBoxVisible = true;
 
             $scope.$on('searchBox', function() {
-                console.log('receiveed');
                 $scope.searchBoxVisible = !$scope.searchBoxVisible;
             });
 
@@ -97,7 +95,6 @@ app.directive('dragPiste', function(SamplesFactory) {
                 .getSamples()
                 .then(function (samples) {
                     $scope.samples = samples;
-                    console.log(samples);
                 })
                 .catch(function (err) {
                     console.error(err);
