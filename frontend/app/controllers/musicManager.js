@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout, socket) {
+app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout, socket, LoginFactory) {
 
     $scope.mix = {};
     $scope.paused = true;
@@ -193,6 +193,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
     socket.on('mixChange', function() {
         getMix();
     });
+    if (LoginFactory.data) socket.emit('subscribe', LoginFactory.data, $stateParams.id);
 
     getMix();
 
