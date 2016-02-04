@@ -86,7 +86,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
             $scope.lines[index].song[i].file.setVolume(volume/100);
         }
         TracksFactory
-            .changeVolume($scope.mix._id, index , volume)
+            .changeVolume($scope.mix._id, trackId , volume)
             .then(function(data){
                 $scope.mix = data;
             })
