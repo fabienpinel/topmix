@@ -170,7 +170,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                         $scope.lines[i].song[j].file.load("../samples/" + path.name);
                     }
                     else {
-                        $scope.lines[i].song[j].file.load("../samples/empty.wav");
+                        $scope.lines[i].song[j].file.load("../samples/empty.mp3");
 
                     }
                 }
