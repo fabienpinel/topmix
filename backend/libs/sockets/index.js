@@ -1,4 +1,5 @@
 var sockets = [];
+var uniqid = require('uniqid');
 
 module.exports = {
 
