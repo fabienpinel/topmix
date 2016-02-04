@@ -1,23 +1,23 @@
 var MongoClient = require('mongodb').MongoClient;
 
 var samplesDoc = [
-    { name: 'VFH2_Cool_Kit_1.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_10.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_11.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_12.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_13.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_14.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_15.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_2.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_3.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_4.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_5.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_6.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_7.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_8.wav', bpm: 128},
-    { name: 'VFH2_Cool_Kit_9.wav', bpm: 128},
-    { name: 'VFH2_Cool_Melody_1.wav', bpm: 128},
-    { name: 'VFH2_Cool_Melody_2.wav', bpm: 128}
+    { name: 'VFH2_Cool_Kit_1.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_10.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_11.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_12.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_13.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_14.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_15.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_2.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_3.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_4.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_5.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_6.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_7.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_8.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Kit_9.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Melody_1.mp3', bpm: 128},
+    { name: 'VFH2_Cool_Melody_2.mp3', bpm: 128}
 ];
 
 var database = {
