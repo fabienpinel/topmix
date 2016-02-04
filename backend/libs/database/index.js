@@ -24,19 +24,27 @@ var database = {
     connect: function () {
         return new Promise(function (resolve) {
             MongoClient.connect('mongodb://localhost:27017/topmix', function(err, db) {
-                var users = db.collection('users');
-                users.createIndex({username: 1}, {unique: true}, function () {
-                    return resolve(db);
-                });
+                if (err) return reject(db);
+                resolve(db);
             });
         });
     },
 
     init: function () {
         return new Promise(function (resolve, reject) {
+            var db = null;
             database
                 .connect()
-                .then(function (db) {
+                .then(function (_db) {
+                    db = _db;
+                    return new Promise(function (resolve) {
+                        var users = db.collection('users');
+                        users.createIndex({username: 1}, {unique: true}, function () {
+                            return resolve();
+                        });
+                    });
+                })
+                .then(function () {
                     var samples = db.collection('samples');
                     samples
                         .find({})

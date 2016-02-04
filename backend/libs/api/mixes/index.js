@@ -1,5 +1,6 @@
 var database = require('../../database');
 var ObjectID = require("mongodb").ObjectID;
+var sockets = require('../../sockets');
 
 module.exports = {
 
@@ -163,7 +164,10 @@ module.exports = {
                         db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
-                            if (result.result.n == 1) return res.status(204).end();
+                            if (result.result.n == 1) {
+                                sockets.emitChangeByMixId(req.params.idMixes, req.headers.sessionid);
+                                return res.status(204).end();
+                            }
                             else return res.status(403).end();
                         }
                     }
@@ -215,7 +219,10 @@ module.exports = {
                             db.close();
                         if (err) { return res.status(500).json(err); }
                         else {
-                            if (result.result.n == 1) return res.status(201).json(id);
+                            if (result.result.n == 1) {
+                                sockets.emitChangeByMixId(req.params.idMixes, req.headers.sessionid);
+                                return res.status(201).json(id);
+                            }
                             else return res.status(403).end();
                         }
                     }
@@ -274,6 +281,7 @@ module.exports = {
                                     }, function (err) {
                                         db.close();
                                         if (err) return res.status(500).json(err);
+                                        sockets.emitChangeByMixId(req.params.idMixes, req.headers.sessionid);
                                         res.status(200).end();
                                     })
                             } else {
@@ -314,7 +322,10 @@ module.exports = {
                         if (err) {
                             return res.status(500).json(err); }
                         else {
-                            if (result.result.n == 1) return res.status(204).end();
+                            if (result.result.n == 1) {
+                                sockets.emitChangeByMixId(req.params.idMixes, req.headers.sessionid);
+                                return res.status(204).end();
+                            }
                             else return res.status(403).end();
                         }
                     }
@@ -326,6 +337,13 @@ module.exports = {
             });
     },
 
+
+    /**
+     * Share a mix with an other user
+     *
+     * @param req
+     * @param res
+     */
     shareMix: function (req, res) {
         database
             .connect()
@@ -356,6 +374,12 @@ module.exports = {
             });
     },
 
+    /**
+     * Unshare a mix
+     *
+     * @param req
+     * @param res
+     */
     unShareMix: function (req, res) {
         database
             .connect()

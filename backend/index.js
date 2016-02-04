@@ -1,11 +1,11 @@
 var express = require('express');
 var app = express();
-var router = require('./modules/router')(express.Router());
+var router = require('./libs/router')(express.Router());
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var authenticate = require('./modules/router/authentication-middleware');
+var authenticate = require('./libs/router/authentication-middleware');
 var expressValidator = require('express-validator');
-var db = require('./modules/database');
+var db = require('./libs/database');
 
 app.use(bodyParser.json());
 app.use(expressValidator());
@@ -23,6 +23,9 @@ var server = app.listen(7070, function () {
         .init()
         .then(function () {
             console.info('Success created Samples');
+            var io = require('socket.io').listen(server);
+            var sockets = require('./libs/sockets');
+            io.on('connection', sockets.socketCallback);
         })
         .catch(function (err) {
             console.error(err.stack);

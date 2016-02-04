@@ -1,6 +1,7 @@
 var database = require('../../database');
 var uuid = require('node-uuid');
 var ObjectID = require("mongodb").ObjectID;
+var sockets = require('../../sockets');
 
 module.exports = {
 
@@ -91,7 +92,10 @@ module.exports = {
                                             db.close();
                                             if (err) { return res.status(500).json(err); }
                                             else {
-                                                if (result.result.n == 1) return res.status(201).end();
+                                                if (result.result.n == 1) {
+                                                    sockets.emitChangeByMixId(req.params.idMixes, req.headers.sessionid);
+                                                    return res.status(201).end();
+                                                }
                                                 else return res.status(403).end();
                                             }
                                         }
@@ -166,7 +170,10 @@ module.exports = {
                                         db.close();
                                         if (err) { return res.status(500).json(err); }
                                         else {
-                                            if (result.result.n == 1) return res.status(204).end();
+                                            if (result.result.n == 1) {
+                                                sockets.emitChangeByMixId(req.params.idMixes, req.headers.sessionid);
+                                                return res.status(204).end();
+                                            }
                                             else return res.status(403).end();
                                         }
                                     }

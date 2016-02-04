@@ -1,7 +1,6 @@
 var assert = require('assert');
-var callbacks = require('../modules/callbacks');
 var request = require('supertest');
-var database = require('../modules/database');
+var database = require('../libs/database');
 
 describe('Callbacks Tests', function () {
 

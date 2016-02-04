@@ -47,7 +47,6 @@ module.exports = {
                             return res.status(201).end();
                         }
                     });
-
             })
             .catch(function (error) {
                 console.log('unexpected error', error);
@@ -55,6 +54,12 @@ module.exports = {
             });
     },
 
+    /**
+     * Search for other user to share the mix with
+     *
+     * @param req
+     * @param res
+     */
     getUsers: function (req, res) {
 
         req.checkQuery({
