@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout) {
+app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout, socket) {
 
     $scope.mix = {};
     $scope.paused = true;
@@ -188,6 +188,10 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.$on('singleMix', function (name, data) {
         $scope.mix = data;
+    });
+
+    socket.on('mixChange', function() {
+        getMix();
     });
 
     getMix();
