@@ -168,7 +168,6 @@ section#player{
   background-color: #D4D4D1;
   overflow: hidden;
   display: inline-block;
-  cursor: move;
   width: 100px;
   height: 32px;
 }

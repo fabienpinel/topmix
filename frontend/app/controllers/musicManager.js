@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout, socket, LoginFactory) {
+app.controller("MusicManagerController" , function($scope, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout, socket, LoginFactory) {
 
     $scope.mix = {};
     $scope.paused = true;
