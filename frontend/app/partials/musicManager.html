@@ -3,19 +3,20 @@
         Mix : {{mix.name}}
         <span class="btn material-icons" ng-click='togglePlayStop()'>{{paused ? "play_arrow" : "stop" }}</span>
         <span class="btn material-icons right" ng-click="searchBox()">queue_music</span>
+        <span class="btn material-icons right" ng-click="showVolume = ! showVolume">volume_up</span>
         <span class="btn material-icons right" ng-click="postTrack()">add</span>
 
     </section>
 
     <!-- Horizontal Tracks-->
-    <drag-piste tracks="draggableObjects"></drag-piste>
+    <drag-piste tracks="draggableObjects"  ng-class="showVolume ? 'hideVolume' : ''"></drag-piste>
 
 
     <!-- Player -->
 
     <!-- <div ng-click="postTrack()" class="btn btn-danger btn-raised add-track"><i class="material-icons icon-plus">add</i></div> -->
     <!-- Draw all tracks settings -->
-    <section id="multipisteVolume">
+    <section id="multipisteVolume" ng-class="showVolume ? 'hideVolume' : ''">
         <div class="container">
             <div ng-repeat="track in draggableObjects" class="volume-slider">
                 <input orient="vertical" type="range" min="0" max="100" ng-model="track.volume" ng-mouseup="changeVolume(track._id, track.volume, $index)">

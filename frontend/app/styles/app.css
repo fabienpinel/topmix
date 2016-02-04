@@ -73,6 +73,12 @@ section{
 
 drag-piste section {
   height:60%;
+  moz-transition: height ease 1s;
+  -webkit-transition: height ease 1s;
+}
+
+drag-piste.hideVolume section{
+  height:94%;
 }
 
 section#player span:not(.toggle){
@@ -91,11 +97,19 @@ section#player label:not(.togglebutton label){
   font-size: 40px;
 }
 section#multipisteVolume{
-  background-color: #D4D4D1;
+  background-color: #ffffff;
   overflow-x:auto;
   overflow-y:hidden;
  white-space: nowrap;
   height:37%;
+  border-top: 1px solid grey;
+  moz-transition: height ease 1s;
+  -webkit-transition: height ease 1s;
+}
+section#multipisteVolume.hideVolume {
+  height: 0 !important;
+  padding: 0px;
+  border:none;
 }
 
 .slidernx{
@@ -165,7 +179,7 @@ section#player{
 }
 
 .multi-tracks td {
-  background-color: #D4D4D1;
+  background-color: #ffffff;
   overflow: hidden;
   display: inline-block;
   width: 100px;
@@ -173,7 +187,7 @@ section#player{
 }
 
 .multi-tracks td:not(:first-child):hover {
-  background-color: white;
+  background-color: #D4D4D1;
   cursor:move;
 }
 
@@ -185,6 +199,7 @@ section#player{
   border-right: 1px solid #999;
   left: 0px;
   z-index:3;
+  background-color: #D4D4D1;
 }
 
 .multi-tracks td:empty {
