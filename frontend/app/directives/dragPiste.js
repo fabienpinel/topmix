@@ -78,6 +78,18 @@ app.directive('dragPiste', function(SamplesFactory) {
                 }
                 , 100);
             };
+
+
+
+            $scope.trackToEdit = {};
+            $scope.openEditModal = function (track) {
+                $scope.trackToEdit = angular.copy(track);
+                $('#edit-track').modal('show');
+            };
+            $scope.updateName = function () {
+                console.log($scope.trackToEdit.name);
+            };
+
         },
         link: function ($scope) {
 

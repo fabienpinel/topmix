@@ -4,9 +4,7 @@
         <table class="tracks">
             <tr class="multi-tracks">
                 <td ng-style="myMarginStyle">
-                    <span class="handle">
-                       &#8597;
-                    </span>
+                    <span class="material-icons" ng-click="openEditModal(track)">edit</span>
                     <span class="label">piste {{track.name}}</span>
                     <span class="material-icons" ng-click="deleteTrack(track._id)">close</span>
                     <span class="material-icons">volume_mute</span>
@@ -55,3 +53,28 @@
 </div>
 </section>
 <div class="clear1px">&nbsp;</div>
+
+
+<div class="modal" id="edit-track">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Update name</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="text" ng-model="trackToEdit.name" class="form-control" placeholder="track name" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updateName()">Mettre à jour</button>
+            </div>
+        </div>
+    </div>
+</div>
