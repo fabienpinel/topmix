@@ -87,7 +87,9 @@ app.directive('dragPiste', function(SamplesFactory) {
                 $('#edit-track').modal('show');
             };
             $scope.updateName = function () {
-                console.log($scope.trackToEdit.name);
+                console.log('suce');
+                TracksFactory.changeName($stateParams.id, $scope.trackToEdit._id, $scope.trackToEdit.name);
+                //console.log($scope.trackToEdit.name);
             };
 
         },

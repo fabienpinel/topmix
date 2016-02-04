@@ -62,6 +62,33 @@ app.factory('TracksFactory', function ($http, $q, $rootScope, LoginFactory, Mixe
             }
             return deferred.promise;
         },
+        changeName: function (mixId, trackId, name) {
+            var deferred = $q.defer();
+            if (LoginFactory.data) {
+                $http({
+                    method: 'PUT',
+                    url: 'http://localhost:7070/api/mixes/' + mixId + '/tracks/'+trackId,
+                    data: {
+                        name: name
+                    },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'sessionid': LoginFactory.data
+                    }
+                }).success(function (data, status) {
+                    if (status == 200) {
+                        deferred.resolve(MixesFactory.getMixById(mixId));
+                    } else {
+                        deferred.reject(data);
+                    }
+                }).error(function (err) {
+                    deferred.reject(err);
+                });
+            } else {
+                deferred.reject(new Error('You must be logged in'))
+            }
+            return deferred.promise;
+        },
         removeTracks: function (mixId, trackId) {
             var deferred = $q.defer();
             if (LoginFactory.data) {

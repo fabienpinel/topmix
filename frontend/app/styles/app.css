@@ -44,7 +44,9 @@ html, body{
   content: "|";
   padding-right: 0.3em;
 }
-
+.pointer {
+  cursor:pointer;
+}
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
