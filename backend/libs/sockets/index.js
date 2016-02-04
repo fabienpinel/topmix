@@ -15,7 +15,9 @@ module.exports = {
                 && sockets[i].subscribedMix == mixId
                 && sockets[i].sessionId
                 && sockets[i].sessionId != sessionId
-            ) sockets[i].emit('mixChange');
+            ) {
+                sockets[i].emit('mixChange');
+            }
         }
         return null;
     },
@@ -29,9 +31,9 @@ module.exports = {
         var id = uniqid();
         sockets[id] = socket;
 
-        socket.on('subscribe', function (sessionId, mixId) {
-            sockets[id].subscribedMix = mixId;
-            sockets[id].sessionId = sessionId;
+        socket.on('subscribe', function (data) {
+            sockets[id].subscribedMix = data.mixId;
+            sockets[id].sessionId = data.sessionId;
         });
 
         socket.on('disconnect', function () {
