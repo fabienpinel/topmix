@@ -4,10 +4,9 @@
         <table class="tracks">
             <tr class="multi-tracks">
                 <td ng-style="myMarginStyle">
-                    <span class="material-icons pointer" ng-click="openEditModal(track)">edit</span>
+                    <span class="material-icons pointer float-left" ng-click="openEditModal(track)">edit</span>
                     <span class="label">{{track.name | limitTo: 8}}</span>
-                    <span class="material-icons" ng-click="deleteTrack(track._id)">close</span>
-                    <span class="material-icons">volume_mute</span>
+                    <span class="material-icons float-right" ng-click="deleteTrack(track._id)">close</span>
                 </td>
                 <td
                         class="blank "

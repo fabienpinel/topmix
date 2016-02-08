@@ -383,4 +383,19 @@ input[type=range]:focus::-ms-fill-upper {
   background: #07d1fb;
 }
 
+.float-left {
+  float:left;
+}
+
+.float-right {
+  float:right;
+}
+
+.label{
+  top: 7px;
+  position: absolute;
+  right: 58px;
+  width: 76px;
+}
+
 
