@@ -73,14 +73,16 @@ section{
   height: 100%;
 }
 
-drag-piste section {
+drag-piste section:not(#multipisteVolume) {
   height:60%;
   moz-transition: height ease 1s;
   -webkit-transition: height ease 1s;
 }
 
-drag-piste.hideVolume section{
+drag-piste.hideVolume section:not(#multipisteVolume){
   height:94%;
+  moz-transition: height ease 1s;
+  -webkit-transition: height ease 1s;
 }
 
 section#player span:not(.toggle){
@@ -105,13 +107,15 @@ section#multipisteVolume{
  white-space: nowrap;
   height:37%;
   border-top: 1px solid grey;
-  moz-transition: height ease 1s;
-  -webkit-transition: height ease 1s;
+  moz-transition: height ease 1s, border ease 1s;
+  -webkit-transition: height ease 1s, border ease 1s;
 }
 section#multipisteVolume.hideVolume {
   height: 0 !important;
-  padding: 0px;
+  padding: 0;
   border:none;
+  moz-transition: height ease 1s, padding ease 1s;
+  -webkit-transition: height ease 1s, padding ease 1s;
 }
 
 .slidernx{
