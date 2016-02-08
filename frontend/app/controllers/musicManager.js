@@ -1,7 +1,7 @@
 /**
  * Created by fabienpinel on 11/01/16.
  */
-app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout) {
+app.controller("MusicManagerController" , function($scope, MixesFactory, TracksFactory, SamplesFactory, $stateParams, $timeout, socket, LoginFactory) {
 
     $scope.mix = {};
     $scope.paused = true;
@@ -13,42 +13,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
         $scope.$broadcast('searchBox');
     };
 
-
-    nx.onload = function() {
-
-    };
-    nx.colorize("#3399FF");
-
-    $scope.lines= [
-        {
-            song : [
-                {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
-                    name:"piste 2",
-                    file:""
-                },
-                {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
-                    name:"1",
-                    file: ""
-                },
-                {   fileName: '../samples/VFH2_Cool_Kit_2.wav',
-                    name:"piste 2",
-                    file:""
-                }
-
-            ],
-            counter: 0
-        },
-        {
-            song : [
-                {   fileName: '../samples/VFH2_Cool_Kit_1.wav',
-                    name:"1",
-                    file: ""
-                }
-            ],
-            counter: 0
-        }
-
-    ];
+    $scope.lines= [];
 
 
     function getMix() {
@@ -170,7 +135,7 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
                         $scope.lines[i].song[j].file.load("../samples/" + path.name);
                     }
                     else {
-                        $scope.lines[i].song[j].file.load("../samples/empty.wav");
+                        $scope.lines[i].song[j].file.load("../samples/empty.mp3");
 
                     }
                 }
@@ -188,9 +153,14 @@ app.controller("MusicManagerController" , function($scope, ngAudio, MixesFactory
 
     $scope.$on('singleMix', function (name, data) {
         $scope.mix = data;
-        $scope.mix.tracks.forEach(function (track) {
-            for (var i = 0; i < 10; i++) track.samples.push(null);
-        });
+    });
+
+    socket.on('mixChange', function() {
+        getMix();
+    });
+    if (LoginFactory.data) socket.emit('subscribe', {
+        sessionId: LoginFactory.data,
+        mixId: $stateParams.id
     });
 
     getMix();

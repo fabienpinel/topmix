@@ -1,15 +1,12 @@
 <section id="contains-tracks" ng-class="searchBoxVisible ? 'col-xs-8' : 'col-xs-12'">
     <div id="mesure"></div>
-    <div class="tracks-zone" ng-repeat="track in tracks" nx="slider" id="piste{{$index}}" min="0" max="100">
+    <div class="tracks-zone" ng-repeat="track in tracks" id="piste{{$index}}">
         <table class="tracks">
             <tr class="multi-tracks">
-                <td class="head" ng-style="myMarginStyle">
-                    <span class="handle">
-                       &#8597;
-                    </span>
-                    <span class="label">piste {{track.name}}</span>
-                    <span class="material-icons" ng-click="deleteTrack(track._id)">close</span>
-                    <span class="material-icons">volume_mute</span>
+                <td ng-style="myMarginStyle">
+                    <span class="material-icons pointer float-left" ng-click="openEditModal(track)">edit</span>
+                    <span class="label">{{track.name | limitTo: 8}}</span>
+                    <span class="material-icons float-right" ng-click="deleteTrack(track._id)">close</span>
                 </td>
                 <td
                         class="blank "
@@ -55,3 +52,28 @@
 </div>
 </section>
 <div class="clear1px">&nbsp;</div>
+
+
+<div class="modal" id="edit-track">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Update name</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="text" ng-model="trackToEdit.name" class="form-control" placeholder="track name" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updateName()">Mettre à jour</button>
+            </div>
+        </div>
+    </div>
+</div>

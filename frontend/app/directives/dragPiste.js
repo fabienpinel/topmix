@@ -9,16 +9,15 @@ app.directive('dragPiste', function(SamplesFactory) {
 
             $scope.$on('singleMix', function (name, data) {
                 $scope.tracks = data.tracks;
-                var max = 0;
+                var max = 2;
 
                 $scope.tracks.forEach(function (track) {
-                    max = track.samples.length>max?track.samples.length:max;
+                    max =  Math.max(max,track.samples.length);
                 });
 
-                if(max < 10) max = 10;
-
                 $scope.tracks.forEach(function (track) {
-                    for (var i = 0; i < max - track.samples.length; i++) track.samples.push(null);
+                    var length = track.samples.length -1;
+                    for (var i = 0; i < max - length; i++) track.samples.push(null);
                 });
             });
 
@@ -79,6 +78,20 @@ app.directive('dragPiste', function(SamplesFactory) {
                 }
                 , 100);
             };
+
+
+
+            $scope.trackToEdit = {};
+            $scope.openEditModal = function (track) {
+                $scope.trackToEdit = angular.copy(track);
+                $('#edit-track').modal('show');
+            };
+            $scope.updateName = function () {
+                console.log('suce');
+                TracksFactory.changeName($stateParams.id, $scope.trackToEdit._id, $scope.trackToEdit.name);
+                //console.log($scope.trackToEdit.name);
+            };
+
         },
         link: function ($scope) {
 

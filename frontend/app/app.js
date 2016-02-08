@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 
 var app = angular.module('TopMix', [
-    'ngAudio',
     'ui.router'
 ]);
 
@@ -56,10 +55,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/mixes",
             templateUrl: "partials/mixes.html",
             controller: 'MixesCtrl',
-            controllerAs: 'MixesCtrl'
+            controllerAs: 'MixesCtrl',
+            resolve: {
+                isConnected: function(LoginFactory) {
+                    if(LoginFactory.data == undefined) $state.go('home');
+                }
+            }
         })
         .state('singleMix', {
             url: "/mixes/:id",
-            template: "<music-manager></music-manager>"
+            template: "<music-manager></music-manager>",
+            resolve: {
+                isConnected: function(LoginFactory) {
+                    if(LoginFactory.data == undefined) $state.go('home');
+                }
+            }
         })
 });

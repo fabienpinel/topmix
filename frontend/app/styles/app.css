@@ -44,7 +44,9 @@ html, body{
   content: "|";
   padding-right: 0.3em;
 }
-
+.pointer {
+  cursor:pointer;
+}
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
@@ -73,6 +75,12 @@ section{
 
 drag-piste section {
   height:60%;
+  moz-transition: height ease 1s;
+  -webkit-transition: height ease 1s;
+}
+
+drag-piste.hideVolume section{
+  height:94%;
 }
 
 section#player span:not(.toggle){
@@ -91,11 +99,19 @@ section#player label:not(.togglebutton label){
   font-size: 40px;
 }
 section#multipisteVolume{
-  background-color: #D4D4D1;
+  background-color: #ffffff;
   overflow-x:auto;
   overflow-y:hidden;
  white-space: nowrap;
   height:37%;
+  border-top: 1px solid grey;
+  moz-transition: height ease 1s;
+  -webkit-transition: height ease 1s;
+}
+section#multipisteVolume.hideVolume {
+  height: 0 !important;
+  padding: 0px;
+  border:none;
 }
 
 .slidernx{
@@ -144,7 +160,6 @@ section#player{
   top: 4px;
   position: absolute;
   left: 5px;
-  cursor:move;
 }
 
 .multi-tracks {
@@ -166,16 +181,16 @@ section#player{
 }
 
 .multi-tracks td {
-  background-color: #D4D4D1;
+  background-color: #ffffff;
   overflow: hidden;
   display: inline-block;
-  cursor: move;
   width: 100px;
   height: 32px;
 }
 
 .multi-tracks td:not(:first-child):hover {
-  background-color: white;
+  background-color: #D4D4D1;
+  cursor:move;
 }
 
 .multi-tracks td:first-child {
@@ -186,6 +201,7 @@ section#player{
   border-right: 1px solid #999;
   left: 0px;
   z-index:3;
+  background-color: #D4D4D1;
 }
 
 .multi-tracks td:empty {
@@ -365,6 +381,21 @@ input[type=range]:focus::-ms-fill-lower {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #07d1fb;
+}
+
+.float-left {
+  float:left;
+}
+
+.float-right {
+  float:right;
+}
+
+.label{
+  top: 7px;
+  position: absolute;
+  right: 58px;
+  width: 76px;
 }
 
 
