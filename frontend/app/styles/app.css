@@ -75,8 +75,8 @@ section{
 
 drag-piste section:not(#multipisteVolume) {
   height:60%;
-  moz-transition: height ease 1s;
-  -webkit-transition: height ease 1s;
+  moz-transition: width ease 1s, height ease 1s;
+  -webkit-transition: width ease 1s, height ease 1s;
 }
 
 drag-piste.hideVolume section:not(#multipisteVolume){
