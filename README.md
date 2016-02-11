@@ -1,11 +1,3 @@
 # Topmix
-Projet Topmix du cours Progammable Web Client side / Server side
 
-# Concept
-Réaliser une webapp qui permet de gérer des sons multipistes.
-
-# Libraries
-http://nexusosc.com/
-http://fezvrasta.github.io/bootstrap-material-design
-https://design.google.com/icons/
-https://danielstern.github.io/ngAudio/#/docs
+you can find the real readme here : https://docs.google.com/document/d/1jETMsusrx4Xw0p0F9IIdmBGDMGtgVaVgJvYcRp-ffRU/edit?usp=sharing
